@@ -1,6 +1,6 @@
 import React from "react";
 
-const OrderRow = ({ transaction, user }) => {
+const TransactionRow = ({ transaction, user }) => {
     return (
         <tr>
         <td>{transaction.id}</td>
@@ -15,4 +15,4 @@ const OrderRow = ({ transaction, user }) => {
     );
 };
 
-export default OrderRow;
+export default TransactionRow;

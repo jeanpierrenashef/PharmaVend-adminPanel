@@ -5,7 +5,7 @@ import transactionSlice from "./transactions/slice";
 
 const store = configureStore({
     reducer:{
-        usres: userSlice.reducer,
+        users: userSlice.reducer,
         transactions: transactionSlice.reducer,
     }
 });
