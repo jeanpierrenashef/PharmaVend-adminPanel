@@ -8,21 +8,19 @@ const Transactions = () => {
     const transactions = useSelector((global) => global.transactions.list);
     const users = useSelector((global) => global.users.list);
 
-    // Fetch Transactions
     useEffect(() => {
         axios.get("http://127.0.0.1:8000/api/admin/transactions").then(({ data }) => {
             const action = { type: "transactions/loadTransactions", payload: data };
             dispatch(action);
         });
-    }, [dispatch]);
+    }, []);
 
-    // Fetch Users
     useEffect(() => {
         axios.get("http://127.0.0.1:8000/api/admin/users").then(({ data }) => {
             const action = { type: "users/loadUsers", payload: data };
             dispatch(action);
         });
-    }, [dispatch]);
+    }, []);
 
     return (
         <div className="transactions">
@@ -45,7 +43,7 @@ const Transactions = () => {
                         const user = users.find((u) => u.id === transaction.user_id);
                         return (
                             <TransactionRow
-                                key={transaction.id || `transaction-${index}`}
+                                key={transaction.id}
                                 transaction={transaction}
                                 user={user}
                             />
