@@ -15,4 +15,7 @@ const transactionSlice = transactionSlice({
             };
         },
     }
-})
+});
+
+export default transactionSlice;
+export const {loadTransactions} = transactionSlice.actions;
