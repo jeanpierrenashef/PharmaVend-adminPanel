@@ -17,6 +17,14 @@ const Orders = () => {
         });
     },[])
 
+    useEffect(()=>{
+        axios.get("http://127.0.0.1:8000/api/admin/transactions"
+        ).then(({data})=>{
+            const action = {type: "transactions/loadTransactions", payload: data}
+            dispatch(action)
+        })
+    }, [])
+
 
     return(
         <h1>hello</h1>
