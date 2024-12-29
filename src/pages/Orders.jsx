@@ -23,7 +23,16 @@ const Orders = () => {
             const action = {type: "transactions/loadTransactions", payload: data}
             dispatch(action)
         })
-    }, [])
+    }, []);
+
+    const combinedData = transactions.map((transaction) => {
+        const user = users.find((u)=> u.id === transaction.user_id);
+        return {
+            ...transaction,
+            username: user?.username,
+            userEmail: user?.email,
+        };
+    });
 
 
     return(
