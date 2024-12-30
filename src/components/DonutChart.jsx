@@ -15,10 +15,13 @@ const DonutChart = ({ transactions }) => {
         { Dispensed: 0, "Not Dispensed": 0 }
         );
 
+        const totalPrice = Object.values(data).reduce((a, b) => a + b, 0);
+
         const width = 260;
         const height = 260;
         const radius = Math.min(width, height) / 2;
 
+        d3.select(chartRef.current).selectAll("*").remove();
         const svg = d3
         .select(chartRef.current)
         .attr("width", width)
@@ -37,7 +40,7 @@ const DonutChart = ({ transactions }) => {
 
         const arc = d3
         .arc()
-        .innerRadius(radius - 40) 
+        .innerRadius(radius - 40)
         .outerRadius(radius);
 
         svg
@@ -53,12 +56,28 @@ const DonutChart = ({ transactions }) => {
         .selectAll("text")
         .data(pie)
         .join("text")
-        .text((d) => `${Math.round((d.data[1] / d3.sum(Object.values(data))) * 100)}%`)
+        .text((d) => `${Math.round((d.data[1] / totalPrice) * 100)}%`)
         .attr("transform", (d) => `translate(${arc.centroid(d)})`)
         .attr("text-anchor", "middle")
         .style("font-size", "12px")
         .style("fill", "white");
+
+        svg
+        .append("text")
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .style("font-weight", "bold")
+        .text(`$${totalPrice.toFixed(2)}`);
     }, [transactions]);
+
+    const data = transactions.reduce(
+        (acc, transaction) => {
+        const key = transaction.dispensed ? "Dispensed" : "Not Dispensed";
+        acc[key] += parseFloat(transaction.total_price);
+        return acc;
+        },
+        { Dispensed: 0, "Not Dispensed": 0 }
+    );
 
     return (
         <div className="donut-chart-container">
@@ -69,14 +88,14 @@ const DonutChart = ({ transactions }) => {
                 className="legend-box"
                 style={{ backgroundColor: "#408751" }}
             ></span>
-            <span className="legend-text">Dispensed</span>
+            <span className="legend-text">${data.Dispensed.toFixed(2)}</span>
             </div>
             <div className="legend-item">
             <span
                 className="legend-box"
                 style={{ backgroundColor: "#595959" }}
             ></span>
-            <span className="legend-text">Not Dispensed</span>
+            <span className="legend-text">${data["Not Dispensed"].toFixed(2)}</span>
             </div>
         </div>
         </div>
