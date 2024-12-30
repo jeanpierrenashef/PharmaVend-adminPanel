@@ -40,7 +40,11 @@ const Machines = () => {
                 </table>
                 
             </div>
-            <MapComponent machines={machines} />
+            <div className="maps">
+                <h2>Machine Map</h2>
+                <MapComponent machines={machines} />
+            </div>
+            
 
         </div>
     )
