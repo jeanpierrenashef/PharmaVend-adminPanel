@@ -6,7 +6,6 @@ const TransactionRow = ({ transaction, user, product }) => {
         <tr>
         <td>#000{transaction.id}</td>
         <td>{user?.username || "Unknown"}</td>
-        <td>{user?.email || "Unknown"}</td>
         <td>{transaction.quantity}</td>
         <td>${transaction.total_price}</td>
         <td>V{transaction.machine_id}</td>

@@ -89,7 +89,6 @@ const Transactions = () => {
                         <tr>
                             <th>ID</th>
                             <th>User</th>
-                            <th>Email</th>
                             <th>Quantity</th>
                             <th>Total Price</th>
                             <th>Machine ID</th>
