@@ -14,13 +14,23 @@ const Machines = () => {
     const machines = useSelector((global) => global.machines.list);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [shouldFetchMachines, setShouldFetchMachines] = useState(false);
+
 
     useEffect(() => {
-        axios.get("http://127.0.0.1:8000/api/admin/machines").then(({ data }) => {
-            const action = { type: "machines/loadMachines", payload: data };
-            dispatch(action);
-        });
-    }, []);
+        const fetchMachines = async () => {
+            try {
+                const { data } = await axios.get("http://127.0.0.1:8000/api/admin/machines");
+                const action = { type: "machines/loadMachines", payload: data };
+                dispatch(action);
+            } catch (error) {
+                console.error("Failed to fetch machines:", error);
+            }
+        };
+    
+        fetchMachines();
+        setShouldFetchMachines(false);
+    }, [dispatch, shouldFetchMachines]);
 
     const machineStatusData = machines.reduce(
         (acc, machine) => {
