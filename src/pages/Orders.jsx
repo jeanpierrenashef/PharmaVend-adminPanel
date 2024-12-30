@@ -5,6 +5,7 @@ import TransactionRow from "../components/TransactionRow.jsx";
 import "../styles/Orders.css";
 import Navbar from "../components/NavBar.jsx";
 import DonutChart from "../components/DonutChart";
+import StackedBarChart from "../components/StackedBar.jsx";
 
 const Transactions = () => {
     const dispatch = useDispatch();
@@ -116,9 +117,13 @@ const Transactions = () => {
                 
             </div>
             <div className="charts">
-                    <div className="chart">
-                        <h2>Receipt of Goods</h2>
-                        <DonutChart transactions={transactions} />
+                <div className="chart">
+                    <h2>Receipt of Goods</h2>
+                    <DonutChart transactions={transactions} />
+                </div>
+                <div className="chart">
+                    <h2>Order Status</h2>
+                    <StackedBarChart transactions={transactions}/>
                 </div>
             </div>
         </div>

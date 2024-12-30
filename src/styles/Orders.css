@@ -133,11 +133,12 @@
 }
 
 .charts {
+  flex-direction: column;
   flex-grow: 1;
   padding: 20px;
   overflow-y: auto;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: flex-start; 
 }
 
