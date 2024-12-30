@@ -61,6 +61,14 @@ const Transactions = () => {
                             <option value="0">Not Dispensed</option>
                         </select>
                     </div>
+                    <div className="filter-dropdown">
+                        <input
+                            type="number"
+                            placeholder="Min Quantity"
+                            value={quantityFilter}
+                            onChange={(e) => setQuantityFilter(e.target.value)}
+                        />
+                    </div>
                 </div>
                 <table>
                     <thead>
