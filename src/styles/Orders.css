@@ -135,11 +135,17 @@
 .charts {
   flex-direction: column;
   flex-grow: 1;
+  gap: 40px;
   padding: 20px;
   overflow-y: auto;
+  overflow: visible;
   display: flex;
   justify-content: start;
   align-items: flex-start; 
+}
+.separator-line {
+  border: 1px solid rgb(181, 181, 181); /* Temporary debug border */
+  width: 400px;
 }
 
 .chart {

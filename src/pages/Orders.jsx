@@ -121,6 +121,7 @@ const Transactions = () => {
                     <h2>Receipt of Goods</h2>
                     <DonutChart transactions={transactions} />
                 </div>
+                <hr className="separator-line" />
                 <div className="chart">
                     <h2>Order Status</h2>
                     <StackedBarChart transactions={transactions}/>
