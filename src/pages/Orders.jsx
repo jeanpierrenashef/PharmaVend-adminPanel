@@ -44,6 +44,10 @@ const Transactions = () => {
         if (quantityFilter !== "" && transaction.quantity < parseInt(quantityFilter)) {
             return false;
         }
+        if (priceFilter !== "" && transaction.total_price < parseFloat(priceFilter)) {
+            return false;
+        }
+        return true;
     });
 
     return (
