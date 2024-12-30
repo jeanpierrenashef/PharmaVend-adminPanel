@@ -1,0 +1,41 @@
+.donut-chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.donut-chart-legend {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.legend-box {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+}
+
+.legend-text {
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+}
+
+svg {
+    display: block;
+    margin: auto;
+}
+
+
+.donut-chart-container svg {
+    max-width: 100%;
+    height: auto;
+}

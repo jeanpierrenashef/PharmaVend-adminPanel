@@ -1,6 +1,7 @@
 .orders-page {
   display: flex;
   height: 100vh;
+  overflow: hidden;
   background-color: #f8f9fa;
 }
 
@@ -10,14 +11,14 @@
 
 .main-content {
   flex-grow: 1;
-  padding: 40px;
+  padding: 20px;
   overflow-y: auto;
 }
 
 .main-content h1 {
   text-align: start;
   font-size: 36px;
-  margin-bottom: 20px;
+  margin: 10px;
   font-weight: bold;
 }
 
@@ -30,7 +31,6 @@
   overflow: hidden;
 }
 
-/* Header Styling */
 .main-content table thead {
   background-color: #ffffff;
   color: #fff;
@@ -130,4 +130,21 @@
 
 .filter-dropdown-after select::-ms-expand {
   display: none;
+}
+
+.charts {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; 
+}
+
+.chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%; 
 }

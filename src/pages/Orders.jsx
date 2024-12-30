@@ -4,6 +4,7 @@ import axios from "axios";
 import TransactionRow from "../components/TransactionRow.jsx";
 import "../styles/Orders.css";
 import Navbar from "../components/NavBar.jsx";
+import DonutChart from "../components/DonutChart";
 
 const Transactions = () => {
     const dispatch = useDispatch();
@@ -112,6 +113,13 @@ const Transactions = () => {
                         })}
                     </tbody>
                 </table>
+                
+            </div>
+            <div className="charts">
+                    <div className="chart">
+                        <h2>Receipt of Goods</h2>
+                        <DonutChart transactions={transactions} />
+                </div>
             </div>
         </div>
     );
