@@ -29,7 +29,7 @@ const Transactions = () => {
         <div className="orders-page">
             <Navbar />
             <div className="main-content">
-                <h1>Transactions</h1>
+                <h1>Orders</h1>
                 <table>
                     <thead>
                         <tr>

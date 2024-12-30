@@ -10,27 +10,30 @@ const Navbar = () => {
         </div>
         <nav className="navbar-links">
             <NavLink to="/dashboard" activeClassName="active-link">
-            <i className="icon-dashboard"></i> Dashboard
+            <img src={require("../styles/assets/dashboard.png")} className="nav-icon" height={20}/>
+            Dashboard
             </NavLink>
             <NavLink to="/orders" activeClassName="active-link">
-            <i className="icon-orders"></i> Orders
+            <img src={require("../styles/assets/orders.png")} className="nav-icon" height={20}/>
+            Orders
             </NavLink>
             <NavLink to="/inventory" activeClassName="active-link">
-            <i className="icon-inventory"></i> Inventory
+            <img src={require("../styles/assets/inventories.png")} className="nav-icon" height={20}/>
+            Inventory
             </NavLink>
             <NavLink to="/machines" activeClassName="active-link">
-            <i className="icon-machines"></i> Machines
+            <img src={require("../styles/assets/settings.png")} className="nav-icon" height={20}/>
+            Machines
             </NavLink>
             <NavLink to="/customers" activeClassName="active-link">
-            <i className="icon-customers"></i> Customers
-            </NavLink>
-            <NavLink to="/settings" activeClassName="active-link">
-            <i className="icon-settings"></i> Settings
+            <img src={require("../styles/assets/customers.png")} className="nav-icon" height={20}/>
+            Customers
             </NavLink>
         </nav>
         <div className="navbar-footer">
             <NavLink to="/help" activeClassName="active-link">
-            <i className="icon-help"></i> Help & Support
+            <img src="/icons/help.png" className="nav-icon" />
+            Help & Support
             </NavLink>
         </div>
         </div>
