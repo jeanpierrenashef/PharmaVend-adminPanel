@@ -40,6 +40,9 @@ const Transactions = () => {
         if (statusFilter !== "" && String(transaction.dispensed) !== statusFilter) {
             return false;
         }
+        if (quantityFilter !== "" && transaction.quantity < parseInt(quantityFilter)) {
+            return false;
+        }
     });
 
     return (
