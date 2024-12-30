@@ -14,6 +14,9 @@ const machineSlice = createSlice({
                 list: machines
             };
         },
+        addMachine: (state, action) => {
+            state.list.push(action.payload); 
+        },
     }
 })
 
