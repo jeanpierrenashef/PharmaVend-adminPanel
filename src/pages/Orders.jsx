@@ -12,6 +12,7 @@ const Transactions = () => {
     const products = useSelector((global) => global.products.list);
 
     const [statusFilter, setStatusFilter] = useState("");
+    const [quantityFilter, setQuantityFilter] = useState("");
 
     useEffect(() => {
         axios.get("http://127.0.0.1:8000/api/admin/transactions").then(({ data }) => {
