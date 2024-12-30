@@ -30,8 +30,10 @@ const Machines = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <MachineRow />
-                    </tbody>
+                        {machines.map((machine) => (
+                            <MachineRow key={machine.id} machine={machine} />
+                        ))}
+                </tbody>
                 </table>
 
                 
