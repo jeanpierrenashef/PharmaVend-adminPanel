@@ -21,4 +21,4 @@ const machineSlice = createSlice({
 })
 
 export default machineSlice;
-export const {loadMachines} = machineSlice.actions;
+export const {loadMachines, addMachine} = machineSlice.actions;

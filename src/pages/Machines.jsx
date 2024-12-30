@@ -1,15 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import MachineRow from "../components/MachineRow.jsx"
+import MachineRow from "../components/MachineRow.jsx";
 import Navbar from "../components/NavBar.jsx";
-import "../styles/Machines.css"
+import "../styles/Machines.css";
 import MapComponent from "../components/MapComponent.jsx";
 import MachineStatusDonutChart from "../components/MachineStatusDonutChart.jsx";
+import AddMachineForm from "../components/AddMachineForm.jsx";
+import Modal from "react-modal";
 
 const Machines = () => {
     const dispatch = useDispatch();
-    const machines = useSelector((global)=>global.machines.list);
+    const machines = useSelector((global) => global.machines.list);
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         axios.get("http://127.0.0.1:8000/api/admin/machines").then(({ data }) => {
@@ -26,11 +30,15 @@ const Machines = () => {
         },
         { Active: 0, Inactive: 0 }
     );
-    return(
+
+    return (
         <div className="machines-page">
             <Navbar />
             <div className="main-content">
                 <h1>Machines</h1>
+                <button className="open-modal-button" onClick={() => setIsModalOpen(true)}>
+                    Add Machine
+                </button>
                 <table>
                     <thead>
                         <tr>
@@ -45,9 +53,8 @@ const Machines = () => {
                         {machines.map((machine) => (
                             <MachineRow key={machine.id} machine={machine} />
                         ))}
-                </tbody>
+                    </tbody>
                 </table>
-                
             </div>
             <div className="maps">
                 <div>
@@ -58,12 +65,22 @@ const Machines = () => {
                     <h2>Machines Stats</h2>
                     <MachineStatusDonutChart machineStatusData={machineStatusData} />
                 </div>
-                
-                
             </div>
-            
 
+            <Modal
+                isOpen={isModalOpen}
+                onRequestClose={() => setIsModalOpen(false)}
+                className="modal-content"
+                overlayClassName="modal-overlay"
+                ariaHideApp={false}
+            >
+                <AddMachineForm />
+                <button className="close-modal-button" onClick={() => setIsModalOpen(false)}>
+                    Close
+                </button>
+            </Modal>
         </div>
-    )
-}
+    );
+};
+
 export default Machines;
