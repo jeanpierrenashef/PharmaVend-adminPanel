@@ -36,9 +36,11 @@ const Machines = () => {
             <Navbar />
             <div className="main-content">
                 <h1>Machines</h1>
-                <button className="open-modal-button" onClick={() => setIsModalOpen(true)}>
-                    Add Machine
-                </button>
+                <div className="button-container">
+                    <button className="open-modal-button" onClick={() => setIsModalOpen(true)}>
+                        Add Machine
+                    </button>
+                </div>
                 <table>
                     <thead>
                         <tr>
@@ -76,7 +78,7 @@ const Machines = () => {
             >
                 <AddMachineForm />
                 <button className="close-modal-button" onClick={() => setIsModalOpen(false)}>
-                    Close
+                    X
                 </button>
             </Modal>
         </div>
