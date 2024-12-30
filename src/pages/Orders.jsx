@@ -2,6 +2,9 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import TransactionRow from "../components/TransactionRow.jsx";
+import "../styles/Orders.css"
+import Navbar from "../components/NavBar.jsx";
+
 
 const Transactions = () => {
     const dispatch = useDispatch();
@@ -23,34 +26,38 @@ const Transactions = () => {
     }, []);
 
     return (
-        <div className="transactions">
-            <h1>Transactions</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>User</th>
-                        <th>Email</th>
-                        <th>Quantity</th>
-                        <th>Total Price</th>
-                        <th>Machine ID</th>
-                        <th>Product ID</th>
-                        <th>Created At</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {transactions.map((transaction, index) => {
-                        const user = users.find((u) => u.id === transaction.user_id);
-                        return (
-                            <TransactionRow
-                                key={transaction.id}
-                                transaction={transaction}
-                                user={user}
-                            />
-                        );
-                    })}
-                </tbody>
-            </table>
+        <div className="orders-page">
+            <Navbar />
+            <div className="main-content">
+                <h1>Transactions</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>User</th>
+                            <th>Email</th>
+                            <th>Quantity</th>
+                            <th>Total Price</th>
+                            <th>Machine ID</th>
+                            <th>Product ID</th>
+                            <th>Created At</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {transactions.map((transaction, index) => {
+                            const user = users.find((u) => u.id === transaction.user_id);
+                            return (
+                                <TransactionRow
+                                    key={transaction.id}
+                                    transaction={transaction}
+                                    user={user}
+                                />
+                            );
+                        })}
+                    </tbody>
+                </table>
+            </div>
+            
         </div>
     );
 };
