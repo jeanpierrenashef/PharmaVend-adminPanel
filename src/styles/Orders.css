@@ -21,7 +21,8 @@
   font-weight: bold;
 }
 
-.main-content table { 
+/* Table styles */
+.main-content table {
   width: 100%;
   border-collapse: collapse;
   background: #fff;
@@ -30,20 +31,23 @@
   overflow: hidden;
 }
 
+/* Header Styling */
 .main-content table thead {
   background-color: #007bff;
   color: #fff;
-  text-align: left;
+  text-align: center;
 }
 
 .main-content table thead th {
   padding: 12px 16px;
   font-weight: bold;
+  text-align: center; 
 }
 
 .main-content table tbody tr {
   border-bottom: 1px solid #e0e0e0;
   transition: background-color 0.2s ease-in-out;
+  text-align: center;
 }
 
 .main-content table tbody tr:hover {
@@ -53,8 +57,9 @@
 .main-content table tbody td {
   padding: 12px 16px;
   font-size: 14px;
+  text-align: center; 
 }
-/* General Status Styling */
+
 .status {
   display: flex;
   align-items: center;
@@ -63,19 +68,14 @@
   font-weight: 500;
 }
 
-/* Dispensed (Green) */
 .status.dispensed {
   color: rgb(29, 177, 29);
 }
 
-/* Not Dispensed (Red) */
 .status.not-dispensed {
-  color: rgb(255, 0, 0);
-
-  
+  color: rgb(255, 0, 0);  
 }
 
-/* General Filters Styling */
 .filters {
   display: flex;
   gap: 15px;
@@ -113,9 +113,8 @@
   background-color: white;
 }
 
-/* Dropdown Arrow for Status Filter Only */
 .filter-dropdown-after select {
-  padding-right: 24px; /* Space for custom arrow */
+  padding-right: 24px;
 }
 
 .filter-dropdown-after:after {
@@ -129,7 +128,6 @@
   pointer-events: none;
 }
 
-/* Remove Default Dropdown Arrow in IE */
 .filter-dropdown-after select::-ms-expand {
   display: none;
 }
