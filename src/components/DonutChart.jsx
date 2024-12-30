@@ -65,10 +65,19 @@ const DonutChart = ({ transactions }) => {
         svg
         .append("text")
         .attr("text-anchor", "middle")
-        .style("font-size", "16px")
+        .style("font-size", "19px")
         .style("font-weight", "bold")
         .text(`$${totalPrice.toFixed(2)}`);
+
+        svg
+        .append("text")
+        .attr("text-anchor", "middle")
+        .style("font-size", "14px")
+        .style("fill", "#666")
+        .attr("y", "18") 
+        .text("Total Orders");
     }, [transactions]);
+    
 
     const data = transactions.reduce(
         (acc, transaction) => {
@@ -81,25 +90,34 @@ const DonutChart = ({ transactions }) => {
 
     return (
         <div className="donut-chart-container">
-        <svg ref={chartRef}></svg>
-        <div className="donut-chart-legend">
-            <div className="legend-item">
-            <span
-                className="legend-box"
-                style={{ backgroundColor: "#408751" }}
-            ></span>
-            <span className="legend-text">${data.Dispensed.toFixed(2)}</span>
+            <svg ref={chartRef}></svg>
+            <div className="donut-chart-legend">
+                <div className="legend-item">
+                    <span
+                        className="legend-box"
+                        style={{ backgroundColor: "#408751" }}
+                    ></span>
+                    <div className="legend-text-group">
+                        <span className="legend-text">${data.Dispensed.toFixed(2)}</span>
+                        <p className="legend-label">Dispensed</p>
+                    </div>
+
+                </div>
+                <div className="legend-item">
+                    <span
+                        className="legend-box"
+                        style={{ backgroundColor: "#595959" }}
+                    ></span>
+                    <div className="legend-text-group">
+                        <span className="legend-text">${data["Not Dispensed"].toFixed(2)}</span>
+                        <p className="legend-label">Pending</p>
+                    </div>
+
+                </div>
             </div>
-            <div className="legend-item">
-            <span
-                className="legend-box"
-                style={{ backgroundColor: "#595959" }}
-            ></span>
-            <span className="legend-text">${data["Not Dispensed"].toFixed(2)}</span>
-            </div>
-        </div>
         </div>
     );
+    
 };
 
 export default DonutChart;
