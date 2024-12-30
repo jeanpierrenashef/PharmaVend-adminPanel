@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import MachineRow from "../components/MachineRow.jsx"
 import Navbar from "../components/NavBar.jsx";
+import "../styles/Machines.css"
 
 const Machines = () => {
     const dispatch = useDispatch();
