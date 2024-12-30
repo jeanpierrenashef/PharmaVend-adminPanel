@@ -16,21 +16,15 @@ const Machines = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [shouldFetchMachines, setShouldFetchMachines] = useState(false);
 
-
     useEffect(() => {
-        const fetchMachines = async () => {
-            try {
-                const { data } = await axios.get("http://127.0.0.1:8000/api/admin/machines");
+        if (shouldFetchMachines || machines.length === 0) {
+            axios.get("http://127.0.0.1:8000/api/admin/machines").then(({ data }) => {
                 const action = { type: "machines/loadMachines", payload: data };
                 dispatch(action);
-            } catch (error) {
-                console.error("Failed to fetch machines:", error);
-            }
-        };
-    
-        fetchMachines();
-        setShouldFetchMachines(false);
-    }, [dispatch, shouldFetchMachines]);
+                setShouldFetchMachines(false); 
+            });
+        }
+    }, [shouldFetchMachines, machines.length, dispatch]);
 
     const machineStatusData = machines.reduce(
         (acc, machine) => {
@@ -89,9 +83,8 @@ const Machines = () => {
                 <button className="close-modal-button" onClick={() => setIsModalOpen(false)}>
                     ×
                 </button>
-                <AddMachineForm />
+                <AddMachineForm setShouldFetchMachines={setShouldFetchMachines} />
             </Modal>
-
         </div>
     );
 };

@@ -5,7 +5,7 @@ import { addMachine } from "../redux/machines/slice";
 import "../styles/AddMachineForm.css";
 
 
-const AddMachineForm = () => {
+const AddMachineForm = ({ setShouldFetchMachines }) => {
     const [formData, setFormData] = useState({
         location: "",
         latitude: "",
