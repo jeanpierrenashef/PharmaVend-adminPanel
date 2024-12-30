@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
+import MachineRow from "../components/MachineRow.jsx"
+import Navbar from "../components/NavBar.jsx";
 
 const Machines = () => {
     const dispatch = useDispatch();
@@ -42,3 +44,4 @@ const Machines = () => {
         </div>
     )
 }
+export default Machines;
