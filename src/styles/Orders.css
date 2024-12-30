@@ -71,4 +71,65 @@
 /* Not Dispensed (Red) */
 .status.not-dispensed {
   color: rgb(255, 0, 0);
+
+  
+}
+
+/* General Filters Styling */
+.filters {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.filter-dropdown {
+  position: relative;
+}
+
+.filter-dropdown select,
+.filter-dropdown input {
+  width: 100px;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  background-color: #f8f9fa;
+  appearance: none;
+  outline: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.filter-dropdown select:hover,
+.filter-dropdown input:hover {
+  background-color: #e9ecef;
+  border-color: #ccc;
+}
+
+.filter-dropdown select:focus,
+.filter-dropdown input:focus {
+  border-color: #007bff;
+  background-color: white;
+}
+
+/* Dropdown Arrow for Status Filter Only */
+.filter-dropdown-after select {
+  padding-right: 24px; /* Space for custom arrow */
+}
+
+.filter-dropdown-after:after {
+  content: "▼";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: #aaa;
+  pointer-events: none;
+}
+
+/* Remove Default Dropdown Arrow in IE */
+.filter-dropdown-after select::-ms-expand {
+  display: none;
 }
