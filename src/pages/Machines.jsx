@@ -5,6 +5,7 @@ import MachineRow from "../components/MachineRow.jsx"
 import Navbar from "../components/NavBar.jsx";
 import "../styles/Machines.css"
 import MapComponent from "../components/MapComponent.jsx";
+import MachineStatusDonutChart from "../components/MachineStatusDonutChart.jsx";
 
 const Machines = () => {
     const dispatch = useDispatch();
@@ -17,6 +18,14 @@ const Machines = () => {
         });
     }, []);
 
+    const machineStatusData = machines.reduce(
+        (acc, machine) => {
+            const key = machine.status === "active" ? "Active" : "Inactive";
+            acc[key] += 1;
+            return acc;
+        },
+        { Active: 0, Inactive: 0 }
+    );
     return(
         <div className="machines-page">
             <Navbar />
@@ -41,8 +50,16 @@ const Machines = () => {
                 
             </div>
             <div className="maps">
-                <h2>Machine Map</h2>
-                <MapComponent machines={machines} />
+                <div>
+                    <h2>Machine Map</h2>
+                    <MapComponent machines={machines} />
+                </div>
+                <div>
+                    <h2>Machines Stats</h2>
+                    <MachineStatusDonutChart machineStatusData={machineStatusData} />
+                </div>
+                
+                
             </div>
             
 
