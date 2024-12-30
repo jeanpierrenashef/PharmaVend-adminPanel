@@ -4,6 +4,7 @@ import axios from "axios";
 import MachineRow from "../components/MachineRow.jsx"
 import Navbar from "../components/NavBar.jsx";
 import "../styles/Machines.css"
+import MapComponent from "../components/MapComponent.jsx";
 
 const Machines = () => {
     const dispatch = useDispatch();
@@ -37,9 +38,9 @@ const Machines = () => {
                         ))}
                 </tbody>
                 </table>
-
                 
             </div>
+            <MapComponent machines={machines} />
 
         </div>
     )
