@@ -21,7 +21,7 @@
   font-weight: bold;
 }
 
-.main-content table {
+.main-content table { 
   width: 100%;
   border-collapse: collapse;
   background: #fff;
@@ -53,4 +53,22 @@
 .main-content table tbody td {
   padding: 12px 16px;
   font-size: 14px;
+}
+/* General Status Styling */
+.status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Dispensed (Green) */
+.status.dispensed {
+  color: rgb(29, 177, 29);
+}
+
+/* Not Dispensed (Red) */
+.status.not-dispensed {
+  color: rgb(255, 0, 0);
 }

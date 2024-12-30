@@ -47,7 +47,8 @@ const Transactions = () => {
                             <th>Quantity</th>
                             <th>Total Price</th>
                             <th>Machine ID</th>
-                            <th>Product</th> 
+                            <th>Product</th>
+                            <th>Status</th>
                             <th>Created At</th>
                         </tr>
                     </thead>

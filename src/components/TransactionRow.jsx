@@ -10,6 +10,17 @@ const TransactionRow = ({ transaction, user, product }) => {
         <td>${transaction.total_price}</td>
         <td>V{transaction.machine_id}</td>
         <td>{product?.name}</td>
+        <td>
+                {transaction.dispensed === 1 ? (
+                    <span className="status dispensed">
+                        <i className="mdi mdi-check-circle"></i> Dispensed
+                    </span>
+                ) : (
+                    <span className="status not-dispensed">
+                        <i className="mdi mdi-timer-sand"></i> Pending
+                    </span>
+                )}
+            </td>
         <td>{transaction.created_at}</td>
         </tr>
     );
