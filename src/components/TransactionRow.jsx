@@ -1,6 +1,7 @@
 import React from "react";
 
 const TransactionRow = ({ transaction, user, product }) => {
+    const formattedDate = transaction.created_at.split("T")[0];
     return (
         <tr>
         <td>#000{transaction.id}</td>
@@ -21,7 +22,7 @@ const TransactionRow = ({ transaction, user, product }) => {
                     </span>
                 )}
             </td>
-        <td>{transaction.created_at}</td>
+        <td>{formattedDate}</td>
         </tr>
     );
 };
