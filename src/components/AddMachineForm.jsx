@@ -75,7 +75,9 @@ const AddMachineForm = () => {
                     <option value="inactive">Inactive</option>
                 </select>
             </div>
-            <button type="submit">Add Machine</button>
+            <button type="submit" className="add-machine-button">
+    Add Machine
+</button>
         </form>
     );
 };

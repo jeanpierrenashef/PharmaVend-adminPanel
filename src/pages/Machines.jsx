@@ -76,11 +76,12 @@ const Machines = () => {
                 overlayClassName="modal-overlay"
                 ariaHideApp={false}
             >
-                <AddMachineForm />
                 <button className="close-modal-button" onClick={() => setIsModalOpen(false)}>
-                    X
+                    ×
                 </button>
+                <AddMachineForm />
             </Modal>
+
         </div>
     );
 };
