@@ -14,7 +14,7 @@ const MachineRow = ({ machine }) => {
                 <span className="status inactive">Inactive</span>
             )}
             </td>
-            <td>{new Date(machine.created_at).toISOString().split("T")[0]}</td>
+            
         </tr>
     );
 };

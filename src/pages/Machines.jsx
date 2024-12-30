@@ -11,7 +11,7 @@ const Machines = () => {
 
     useEffect(() => {
         axios.get("http://127.0.0.1:8000/api/admin/machines").then(({ data }) => {
-            const action = { type: "machines/loadmachines", payload: data };
+            const action = { type: "machines/loadMachines", payload: data };
             dispatch(action);
         });
     }, []);
@@ -29,7 +29,6 @@ const Machines = () => {
                             <th>Latitude</th>
                             <th>Longitude</th>
                             <th>Status</th>
-                            <th>Created At</th>
                         </tr>
                     </thead>
                     <tbody>
