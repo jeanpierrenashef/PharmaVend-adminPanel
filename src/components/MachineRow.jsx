@@ -8,14 +8,18 @@ const MachineRow = ({ machine }) => {
             <td>{machine.latitude}</td>
             <td>{machine.longitude}</td>
             <td>
-            {machine.status === "active" ? (
-                <span className="status active">Active</span>
-            ) : (
-                <span className="status inactive">Inactive</span>
-            )}
+                {machine.status === "active" ? (
+                    <span className="status active">
+                        <i className="mdi mdi-check-circle"></i> Active
+                    </span>
+                ) : (
+                    <span className="status inactive">
+                        <i className="mdi mdi-close-circle"></i> Inactive
+                    </span>
+                )}
             </td>
-            
         </tr>
     );
 };
+
 export default MachineRow;

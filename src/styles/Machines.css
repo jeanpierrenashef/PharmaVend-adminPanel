@@ -66,3 +66,11 @@
   align-items: center;
   padding: 20px;
 }
+
+.status.active {
+  color: rgb(29, 177, 29);
+}
+
+.status.inactive {
+  color: rgb(255, 0, 0);  
+}
