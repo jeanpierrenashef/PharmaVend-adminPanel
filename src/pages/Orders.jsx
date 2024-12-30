@@ -13,6 +13,7 @@ const Transactions = () => {
 
     const [statusFilter, setStatusFilter] = useState("");
     const [quantityFilter, setQuantityFilter] = useState("");
+    const [priceFilter, setPriceFilter] = useState("");
 
     useEffect(() => {
         axios.get("http://127.0.0.1:8000/api/admin/transactions").then(({ data }) => {
