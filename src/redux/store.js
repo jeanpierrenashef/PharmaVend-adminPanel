@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import userSlice from "./users/slice";
 import transactionSlice from "./transactions/slice";
 import productsSlice from "./products/slice";
+import machineSlice from "./machines/slice";
 
 
 const store = configureStore({
@@ -9,6 +10,7 @@ const store = configureStore({
         users: userSlice.reducer,
         transactions: transactionSlice.reducer,
         products: productsSlice.reducer,
+        machines: machineSlice.reducer,
     }
 });
 export default store;
