@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { addMachine } from "../redux/machines/slice";
-import "../styles/AddMachineForm.css"
+import "../styles/AddMachineForm.css";
+
 
 const AddMachineForm = () => {
     const [formData, setFormData] = useState({
         location: "",
         latitude: "",
         longitude: "",
-        status: "inactive", // Default status
+        status: "inactive",
     });
     const dispatch = useDispatch();
 
@@ -50,7 +51,7 @@ const AddMachineForm = () => {
                 <label>Latitude:</label>
                 <input
                     type="number"
-                    step="0.000001"
+                    step="0.0001"
                     name="latitude"
                     value={formData.latitude}
                     onChange={handleChange}
@@ -61,7 +62,7 @@ const AddMachineForm = () => {
                 <label>Longitude:</label>
                 <input
                     type="number"
-                    step="0.000001"
+                    step="0.0001"
                     name="longitude"
                     value={formData.longitude}
                     onChange={handleChange}

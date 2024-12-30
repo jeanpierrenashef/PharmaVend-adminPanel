@@ -119,37 +119,6 @@
 .close-modal-button:hover {
   color: #ff1c1c;
 }
-.add-machine-button {
-  display: inline-block; 
-  margin-top: 20px;
-  padding: 8px 12px;
-  font-size: 14px;
-  color: #333;
-  border: 1px solid #ddd;
-  border-radius: 20px;
-  background-color: #f8f9fa;
-  appearance: none;
-  outline: none;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  position: relative; 
-  text-align: center; 
-}
-.add-machine-button:hover {
-  background-color: #e9ecef;
-  border-color: #ccc;
-}
-
-.add-machine-button:after {
-  content: "+";
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 16px;
-  color: #aaa;
-  pointer-events: none;
-}
 .open-modal-button {
   display: inline-block; 
   margin-bottom: 20px;
