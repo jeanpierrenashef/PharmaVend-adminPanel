@@ -23,17 +23,18 @@ const AddMachineForm = () => {
         e.preventDefault();
         try {
             const response = await axios.post("http://127.0.0.1:8000/api/admin/add_machine", formData);
-            const newMachine = response.data;
-
-            dispatch(addMachine(newMachine)); 
-            setFormData({ location: "", latitude: "", longitude: "", status: "inactive" }); 
             alert("Machine added successfully!");
+    
+            dispatch(addMachine(response.data)); 
+            setShouldFetchMachines(true); 
+    
+            setFormData({ location: "", latitude: "", longitude: "", status: "inactive" }); // Clear the form
         } catch (error) {
             console.error("Error adding machine:", error);
             alert("Failed to add machine. Please try again.");
         }
     };
-
+    
     return (
         <form onSubmit={handleSubmit} className="add-machine-form">
             <h3>Add New Machine</h3>
