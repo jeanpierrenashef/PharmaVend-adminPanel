@@ -10,6 +10,7 @@ const Transactions = () => {
     const dispatch = useDispatch();
     const transactions = useSelector((global) => global.transactions.list);
     const users = useSelector((global) => global.users.list);
+    const products = useSelector((global) => global.products.list);
 
     useEffect(() => {
         axios.get("http://127.0.0.1:8000/api/admin/transactions").then(({ data }) => {
@@ -21,6 +22,13 @@ const Transactions = () => {
     useEffect(() => {
         axios.get("http://127.0.0.1:8000/api/admin/users").then(({ data }) => {
             const action = { type: "users/loadUsers", payload: data };
+            dispatch(action);
+        });
+    }, []);
+
+    useEffect(() => {
+        axios.get("http://127.0.0.1:8000/api/admin/products").then(({ data }) => {
+            const action = { type: "products/loadProducts", payload: data };
             dispatch(action);
         });
     }, []);
@@ -39,18 +47,20 @@ const Transactions = () => {
                             <th>Quantity</th>
                             <th>Total Price</th>
                             <th>Machine ID</th>
-                            <th>Product ID</th>
+                            <th>Product</th> 
                             <th>Created At</th>
                         </tr>
                     </thead>
                     <tbody>
                         {transactions.map((transaction, index) => {
                             const user = users.find((u) => u.id === transaction.user_id);
+                            const product = products.find((p)=>p.id === transaction.product_id)
                             return (
                                 <TransactionRow
                                     key={transaction.id}
                                     transaction={transaction}
                                     user={user}
+                                    product={product}
                                 />
                             );
                         })}

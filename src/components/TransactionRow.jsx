@@ -1,15 +1,15 @@
 import React from "react";
 
-const TransactionRow = ({ transaction, user }) => {
+const TransactionRow = ({ transaction, user, product }) => {
     return (
         <tr>
-        <td>{transaction.id}</td>
+        <td>#000{transaction.id}</td>
         <td>{user?.username || "Unknown"}</td>
         <td>{user?.email || "Unknown"}</td>
         <td>{transaction.quantity}</td>
-        <td>{transaction.total_price}</td>
-        <td>{transaction.machine_id}</td>
-        <td>{transaction.product_id}</td>
+        <td>${transaction.total_price}</td>
+        <td>V{transaction.machine_id}</td>
+        <td>{product?.name}</td>
         <td>{transaction.created_at}</td>
         </tr>
     );
