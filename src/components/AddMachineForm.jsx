@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import { addMachine } from "../redux/machines/slice";
+import { addMachine, updateMachine } from "../redux/machines/slice";
 import "../styles/AddMachineForm.css";
 
-const AddMachineForm = ({ setShouldFetchMachines }) => {
-    const [formData, setFormData] = useState({
+const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
+    const [formData, setFormData] = useState(initialData || {
         location: "",
         latitude: "",
         longitude: "",
         status: "inactive",
+    
     });
 
     const dispatch = useDispatch();
@@ -18,18 +19,35 @@ const AddMachineForm = ({ setShouldFetchMachines }) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://127.0.0.1:8000/api/admin/add_machine", formData);
-            alert("Machine added successfully!");
-            dispatch(addMachine(response.data));
-            setShouldFetchMachines(true); 
-            setFormData({ location: "", latitude: "", longitude: "", status: "inactive" }); 
+            if (initialData) {
+                // Update existing machine
+                const response = await axios.put(
+                    `http://127.0.0.1:8000/api/admin/machines/${formData.id}`,
+                    formData
+                );
+                dispatch(updateMachine(response.data));
+                alert("Machine updated successfully!");
+            } else {
+                // Add new machine
+                const response = await axios.post(
+                    "http://127.0.0.1:8000/api/admin/add_machine",
+                    formData
+                );
+                dispatch(addMachine(response.data));
+                alert("Machine added successfully!");
+                setFormData({ location: "", latitude: "", longitude: "", status: "inactive" });
+            }
+
+            setShouldFetchMachines(true);
+            if (onSubmit) {
+                onSubmit(formData);
+            }
         } catch (error) {
-            console.error("Error adding machine:", error);
-            alert("Failed to add machine. Please try again.");
+            console.error("Error processing machine:", error);
+            alert("Failed to process machine. Please try again.");
         }
     };
 
@@ -56,7 +74,7 @@ const AddMachineForm = ({ setShouldFetchMachines }) => {
 
     return (
         <form onSubmit={handleSubmit} className="add-machine-form">
-            <h3>Add New Machine</h3>
+            <h3>{initialData ? "Edit Machine" : "Add New Machine"}</h3>
             <div>
                 <label>Location:</label>
                 <input
@@ -101,9 +119,7 @@ const AddMachineForm = ({ setShouldFetchMachines }) => {
                     <option value="inactive">Inactive</option>
                 </select>
             </div>
-            <button type="submit" className="add-machine-button">
-                Add Machine
-            </button>
+            <button type="submit">{initialData ? "Update Machine" : "Add Machine"}</button>
         </form>
     );
 };

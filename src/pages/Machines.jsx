@@ -49,16 +49,10 @@ const Machines = () => {
         setEditData(machine); 
         setIsModalOpen(true); 
     };
-
-    const handleUpdate = async (updatedData) => {
-        try {
-            const response = await axios.put(`http://127.0.0.1:8000/api/admin/machines/${updatedData.id}`, updatedData);
-            dispatch(updateMachine(response.data));
-            setIsModalOpen(false);
-            setShouldFetchMachines(true); 
-        } catch (error) {
-            console.error("Error updating machine:", error);
-        }
+    
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+        setEditData(null); 
     };
 
     return (
@@ -102,19 +96,18 @@ const Machines = () => {
 
             <Modal
                 isOpen={isModalOpen}
-                onRequestClose={() => setIsModalOpen(false)}
+                onRequestClose={handleCloseModal}
                 className="modal-content"
                 overlayClassName="modal-overlay"
                 ariaHideApp={false}
             >
-                <button className="close-modal-button" onClick={() => setIsModalOpen(false)}>
+                <button className="close-modal-button" onClick={handleCloseModal}>
                     ×
                 </button>
-                <AddMachineForm setShouldFetchMachines={setShouldFetchMachines} 
-                initialData={editData} 
-                onSubmit={editData ? handleUpdate : null
-                
-                }/>
+                <AddMachineForm
+                    setShouldFetchMachines={setShouldFetchMachines}
+                    initialData={editData}
+                />
             </Modal>
         </div>
     );
