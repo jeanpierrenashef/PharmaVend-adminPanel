@@ -18,6 +18,18 @@ const MachineRow = ({ machine }) => {
                     </span>
                 )}
             </td>
+            <td>
+                <button
+                    className="action-button delete-button"
+                    onClick={() => onDelete(machine.id)}
+                    title="Delete Machine"
+                >
+                    <i className="mdi mdi-trash-can-outline"></i>
+                </button>
+                <button className="action-button edit-button" title="Edit Machine">
+                    <i className="mdi mdi-pencil-outline"></i>
+                </button>
+            </td>
         </tr>
     );
 };

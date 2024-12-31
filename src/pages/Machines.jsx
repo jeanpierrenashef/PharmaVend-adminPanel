@@ -63,6 +63,7 @@ const Machines = () => {
                             <th>Latitude</th>
                             <th>Longitude</th>
                             <th>Status</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
