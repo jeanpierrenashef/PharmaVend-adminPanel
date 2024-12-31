@@ -1,6 +1,6 @@
 import React from "react";
 
-const MachineRow = ({ machine }) => {
+const MachineRow = ({ machine, onDelete  }) => {
     return (
         <tr>
             <td>{machine.id}</td>

@@ -68,7 +68,7 @@ const Machines = () => {
                     </thead>
                     <tbody>
                         {machines.map((machine) => (
-                            <MachineRow key={machine.id} machine={machine} />
+                            <MachineRow key={machine.id} machine={machine} onDelete={handleDelete}/>
                         ))}
                     </tbody>
                 </table>
