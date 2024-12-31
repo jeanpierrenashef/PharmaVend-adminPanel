@@ -60,3 +60,36 @@
     color: #aaa;
     pointer-events: none;
   }
+
+  .get-location-button {
+    margin-top: 10px;
+    padding: 8px 12px;
+    font-size: 14px;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.get-location-button:hover {
+    background-color: #e9ecef;
+    border-color: #ccc;
+}
+
+.add-machine-button {
+    margin-top: 20px;
+    padding: 10px 15px;
+    font-size: 16px;
+    color: white;
+    background-color: #4caf50;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-machine-button:hover {
+    background-color: #45a049;
+}
