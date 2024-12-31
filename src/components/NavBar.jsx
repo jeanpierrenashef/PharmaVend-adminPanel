@@ -30,7 +30,7 @@ const Navbar = () => {
         <NavLink 
           to="/machines" 
           className={({ isActive }) => (isActive ? "active-link" : "")}>
-          <img src={require("../styles/assets/settings.png")} className="nav-icon" height={20}/>
+          <img src={require("../styles/assets/machines.png")} className="nav-icon" height={20}/>
           Machines
         </NavLink>
         <NavLink 
