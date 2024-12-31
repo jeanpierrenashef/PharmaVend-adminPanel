@@ -17,8 +17,12 @@ const machineSlice = createSlice({
         addMachine: (state, action) => {
             state.list.push(action.payload); 
         },
+        delteMachine: (state,action) => {
+            const machineId = action.payload;
+            state.list = state.list.filter(machine=>machine.id !== machineId);
+        }
     }
 })
 
 export default machineSlice;
-export const {loadMachines, addMachine} = machineSlice.actions;
+export const {loadMachines, addMachine, delteMachine} = machineSlice.actions;
