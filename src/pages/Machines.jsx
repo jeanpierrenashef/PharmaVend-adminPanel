@@ -8,7 +8,7 @@ import MapComponent from "../components/MapComponent.jsx";
 import MachineStatusDonutChart from "../components/MachineStatusDonutChart.jsx";
 import AddMachineForm from "../components/AddMachineForm.jsx";
 import Modal from "react-modal";
-import { delteMachine } from "../redux/machines/slice.js";
+import { delteMachine, updateMachine } from "../redux/machines/slice.js";
 
 const Machines = () => {
     const dispatch = useDispatch();
@@ -16,6 +16,7 @@ const Machines = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [shouldFetchMachines, setShouldFetchMachines] = useState(false);
+    const [editData, setEditData] = useState(null);
 
     useEffect(() => {
         if (shouldFetchMachines || machines.length === 0) {
@@ -44,6 +45,21 @@ const Machines = () => {
             console.log("Error ", e);
         }
     }
+    const handleEdit = (machine) => {
+        setEditData(machine); 
+        setIsModalOpen(true); 
+    };
+
+    const handleUpdate = async (updatedData) => {
+        try {
+            const response = await axios.put(`http://127.0.0.1:8000/api/admin/machines/${updatedData.id}`, updatedData);
+            dispatch(updateMachine(response.data));
+            setIsModalOpen(false);
+            setShouldFetchMachines(true); 
+        } catch (error) {
+            console.error("Error updating machine:", error);
+        }
+    };
 
     return (
         <div className="machines-page">
@@ -68,7 +84,7 @@ const Machines = () => {
                     </thead>
                     <tbody>
                         {machines.map((machine) => (
-                            <MachineRow key={machine.id} machine={machine} onDelete={handleDelete}/>
+                            <MachineRow key={machine.id} machine={machine} onDelete={handleDelete} onEdit={handleEdit}/>
                         ))}
                     </tbody>
                 </table>
@@ -94,7 +110,11 @@ const Machines = () => {
                 <button className="close-modal-button" onClick={() => setIsModalOpen(false)}>
                     ×
                 </button>
-                <AddMachineForm setShouldFetchMachines={setShouldFetchMachines} />
+                <AddMachineForm setShouldFetchMachines={setShouldFetchMachines} 
+                initialData={editData} 
+                onSubmit={editData ? handleUpdate : null
+                
+                }/>
             </Modal>
         </div>
     );
