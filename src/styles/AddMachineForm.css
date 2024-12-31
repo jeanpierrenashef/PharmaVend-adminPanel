@@ -93,3 +93,22 @@
 .add-machine-button:hover {
     background-color: #45a049;
 }
+.action-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #333;
+}
+
+.action-button:hover {
+    color: #000;
+}
+
+.delete-button {
+    color: red;
+}
+
+.edit-button {
+    color: blue;
+}
