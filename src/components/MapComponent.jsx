@@ -3,9 +3,9 @@ import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 
 const MapComponent = ({ machines }) => {
     const { isLoaded } = useJsApiLoader({
-        googleMapsApiKey: "AIzaSyD3EiOtcu7hbFzjSOBIMlFbnU7pXSCq4cw", 
+        googleMapsApiKey: "AIzaSyBblu-ime4U7pTC4ILi9CJmQeAYkvBdmG0", 
+        
     });
-
     const center = { lat: 33.8892, lng: 35.4827 };
     const zoomLevel = 8;
 

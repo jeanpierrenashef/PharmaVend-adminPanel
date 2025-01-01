@@ -23,21 +23,17 @@ const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
         e.preventDefault();
         try {
             if (initialData) {
-                // Update existing machine
                 const response = await axios.put(
                     `http://127.0.0.1:8000/api/admin/machines/${formData.id}`,
                     formData
                 );
                 dispatch(updateMachine(response.data));
-                alert("Machine updated successfully!");
             } else {
-                // Add new machine
                 const response = await axios.post(
                     "http://127.0.0.1:8000/api/admin/add_machine",
                     formData
                 );
                 dispatch(addMachine(response.data));
-                alert("Machine added successfully!");
                 setFormData({ location: "", latitude: "", longitude: "", status: "inactive" });
             }
 
@@ -47,7 +43,6 @@ const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
             }
         } catch (error) {
             console.error("Error processing machine:", error);
-            alert("Failed to process machine. Please try again.");
         }
     };
 
