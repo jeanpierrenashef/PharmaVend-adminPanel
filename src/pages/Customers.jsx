@@ -15,7 +15,7 @@ const Customers = () => {
 
         return { ...customer, totalOrders };
     });
-    
+
     return (
         <div className="customers-page">
             <Navbar />
@@ -37,6 +37,19 @@ const Customers = () => {
                         ))}
                     </tbody>
                 </table>
+            </div>
+            <div className="charts">
+                <div className="chart">
+                    <h2>Engagement of customers</h2>
+                    <PieChart />
+                </div>    
+                <hr className="separator-line" />
+                <div className="chart">
+                    <h2>Customer Growth</h2>
+                    <LineChart />
+                </div>          
+                
+
             </div>
         </div>
     );
