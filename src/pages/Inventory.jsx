@@ -52,13 +52,13 @@ const Inventory = () => {
         dispatch(updateQuantity(payload));
 
         try {
-            await axios.post("http://127.0.0.1:8000/api/admin/updateOrInsertInventory", {
+            await axios.post("http://127.0.0.1:8000/api/admin/update_inventory", {
                 machine_id: currentMachine.id,
                 product_id: productId,
                 quantity: increment,
             });
         } catch (error) {
-            console.error("Error updating inventory:", error);
+            console.error(error);
         }
     };
     
