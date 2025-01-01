@@ -16,9 +16,12 @@ const userSlice = createSlice({
         },
         deleteUser: (state, action) => {
             const userId = action.payload;
-            state.list = state.list.filter(user => user.id !== userId);
-
+            return {
+                ...state,
+                list: state.list.filter(user => user.id !== userId),
+            };
         }
+        
     }
 });
 

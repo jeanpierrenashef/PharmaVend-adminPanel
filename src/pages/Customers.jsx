@@ -23,13 +23,15 @@ const Customers = () => {
     });
 
     const handleDelete = async (id) => {
-        try{
-            await axios.delete(`http://127.0.0.1:8000/api/admin/users/${id}`);
-            dispatch(deleteUser(id));
-        }catch (e) {
-            console.log("Error ", e);
-        }
+    try {
+        const response = await axios.delete(`http://127.0.0.1:8000/api/admin/users/${id}`);
+        console.log("API Response:", response.data);
+        dispatch(deleteUser(id));
+    } catch (e) {
+        console.error("Error deleting user:", e);
     }
+};
+
 
     return (
         <div className="customers-page">
