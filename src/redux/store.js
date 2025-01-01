@@ -3,7 +3,7 @@ import userSlice from "./users/slice";
 import transactionSlice from "./transactions/slice";
 import productsSlice from "./products/slice";
 import machineSlice from "./machines/slice";
-import inventorySlice from "./inventories/slice";
+import inventorySlice from "./inventory/slice";
 
 
 const store = configureStore({
@@ -12,7 +12,7 @@ const store = configureStore({
         transactions: transactionSlice.reducer,
         products: productsSlice.reducer,
         machines: machineSlice.reducer,
-        inventories : inventorySlice.reducer
+        inventory : inventorySlice.reducer
     }
 });
 export default store;

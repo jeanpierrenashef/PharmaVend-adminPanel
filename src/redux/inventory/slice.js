@@ -1,20 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const inventorySlice = createSlice({
-    name: "inventories",
+    name: "inventory",
     initialState: {
         list:[],
     },
     reducers:{
-        loadInventories: (state, action) => {
-            const inventories = action.payload;
+        loadInventory: (state, action) => {
+            const inventory = action.payload;
 
             return{
                 ...state,
-                list: inventories
+                list: inventory
             }
         }
     }
 })
 export default inventorySlice;
-export const {loadInventories} = inventorySlice.actions;
+export const {loadInventory} = inventorySlice.actions;
