@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import InventoryRow from "../components/InventoryRow";
 import axios from "axios";
 import Navbar from "../components/NavBar";
+import "../styles/Inventory.css"
 
 const Inventory = () => {
     const dispatch = useDispatch();
@@ -35,20 +36,19 @@ const Inventory = () => {
         (inventory) => inventory.machine_id === currentMachine?.id
     );
 
-    return(
-        <div>
+    return (
+        <div className="inventory-page">
             <Navbar />
-            <div className="inventory-page">
-                
+            <div className="main-content">
                 <h1>Inventory Management</h1>
-    
+
                 <div className="machine-navigation">
-                    <button onClick={handlePrevMachine}>&lt; Prev Machine</button>
+                    <button onClick={handlePrevMachine}>&lt;</button>
                     <h2>{currentMachine ? `Machine ID: ${currentMachine.id}` : "Loading..."}</h2>
-                    <button onClick={handleNextMachine}>Next Machine &gt;</button>
+                    <button onClick={handleNextMachine}>&gt;</button>
                 </div>
-    
-                <table className="inventory-table">
+
+                <table>
                     <thead>
                         <tr>
                             <th>Product ID</th>
@@ -70,8 +70,8 @@ const Inventory = () => {
                     </tbody>
                 </table>
             </div>
-    </div>
-        );
+        </div>
+    );
 
 }
 export default Inventory;
