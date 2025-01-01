@@ -2,6 +2,7 @@ import React from "react";
 import CustomerRow from "../components/CustomerRow";
 import { useSelector } from "react-redux";
 import Navbar from "../components/NavBar";
+import "../styles/Customers.css"
 
 const Customers = () => {
     const customers = useSelector((state) => state.users.list);
