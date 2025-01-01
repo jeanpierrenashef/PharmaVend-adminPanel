@@ -23,7 +23,7 @@
     align-items: center;
     justify-content: space-between;
     font-size: 14px;
-    color: rgb(73, 73, 73);
+    color: #494949;
     height: 25px;
 }
 
@@ -32,3 +32,4 @@
     height: 16px;
     border-radius: 2px;
 }
+

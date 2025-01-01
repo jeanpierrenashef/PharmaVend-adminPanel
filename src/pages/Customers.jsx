@@ -1,15 +1,18 @@
 import React from "react";
 import CustomerRow from "../components/CustomerRow";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../components/NavBar";
 import "../styles/Customers.css"
 import CustomerPieChart from "../components/CustomerPieChart";
 import CustomerBarChartWithLine from "../components/CustomerBarChartWithLine";
 import { deleteUser } from "../redux/users/slice.js";
 
+import axios from "axios";
+
 const Customers = () => {
     const customers = useSelector((state) => state.users.list);
     const transactions = useSelector((state) => state.transactions.list);
+    const dispatch = useDispatch();
 
     const customersWithOrderCount = customers.map((customer) => {
         const totalOrders = transactions.filter(
@@ -21,7 +24,7 @@ const Customers = () => {
 
     const handleDelete = async (id) => {
         try{
-            await axios.delete(`http://127.0.0.1:8000/api/admin/machines/${id}`);
+            await axios.delete(`http://127.0.0.1:8000/api/admin/users/${id}`);
             dispatch(deleteUser(id));
         }catch (e) {
             console.log("Error ", e);
