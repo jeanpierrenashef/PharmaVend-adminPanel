@@ -24,17 +24,18 @@ const TopProducts = ({ machineId, products, transactions }) => {
         .slice(0, 3);
 
     return (
-        <ul className="top-products-list">
+        <ol className="top-products-list">
             {topProducts.length > 0 ? (
-                topProducts.map((product) => (
-                    <li key={product.id}>
+                topProducts.map((product, index) => (
+                    <li key={product.id} className={`rank-${index + 1}`}>
+                        <span className="rank-number">{index + 1}. </span>
                         <strong>{product.name}</strong>: {product.totalSold} sold
                     </li>
                 ))
             ) : (
                 <p>No sales data available for this machine.</p>
             )}
-        </ul>
+        </ol>
     );
 };
 
