@@ -1,0 +1,34 @@
+.inventory-page {
+    text-align: center;
+    padding: 20px;
+}
+
+.machine-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.machine-navigation button {
+    padding: 10px 15px;
+    font-size: 16px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.inventory-table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    width: 80%;
+}
+
+.inventory-table th, .inventory-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.inventory-table th {
+    background-color: #f4f4f4;
+}

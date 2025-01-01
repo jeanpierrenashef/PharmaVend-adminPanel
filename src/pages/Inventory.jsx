@@ -1,7 +1,9 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import InventoryRow from "../components/InventoryRow";
+import axios from "axios";
+import Navbar from "../components/NavBar";
 
 const Inventory = () => {
     const dispatch = useDispatch();
@@ -34,7 +36,10 @@ const Inventory = () => {
     );
 
     return(
+        <div>
+            <Navbar />
             <div className="inventory-page">
+                
                 <h1>Inventory Management</h1>
     
                 <div className="machine-navigation">
@@ -65,6 +70,7 @@ const Inventory = () => {
                     </tbody>
                 </table>
             </div>
+    </div>
         );
 
 }
