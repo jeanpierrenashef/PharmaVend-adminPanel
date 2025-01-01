@@ -32,9 +32,15 @@ const Inventory = () => {
 
     const currentMachine = machines[currentMachineIndex];
 
-    const currentMachineInventory = inventory.filter(
-        (inventory) => inventory.machine_id === currentMachine?.id
-    );
+    const currentMachineInventory = products.map((product) => {
+        const inventoryItem = inventory.find(
+            (item) => item.machine_id === currentMachine?.id && item.product_id === product.id
+        );
+        return {
+            ...product,
+            quantity: inventoryItem ? inventoryItem.quantity : 0,
+        };
+    });
 
     return (
         <div className="inventory-page">
@@ -57,16 +63,13 @@ const Inventory = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {currentMachineInventory.map((item) => {
-                            const product = products.find((p) => p.id === item.product_id);
-                            return (
-                                <InventoryRow
-                                    key={item.product_id}
-                                    product={product}
-                                    quantity={item.quantity}
-                                />
-                            );
-                        })}
+                        {currentMachineInventory.map((item) => (
+                            <InventoryRow
+                                key={item.product_id}
+                                product={item}
+                                quantity={item.quantity}
+                            />
+                    ))}
                     </tbody>
                 </table>
             </div>
