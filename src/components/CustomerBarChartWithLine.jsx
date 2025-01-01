@@ -70,6 +70,13 @@ const CustomerBarChartWithLine = ({ customers }) => {
 
         svg.append("g").call(d3.axisLeft(yScale));
 
+        svg.append("text")
+            .attr("text-anchor", "middle")
+            .attr("transform", `translate(-40, ${height/2}) rotate(-90)`)
+            .text("# of Customers")
+            .style("font-size", "12px")
+            .style("fill", "#494949");
+
         svg.append("g")
             .attr("transform", `translate(${width},0)`) 
             .call(d3.axisRight(yScaleCumulative))
