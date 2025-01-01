@@ -8,6 +8,14 @@ const Customers = () => {
     const customers = useSelector((state) => state.users.list);
     const transactions = useSelector((state) => state.transactions.list);
 
+    const customersWithOrderCount = customers.map((customer) => {
+        const totalOrders = transactions.filter(
+            (transaction) => transaction.user_id === customer.id
+        ).length;
+
+        return { ...customer, totalOrders };
+    });
+    
     return (
         <div className="customers-page">
             <Navbar />
