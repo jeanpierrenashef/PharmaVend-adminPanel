@@ -5,6 +5,7 @@ import Navbar from "../components/NavBar";
 import "../styles/Customers.css"
 import CustomerPieChart from "../components/CustomerPieChart";
 import CustomerBarChartWithLine from "../components/CustomerBarChartWithLine";
+import { deleteUser } from "../redux/users/slice.js";
 
 const Customers = () => {
     const customers = useSelector((state) => state.users.list);
@@ -21,7 +22,7 @@ const Customers = () => {
     const handleDelete = async (id) => {
         try{
             await axios.delete(`http://127.0.0.1:8000/api/admin/machines/${id}`);
-            dispatch(delteMachine(id));
+            dispatch(deleteUser(id));
         }catch (e) {
             console.log("Error ", e);
         }
