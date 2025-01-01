@@ -60,3 +60,26 @@
     font-size: 14px;
     text-align: center;
 }
+.charts {
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 40px;
+    padding: 20px;
+    overflow-y: auto;
+    overflow: visible;
+    display: flex;
+    justify-content: start;
+    align-items: flex-start; 
+}
+.separator-line {
+    border: 1px solid rgb(181, 181, 181); 
+    width: 400px;
+}
+
+.chart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%; 
+}
