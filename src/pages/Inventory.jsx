@@ -40,7 +40,7 @@ const Inventory = () => {
             ...product,
             quantity: inventoryItem ? inventoryItem.quantity : 0,
         };
-    });
+    }) .sort((a, b) => (a.name?.toLowerCase() || "").localeCompare(b.name?.toLowerCase() || ""));
 
     return (
         <div className="inventory-page">
