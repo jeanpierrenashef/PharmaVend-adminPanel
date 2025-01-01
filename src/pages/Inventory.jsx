@@ -1,5 +1,4 @@
 import React from "react";
-import {loadInventory} from "../redux/inventory/slice.js"
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -29,16 +28,43 @@ const Inventory = () => {
 
     const currentMachine = machines[currentMachineIndex];
 
-    const currentMachineInventory = inventories.filter(
+    const currentMachineInventory = inventory.filter(
         (inventory) => inventory.machine_id === currentMachine?.id
     );
 
     return(
-        <div>
-
-        </div>
-
-    );
+            <div className="inventory-page">
+                <h1>Inventory Management</h1>
+    
+                <div className="machine-navigation">
+                    <button onClick={handlePrevMachine}>&lt; Prev Machine</button>
+                    <h2>{currentMachine ? `Machine ID: ${currentMachine.id}` : "Loading..."}</h2>
+                    <button onClick={handleNextMachine}>Next Machine &gt;</button>
+                </div>
+    
+                <table className="inventory-table">
+                    <thead>
+                        <tr>
+                            <th>Product ID</th>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {currentMachineInventory.map((item) => {
+                            const product = products.find((p) => p.id === item.product_id);
+                            return (
+                                <InventoryRow
+                                    key={item.product_id}
+                                    product={product}
+                                    quantity={item.quantity}
+                                />
+                            );
+                        })}
+                    </tbody>
+                </table>
+            </div>
+        );
 
 }
 export default Inventory;
