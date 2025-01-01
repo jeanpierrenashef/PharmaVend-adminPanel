@@ -7,18 +7,26 @@ const CustomerPieChart = ({ customers, transactions }) => {
 
     useEffect(() => {
         const engagement = {
-            "At least 1 order": 0,
-            "At least 5 orders": 0,
-            "At least 10 orders": 0,
+            "0 orders": 0,
+            "1 to 5 orders": 0,
+            "6 to 10 orders": 0,
+            "10+ orders": 0,
         };
 
         customers.forEach((customer) => {
             const orderCount = transactions.filter((t) => t.user_id === customer.id).length;
-            if (orderCount >= 1) engagement["At least 1 order"]++;
-            if (orderCount >= 5) engagement["At least 5 orders"]++;
-            if (orderCount >= 10) engagement["At least 10 orders"]++;
+
+            if (orderCount === 0) {
+                engagement["0 orders"]++;
+            } else if (orderCount >= 1 && orderCount <= 5) {
+                engagement["1 to 5 orders"]++;
+            } else if (orderCount >= 6 && orderCount <= 10) {
+                engagement["6 to 10 orders"]++;
+            } else if (orderCount > 10) {
+                engagement["10+ orders"]++;
+            }
         });
-        
+
         const data = Object.entries(engagement).map(([key, value]) => ({
             label: key,
             value,
@@ -30,6 +38,7 @@ const CustomerPieChart = ({ customers, transactions }) => {
         const radius = Math.min(width, height) / 2;
 
         d3.select(chartRef.current).selectAll("*").remove();
+
         const svg = d3
             .select(chartRef.current)
             .attr("width", width)
@@ -48,11 +57,8 @@ const CustomerPieChart = ({ customers, transactions }) => {
             .join("path")
             .attr("d", arc)
             .attr("fill", (d, i) => color(i))
-            .attr("fill-opacity", 1)   
             .attr("stroke", "white")
             .style("stroke-width", "2px");
-            ;
-
 
         svg.selectAll("text")
             .data(pie)
@@ -67,35 +73,25 @@ const CustomerPieChart = ({ customers, transactions }) => {
             .attr("text-anchor", "middle")
             .style("font-size", "19px")
             .style("font-weight", "bold")
-            .text(`Total: ${totalCustomers}`);
-
-    }, [customers]);
+    }, [customers, transactions]);
 
     return (
         <div className="customer-pie-chart-container">
             <svg ref={chartRef}></svg>
             <div className="customer-pie-chart-legend">
-                <div className="legend-item">
-                    <span
-                        className="legend-box"
-                        style={{ backgroundColor: d3.schemeCategory10[0] }}
-                    ></span>
-                    <p>At least 1 order</p>
-                </div>
-                <div className="legend-item">
-                    <span
-                        className="legend-box"
-                        style={{ backgroundColor: d3.schemeCategory10[1] }}
-                    ></span>
-                    <p>At least 5 orders</p>
-                </div>
-                <div className="legend-item">
-                    <span
-                        className="legend-box"
-                        style={{ backgroundColor: d3.schemeCategory10[2] }}
-                    ></span>
-                    <p>At least 10 orders</p>
-                </div>
+                {["0 orders", "1 to 5 orders", "6 to 10 orders", "10+ orders"].map(
+                    (label, index) => (
+                        <div className="customer-legend-item" key={index}>
+                            <span
+                                className="customer-legend-box"
+                                style={{
+                                    backgroundColor: d3.schemeCategory10[index],
+                                }}
+                            ></span>
+                            <p>{label}</p>
+                        </div>
+                    )
+                )}
             </div>
         </div>
     );

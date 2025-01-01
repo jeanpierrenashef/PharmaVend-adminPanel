@@ -6,32 +6,32 @@
     margin-top: 10px;
   }
   
-  .legend-item {
+  .donut-legend-item {
     display: flex;
     align-items: center;
     gap: 8px;
   }
   
-  .legend-box {
+  .donut-legend-box {
     width: 12px;
     height: 12px;
     border-radius: 2px;
   }
   
-  .legend-text-group {
+  .donut-legend-text-group {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4px;
+
   }
   
-  .legend-text {
+  .donut-legend-text {
     font-size: 14px;
     color: #333;
     font-weight: 500;
   }
   
-  .legend-label {
+  .donut-legend-label {
     font-size: 12px;
     color: #666;
     margin: 0;

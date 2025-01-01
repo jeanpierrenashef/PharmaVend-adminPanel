@@ -92,25 +92,25 @@ const DonutChart = ({ transactions }) => {
         <div className="donut-chart-container">
             <svg ref={chartRef}></svg>
             <div className="donut-chart-legend">
-                <div className="legend-item">
+                <div className="donut-legend-item">
                     <span
-                        className="legend-box"
+                        className="donut-legend-box"
                         style={{ backgroundColor: "#408751" }}
                     ></span>
-                    <div className="legend-text-group">
-                        <span className="legend-text">${data.Dispensed.toFixed(2)}</span>
-                        <p className="legend-label">Dispensed</p>
+                    <div className="donut-legend-text-group">
+                        <span className="donut-legend-text">${data.Dispensed.toFixed(2)}</span>
+                        <p className="donut-legend-label">Dispensed</p>
                     </div>
 
                 </div>
-                <div className="legend-item">
+                <div className="donut-legend-item">
                     <span
-                        className="legend-box"
+                        className="donut-legend-box"
                         style={{ backgroundColor: "#595959" }}
                     ></span>
-                    <div className="legend-text-group">
-                        <span className="legend-text">${data["Not Dispensed"].toFixed(2)}</span>
-                        <p className="legend-label">Pending</p>
+                    <div className="donut-legend-text-group">
+                        <span className="donut-legend-text">${data["Not Dispensed"].toFixed(2)}</span>
+                        <p className="donut-legend-label">Pending</p>
                     </div>
 
                 </div>
