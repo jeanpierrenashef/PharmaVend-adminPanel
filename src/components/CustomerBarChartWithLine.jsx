@@ -82,6 +82,13 @@ const CustomerBarChartWithLine = ({ customers }) => {
             .call(d3.axisRight(yScaleCumulative))
             .selectAll("text")
 
+        svg.append("text")
+            .attr("text-anchor", "middle")
+            .attr("transform", `translate(${width + 40},${height / 2}) rotate(-90)`)
+            .text("Total # of Customers")
+            .style("font-size", "12px")
+            .style("fill", "#494949");
+
         svg.selectAll(".bar")
             .data(data)
             .join("rect")
