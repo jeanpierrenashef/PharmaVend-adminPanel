@@ -18,6 +18,15 @@ const Customers = () => {
         return { ...customer, totalOrders };
     });
 
+    const handleDelete = async (id) => {
+        try{
+            await axios.delete(`http://127.0.0.1:8000/api/admin/machines/${id}`);
+            dispatch(delteMachine(id));
+        }catch (e) {
+            console.log("Error ", e);
+        }
+    }
+
     return (
         <div className="customers-page">
             <Navbar />
@@ -31,11 +40,12 @@ const Customers = () => {
                             <th>Email</th>
                             <th>Total Orders</th>
                             <th>Created At</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {customersWithOrderCount.map((customer) => (
-                            <CustomerRow key={customer.id} customer={customer} />
+                            <CustomerRow key={customer.id} customer={customer} onDelete={handleDelete}/>
                         ))}
                     </tbody>
                 </table>
