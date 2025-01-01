@@ -100,7 +100,7 @@ const Orders = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredTransactions.map((transaction, index) => {
+                        {filteredTransactions.map((transaction) => {
                             const user = users.find((u) => u.id === transaction.user_id);
                             const product = products.find((p) => p.id === transaction.product_id);
                             return (
