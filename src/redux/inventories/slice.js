@@ -16,3 +16,5 @@ const inventorySlice = createSlice({
         }
     }
 })
+export default inventorySlice;
+export const {loadInventories} = inventorySlice.actions;
