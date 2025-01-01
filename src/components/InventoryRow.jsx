@@ -13,6 +13,7 @@ const InventoryRow = ({ product, quantity, onUpdateQuantity }) => {
                 >
                     <i className="mdi mdi-plus-circle-outline"></i>
                 </button>
+                /
                 <button
                     className="action-button subtract-button"
                     onClick={() => onUpdateQuantity(product.id, -1)}

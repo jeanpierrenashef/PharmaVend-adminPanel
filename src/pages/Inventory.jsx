@@ -43,13 +43,23 @@ const Inventory = () => {
         };
     }) .sort((a, b) => (a.name?.toLowerCase() || "").localeCompare(b.name?.toLowerCase() || ""));
 
-    const handleUpdateQuantity = (productId, increment) => {
+    const handleUpdateQuantity = async (productId, increment) => {
         const payload = {
             machine_id: currentMachine.id,
             product_id: productId,
             increment,
         };
         dispatch(updateQuantity(payload));
+
+        try {
+            await axios.post("http://127.0.0.1:8000/api/admin/updateOrInsertInventory", {
+                machine_id: currentMachine.id,
+                product_id: productId,
+                quantity: increment,
+            });
+        } catch (error) {
+            console.error("Error updating inventory:", error);
+        }
     };
     
     return (
