@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import InventoryRow from "../components/InventoryRow";
 
 const Inventory = () => {
     const dispatch = useDispatch();
