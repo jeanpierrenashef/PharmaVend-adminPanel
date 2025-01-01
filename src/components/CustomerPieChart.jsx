@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from "react";
 import * as d3 from "d3";
 import "../styles/CustomerPieChart.css";
 
-const CustomerPieChart = ({ customers }) => {
+const CustomerPieChart = ({ customers, transactions }) => {
     const chartRef = useRef();
 
     useEffect(() => {
@@ -13,19 +13,18 @@ const CustomerPieChart = ({ customers }) => {
         };
 
         customers.forEach((customer) => {
-            const orderCount = customer.totalOrders; 
+            const orderCount = transactions.filter((t) => t.user_id === customer.id).length;
             if (orderCount >= 1) engagement["At least 1 order"]++;
             if (orderCount >= 5) engagement["At least 5 orders"]++;
             if (orderCount >= 10) engagement["At least 10 orders"]++;
         });
-
+        
         const data = Object.entries(engagement).map(([key, value]) => ({
             label: key,
             value,
         }));
 
         const totalCustomers = customers.length;
-
         const width = 260;
         const height = 260;
         const radius = Math.min(width, height) / 2;
@@ -49,8 +48,11 @@ const CustomerPieChart = ({ customers }) => {
             .join("path")
             .attr("d", arc)
             .attr("fill", (d, i) => color(i))
+            .attr("fill-opacity", 1)   
             .attr("stroke", "white")
             .style("stroke-width", "2px");
+            ;
+
 
         svg.selectAll("text")
             .data(pie)

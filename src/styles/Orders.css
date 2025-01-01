@@ -144,7 +144,7 @@
   align-items: flex-start; 
 }
 .separator-line {
-  border: 1px solid rgb(181, 181, 181); /* Temporary debug border */
+  border: 1px solid rgb(181, 181, 181); 
   width: 400px;
 }
 
