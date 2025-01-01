@@ -5,6 +5,7 @@ import InventoryRow from "../components/InventoryRow";
 import axios from "axios";
 import Navbar from "../components/NavBar";
 import "../styles/Inventory.css"
+import { updateQuantity } from "../redux/inventory/slice";
 
 const Inventory = () => {
     const dispatch = useDispatch();
@@ -42,6 +43,15 @@ const Inventory = () => {
         };
     }) .sort((a, b) => (a.name?.toLowerCase() || "").localeCompare(b.name?.toLowerCase() || ""));
 
+    const handleUpdateQuantity = (productId, increment) => {
+        const payload = {
+            machine_id: currentMachine.id,
+            product_id: productId,
+            increment,
+        };
+        dispatch(updateQuantity(payload));
+    };
+    
     return (
         <div className="inventory-page">
             <Navbar />
@@ -57,9 +67,9 @@ const Inventory = () => {
                 <table>
                     <thead>
                         <tr>
-                            <th>Product ID</th>
                             <th>Product Name</th>
                             <th>Quantity</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -67,7 +77,8 @@ const Inventory = () => {
                             <InventoryRow
                                 key={item.product_id}
                                 product={item}
-                                quantity={item.quantity}
+                                quantity={item.quantity}    
+                                onUpdateQuantity={handleUpdateQuantity}
                             />
                     ))}
                     </tbody>
