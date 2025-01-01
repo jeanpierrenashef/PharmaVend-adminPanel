@@ -1,18 +1,34 @@
 import React from "react";
 import CustomerRow from "../components/CustomerRow";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import Navbar from "../components/NavBar";
 import "../styles/Customers.css"
 import CustomerPieChart from "../components/CustomerPieChart";
 import CustomerBarChartWithLine from "../components/CustomerBarChartWithLine";
-import { deleteUser } from "../redux/users/slice.js";
-
+import { deleteUser, loadUsers } from "../redux/users/slice.js";
+import {loadTransactions} from "../redux/transactions/slice.js"
 import axios from "axios";
 
 const Customers = () => {
+
     const customers = useSelector((state) => state.users.list);
     const transactions = useSelector((state) => state.transactions.list);
     const dispatch = useDispatch();
+    
+    useEffect(() => {
+        if (customers.length === 0) {
+            axios.get("http://127.0.0.1:8000/api/admin/users").then(({ data }) => {
+                dispatch(loadUsers(data));
+            });
+        }
+
+        if (transactions.length === 0) {
+            axios.get("http://127.0.0.1:8000/api/admin/transactions").then(({ data }) => {
+                dispatch(loadTransactions(data));
+            });
+        }
+    }, [customers, transactions, dispatch]);
 
     const customersWithOrderCount = customers.map((customer) => {
         const totalOrders = transactions.filter(
