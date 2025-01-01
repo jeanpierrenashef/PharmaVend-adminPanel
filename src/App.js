@@ -5,6 +5,7 @@ import store from './redux/store';
 import Orders from './pages/Orders';
 import Machines from './pages/Machines';
 import Customers from './pages/Customers';
+import Inventory from './pages/Inventory';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
               <Route path="/orders" element={<Orders />} />
               <Route path="/machines" element={<Machines />} />
               <Route path="/customers" element={<Customers />} />
+              <Route path="/inventory" element={<Inventory />} />
             </Routes>
           
         </BrowserRouter>
