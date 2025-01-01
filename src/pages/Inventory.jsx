@@ -110,6 +110,14 @@ const Inventory = () => {
                     </tbody>
                 </table>
             </div>
+            <div className="top-products-section">
+                <h2>Top 3 Most Sold Products</h2>
+                <TopProducts
+                    machineId={currentMachine?.id}
+                    products={products}
+                    transactions={transactions}
+                />
+            </div>
         </div>
     );
 
