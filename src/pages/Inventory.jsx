@@ -6,6 +6,8 @@ import axios from "axios";
 import Navbar from "../components/NavBar";
 import "../styles/Inventory.css"
 import { updateQuantity } from "../redux/inventory/slice";
+import {loadProducts} from "../redux/products/slice.js";
+import {loadMachines} from "../redux/machines/slice.js";
 
 const Inventory = () => {
     const dispatch = useDispatch();
@@ -55,12 +57,26 @@ const Inventory = () => {
             await axios.post("http://127.0.0.1:8000/api/admin/update_inventory", {
                 machine_id: currentMachine.id,
                 product_id: productId,
-                quantity: increment,
+                add_quantity: increment,
             });
         } catch (error) {
             console.error(error);
         }
     };
+    useEffect(() => {
+        if (products.length === 0) {
+            axios.get("http://127.0.0.1:8000/api/admin/products").then(({ data }) => {
+                dispatch(loadProducts(data));
+            });
+        }
+
+        if (machines.length === 0) {
+            axios.get("http://127.0.0.1:8000/api/admin/machines").then(({ data }) => {
+                dispatch(loadMachines(data));
+            });
+        }
+    }, [products, machines, dispatch]);
+
     
     return (
         <div className="inventory-page">
