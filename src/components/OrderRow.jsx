@@ -1,6 +1,6 @@
 import React from "react";
 
-const TransactionRow = ({ transaction, user, product }) => {
+const OrderRow = ({ transaction, user, product }) => {
     const formattedDate = transaction.created_at.split("T")[0];
     return (
         <tr>
@@ -26,4 +26,4 @@ const TransactionRow = ({ transaction, user, product }) => {
     );
 };
 
-export default TransactionRow;
+export default OrderRow;

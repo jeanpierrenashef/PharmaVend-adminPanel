@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import TransactionRow from "../components/TransactionRow.jsx";
+import OrderRow from "../components/OrderRow.jsx";
 import "../styles/Orders.css";
 import Navbar from "../components/NavBar.jsx";
 import DonutChart from "../components/DonutChart";
 import StackedBarChart from "../components/StackedBar.jsx";
 
-const Transactions = () => {
+const Orders = () => {
     const dispatch = useDispatch();
     const transactions = useSelector((global) => global.transactions.list);
     const users = useSelector((global) => global.users.list);
@@ -104,7 +104,7 @@ const Transactions = () => {
                             const user = users.find((u) => u.id === transaction.user_id);
                             const product = products.find((p) => p.id === transaction.product_id);
                             return (
-                                <TransactionRow
+                                <OrderRow
                                     key={transaction.id}
                                     transaction={transaction}
                                     user={user}
@@ -131,4 +131,4 @@ const Transactions = () => {
     );
 };
 
-export default Transactions;
+export default Orders;
