@@ -8,12 +8,14 @@ import "../styles/Inventory.css"
 import { updateQuantity } from "../redux/inventory/slice";
 import {loadProducts} from "../redux/products/slice.js";
 import {loadMachines} from "../redux/machines/slice.js";
+import TopProducts from "../components/TopProducts.jsx";
 
 const Inventory = () => {
     const dispatch = useDispatch();
     const inventory = useSelector((global) => global.inventory.list);
     const machines = useSelector((state) => state.machines.list);
     const products = useSelector((state) => state.products.list);
+    const transactions = useSelector((state) => state.transactions.list)
 
     const [currentMachineIndex, setCurrentMachineIndex] = useState(0);
 
