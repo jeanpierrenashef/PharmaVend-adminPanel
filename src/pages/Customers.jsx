@@ -41,12 +41,12 @@ const Customers = () => {
             <div className="charts">
                 <div className="chart">
                     <h2>Engagement of customers</h2>
-                    <PieChart />
+                    <CustomerPieChart customers={customers} transactions={transactions} />
                 </div>    
                 <hr className="separator-line" />
                 <div className="chart">
                     <h2>Customer Growth</h2>
-                    <LineChart />
+                    {/* <CustomerLineChart /> */}
                 </div>          
                 
 
