@@ -77,7 +77,34 @@
     text-align: center;
     color: #333;
 }
-.main-content table tbody{
-    height: 50px;
+
+.action-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 18px;
+    margin: 0 5px;
+    padding: 5px;
+    color: #007bff;
+    transition: color 0.2s ease-in-out;
 }
 
+.action-button:hover {
+    color: #0056b3;
+}
+
+.add-button {
+    color: #28a745;
+}
+
+.add-button:hover {
+    color: #218838;
+}
+
+.subtract-button {
+    color: #dc3545;
+}
+
+.subtract-button:hover {
+    color: #c82333;
+}
