@@ -12,7 +12,8 @@ const CustomerBarChartWithLine = ({ customers }) => {
             (d) => d3.timeDay(new Date(d.created_at))
         );
 
-        const minDate = d3.timeDay.floor(new Date("2024-12-13")); 
+        const minDate = d3.timeDay.offset(new Date(), -20); 
+
         const maxDate = d3.max(customers, (d) => new Date(d.created_at));
         const allDates = d3.timeDays(minDate, d3.timeDay.offset(maxDate, 1));
 
@@ -48,7 +49,7 @@ const CustomerBarChartWithLine = ({ customers }) => {
 
         const yScale = d3
             .scaleLinear()
-            .domain([0, d3.max(data, (d) => d.count+3)])
+            .domain([0, d3.max(data, (d) => d.count+2)])
             .range([height, 0]);
 
         const yScaleCumulative = d3
