@@ -14,6 +14,11 @@ const userSlice = createSlice({
                 list:users,
             };
         },
+        deleteUsers: (state, action) => {
+            const userId = action.payload;
+            state.list = state.list.filter(user => user.id !== userId);
+
+        }
     }
 });
 
