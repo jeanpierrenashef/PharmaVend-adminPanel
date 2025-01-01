@@ -1,26 +1,45 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import "../styles/CustomerBarChartWithLine.css";
 
 const CustomerBarChartWithLine = ({ customers }) => {
     const chartRef = useRef();
+    const [granularity, setGranularity] = useState("daily"); 
 
     useEffect(() => {
-        const customersByDay = d3.rollup(
+        const timeGranularity = {
+            daily: d3.timeDay,
+            monthly: d3.timeMonth,
+            yearly: d3.timeYear,
+        };
+
+        const timeFormat = {
+            daily: "%d %b",
+            monthly: "%b %Y",
+            yearly: "%Y",
+        };
+
+        const timeOffset = timeGranularity[granularity];
+
+        const customersByGranularity = d3.rollup(
             customers,
             (v) => v.length,
-            (d) => d3.timeDay(new Date(d.created_at))
+            (d) => timeOffset(new Date(d.created_at))
         );
 
-        const minDate = d3.timeDay.offset(new Date(), -20); 
-
+        const minDate =  granularity === "daily"
+        ? d3.timeDay.offset(
+            timeOffset.floor(d3.min(customers, (d) => new Date(d.created_at))),
+            -3 
+        )
+        : timeOffset.floor(d3.min(customers, (d) => new Date(d.created_at)));
         const maxDate = d3.max(customers, (d) => new Date(d.created_at));
-        const allDates = d3.timeDays(minDate, d3.timeDay.offset(maxDate, 1));
+        const allDates = Array.from(timeOffset.range(minDate, timeOffset.offset(maxDate, 1)));
 
         let cumulativeCount = 0;
         const data = allDates.map((date) => {
-            const count = customersByDay.get(date) || 0;
-            cumulativeCount += count; 
+            const count = customersByGranularity.get(date) || 0;
+            cumulativeCount += count;
             return {
                 date,
                 count,
@@ -49,20 +68,20 @@ const CustomerBarChartWithLine = ({ customers }) => {
 
         const yScale = d3
             .scaleLinear()
-            .domain([0, d3.max(data, (d) => d.count+2)])
+            .domain([0, d3.max(data, (d) => d.count + 2)])
             .range([height, 0]);
 
         const yScaleCumulative = d3
             .scaleLinear()
-            .domain([0, d3.max(data, (d) => d.cumulativeCount)]) 
+            .domain([0, d3.max(data, (d) => d.cumulativeCount)])
             .range([height, 0]);
 
         svg.append("g")
             .attr("transform", `translate(0,${height})`)
             .call(
                 d3.axisBottom(xScale)
-                    .tickValues(allDates) 
-                    .tickFormat(d3.timeFormat("%d %b"))
+                    .tickValues(data.map((d) => d.date))
+                    .tickFormat(d3.timeFormat(timeFormat[granularity]))
             )
             .selectAll("text")
             .attr("transform", "rotate(-45)")
@@ -70,24 +89,9 @@ const CustomerBarChartWithLine = ({ customers }) => {
 
         svg.append("g").call(d3.axisLeft(yScale));
 
-        svg.append("text")
-            .attr("text-anchor", "middle")
-            .attr("transform", `translate(-40, ${height/2}) rotate(-90)`)
-            .text("# of Customers")
-            .style("font-size", "12px")
-            .style("fill", "#494949");
-
         svg.append("g")
-            .attr("transform", `translate(${width},0)`) 
-            .call(d3.axisRight(yScaleCumulative))
-            .selectAll("text")
-
-        svg.append("text")
-            .attr("text-anchor", "middle")
-            .attr("transform", `translate(${width + 40},${height / 2}) rotate(-90)`)
-            .text("Total # of Customers")
-            .style("font-size", "12px")
-            .style("fill", "#494949");
+            .attr("transform", `translate(${width},0)`)
+            .call(d3.axisRight(yScaleCumulative));
 
         svg.selectAll(".bar")
             .data(data)
@@ -97,7 +101,7 @@ const CustomerBarChartWithLine = ({ customers }) => {
             .attr("x", (d) => xScale(d.date))
             .attr("y", (d) => yScale(d.count))
             .attr("width", xScale.bandwidth())
-            .attr("height", (d) => height - yScale(d.count))
+            .attr("height", (d) => height - yScale(d.count));
 
         const line = d3
             .line()
@@ -111,10 +115,25 @@ const CustomerBarChartWithLine = ({ customers }) => {
             .attr("stroke", "#2b788a")
             .attr("stroke-width", 2)
             .attr("d", line);
-            
-    }, [customers]);
+    }, [customers, granularity]);
 
-    return <svg ref={chartRef} />;
+    return (
+        <div>
+            <div className="granularity-selector">
+                <label htmlFor="granularity">View by:</label>
+                <select
+                    id="granularity"
+                    value={granularity}
+                    onChange={(e) => setGranularity(e.target.value)}
+                >
+                    <option value="daily">Daily</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="yearly">Yearly</option>
+                </select>
+            </div>
+            <svg ref={chartRef} />
+        </div>
+    );
 };
 
 export default CustomerBarChartWithLine;
