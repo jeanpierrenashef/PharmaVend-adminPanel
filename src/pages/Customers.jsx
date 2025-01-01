@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import Navbar from "../components/NavBar";
 import "../styles/Customers.css"
 import CustomerPieChart from "../components/CustomerPieChart";
+import CustomerBarChartWithLine from "../components/CustomerBarChartWithLine";
 
 const Customers = () => {
     const customers = useSelector((state) => state.users.list);
@@ -47,7 +48,7 @@ const Customers = () => {
                 <hr className="separator-line" />
                 <div className="chart">
                     <h2>Customer Growth</h2>
-                    {/* <CustomerLineChart /> */}
+                    <CustomerBarChartWithLine customers={customers} />
                 </div>          
                 
 

@@ -1,6 +1,6 @@
 .navbar {
   width: 200px;
-  height: 100vh;
+  height: auto;
   background-color: #1c1e21; 
   color: #fff;
   display: flex;
