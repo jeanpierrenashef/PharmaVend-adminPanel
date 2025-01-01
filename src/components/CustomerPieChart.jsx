@@ -4,7 +4,7 @@ import "../styles/CustomerPieChart.css";
 
 const CustomerPieChart = ({ customers, transactions }) => {
     const chartRef = useRef();
-
+    const totalCustomers = customers.length;
     useEffect(() => {
         const engagement = {
             "0 orders": 0,
@@ -32,7 +32,7 @@ const CustomerPieChart = ({ customers, transactions }) => {
             value,
         }));
 
-        const totalCustomers = customers.length;
+        
         const width = 260;
         const height = 260;
         const radius = Math.min(width, height) / 2;
@@ -73,10 +73,11 @@ const CustomerPieChart = ({ customers, transactions }) => {
             .attr("text-anchor", "middle")
             .style("font-size", "19px")
             .style("font-weight", "bold")
-    }, [customers, transactions]);
+    }, [customers, transactions, totalCustomers],);
 
     return (
         <div className="customer-pie-chart-container">
+            <h3>Total Customers: {totalCustomers}</h3>
             <svg ref={chartRef}></svg>
             <div className="customer-pie-chart-legend">
                 {["0 orders", "1 to 5 orders", "6 to 10 orders", "10+ orders"].map(

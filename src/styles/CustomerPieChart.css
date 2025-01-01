@@ -5,6 +5,7 @@
     justify-content: center;
     width: 260px;
     margin: 0 auto;
+    padding-top: 0;
 }
 
 .customer-pie-chart-legend {
