@@ -120,16 +120,19 @@ const CustomerBarChartWithLine = ({ customers }) => {
     return (
         <div>
             <div className="granularity-selector">
-                <label htmlFor="granularity">View by:</label>
-                <select
-                    id="granularity"
-                    value={granularity}
-                    onChange={(e) => setGranularity(e.target.value)}
-                >
-                    <option value="daily">Daily</option>
-                    <option value="monthly">Monthly</option>
-                    <option value="yearly">Yearly</option>
-                </select>
+                <label htmlFor="granularity">View by: </label>
+                <div className="select-container">
+                    <select
+                        id="granularity"
+                        className="select"
+                        value={granularity}
+                        onChange={(e) => setGranularity(e.target.value)}
+                    >
+                        <option value="daily">Daily</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="yearly">Yearly</option>
+                    </select>
+                </div>
             </div>
             <svg ref={chartRef} />
         </div>
