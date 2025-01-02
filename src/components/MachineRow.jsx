@@ -4,7 +4,7 @@ const MachineRow = ({ machine, onDelete , onEdit }) => {
     const handleToggleStatus = async () => {
         try {
             const response = await axios.post(
-                `http://127.0.0.1:8000/api/admin/machines/${machine.id}/toggle_status`
+                `http://127.0.0.1:8000/api/admin/machines/toggle_status/${machine.id}`
             );
             dispatch(updateMachine(response.data));
         } catch (error) {
