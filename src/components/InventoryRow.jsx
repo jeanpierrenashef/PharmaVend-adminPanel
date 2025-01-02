@@ -6,7 +6,7 @@ const InventoryRow = ({ product, quantity, onUpdateQuantity }) => {
             <td>{product?.id }</td>
             <td>{product?.name || "Unknown"}</td>
             <td>
-            <button
+                <button
                     className="action-button subtract-button"
                     onClick={() => onUpdateQuantity(product.id, -1)}
                     title="Decrease Quantity"

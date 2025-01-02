@@ -19,6 +19,8 @@ const Inventory = () => {
     const transactions = useSelector((state) => state.transactions.list)
 
     const [currentMachineIndex, setCurrentMachineIndex] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1); 
+    const itemsPerPage = 10;
 
     
     useEffect(()=>{
@@ -30,10 +32,12 @@ const Inventory = () => {
 
     const handlePrevMachine = () => {
         setCurrentMachineIndex((prev) => (prev > 0 ? prev - 1 : machines.length - 1));
+        setCurrentPage(1);
     };
 
     const handleNextMachine = () => {
         setCurrentMachineIndex((prev) => (prev < machines.length - 1 ? prev + 1 : 0));
+        setCurrentPage(1);
     };
 
     const currentMachine = machines[currentMachineIndex];
@@ -46,7 +50,19 @@ const Inventory = () => {
             ...product,
             quantity: inventoryItem ? inventoryItem.quantity : 0,
         };
-    })
+    });
+
+    const totalPages = Math.ceil(currentMachineInventory.length / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const paginatedInventory = currentMachineInventory.slice(startIndex, startIndex + itemsPerPage);
+
+    const handleNextPage = () => {
+        setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+    };
+
+    const handlePrevPage = () => {
+        setCurrentPage((prev) => Math.max(prev - 1, 1));
+    };
 
     const handleUpdateQuantity = async (productId, increment) => {
         const payload = {
@@ -103,16 +119,27 @@ const Inventory = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {currentMachineInventory.map((item) => (
+                            {paginatedInventory.map((item) => (
                                 <InventoryRow
                                     key={item.product_id}
                                     product={item}
-                                    quantity={item.quantity}    
+                                    quantity={item.quantity}
                                     onUpdateQuantity={handleUpdateQuantity}
                                 />
-                        ))}
+                            ))}
                         </tbody>
                     </table>
+                    <div className="pagination-controls">
+                        <button onClick={handlePrevPage} disabled={currentPage === 1}> 
+                            Previous
+                        </button>
+                        <span>
+                            Page {currentPage} of {totalPages}
+                        </span>
+                        <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+                            Next
+                        </button>
+                    </div>
                 </div>
                 <div className="data">
                     <div className="top-products-section">
