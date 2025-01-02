@@ -9,7 +9,7 @@ const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
         location: "",
         latitude: "",
         longitude: "",
-        status: "inactive",
+        
     
     });
 
@@ -34,7 +34,7 @@ const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
                     formData
                 );
                 dispatch(addMachine(response.data));
-                setFormData({ location: "", latitude: "", longitude: "", status: "inactive" });
+                setFormData({ location: "", latitude: "", longitude: ""});
             }
 
             setShouldFetchMachines(true);
@@ -106,13 +106,6 @@ const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
                 <button type="button" onClick={handleGetCurrentLocation} className="get-location-button">
                     Get Current Location
                 </button>
-            </div>
-            <div>
-                <label>Status:</label>
-                <select name="status" value={formData.status} onChange={handleChange}>
-                    <option value="active">Active</option>
-                    <option value="inactive">Inactive</option>
-                </select>
             </div>
             <button type="submit">{initialData ? "Update Machine" : "Add Machine"}</button>
         </form>
