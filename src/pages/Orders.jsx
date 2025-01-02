@@ -55,78 +55,80 @@ const Orders = () => {
     return (
         <div className="orders-page">
             <Navbar />
-            <div className="main-content">
-                <h1>Orders</h1>
-                <div className="filters">
-                    <div className="filter-dropdown filter-dropdown-after">
-                        <select
-                            value={statusFilter}
-                            onChange={(e) => setStatusFilter(e.target.value)}
-                        >
-                            <option value="">Status</option>
-                            <option value="1">Dispensed</option>
-                            <option value="0">Not Dispensed</option>
-                        </select>
+            <div className="content">
+                <div className="main-content">
+                    <h1>Orders</h1>
+                    <div className="filters">
+                        <div className="filter-dropdown filter-dropdown-after">
+                            <select
+                                value={statusFilter}
+                                onChange={(e) => setStatusFilter(e.target.value)}
+                            >
+                                <option value="">Status</option>
+                                <option value="1">Dispensed</option>
+                                <option value="0">Not Dispensed</option>
+                            </select>
+                        </div>
+                        <div className="filter-dropdown">
+                            <input
+                                type="number"
+                                placeholder="Min Quantity"
+                                value={quantityFilter}
+                                onChange={(e) => setQuantityFilter(e.target.value)}
+                            />
+                        </div>
+                        <div className="filter-dropdown">
+                            <input
+                                type="number"
+                                step="0.50"
+                                placeholder="Min Price"
+                                value={priceFilter}
+                                onChange={(e) => setPriceFilter(e.target.value)}
+                            />
+                        </div>
                     </div>
-                    <div className="filter-dropdown">
-                        <input
-                            type="number"
-                            placeholder="Min Quantity"
-                            value={quantityFilter}
-                            onChange={(e) => setQuantityFilter(e.target.value)}
-                        />
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>User</th>
+                                <th>Quantity</th>
+                                <th>Total Price</th>
+                                <th>Machine ID</th>
+                                <th>Product</th>
+                                <th>Status</th>
+                                <th>Created At</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {filteredTransactions.map((transaction) => {
+                                const user = users.find((u) => u.id === transaction.user_id);
+                                const product = products.find((p) => p.id === transaction.product_id);
+                                return (
+                                    <OrderRow
+                                        key={transaction.id}
+                                        transaction={transaction}
+                                        user={user}
+                                        product={product}
+                                    />
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                    
+                </div>
+                <div className="charts">
+                    <div className="chart">
+                        <h2>Receipt of Goods</h2>
+                        <DonutChart transactions={transactions} />
                     </div>
-                    <div className="filter-dropdown">
-                        <input
-                            type="number"
-                            step="0.50"
-                            placeholder="Min Price"
-                            value={priceFilter}
-                            onChange={(e) => setPriceFilter(e.target.value)}
-                        />
+                    <div className="chart">
+                        <h2>Order Status</h2>
+                        <StackedBarChart transactions={transactions}/>
                     </div>
                 </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>User</th>
-                            <th>Quantity</th>
-                            <th>Total Price</th>
-                            <th>Machine ID</th>
-                            <th>Product</th>
-                            <th>Status</th>
-                            <th>Created At</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {filteredTransactions.map((transaction) => {
-                            const user = users.find((u) => u.id === transaction.user_id);
-                            const product = products.find((p) => p.id === transaction.product_id);
-                            return (
-                                <OrderRow
-                                    key={transaction.id}
-                                    transaction={transaction}
-                                    user={user}
-                                    product={product}
-                                />
-                            );
-                        })}
-                    </tbody>
-                </table>
-                
             </div>
-            <div className="charts">
-                <div className="chart">
-                    <h2>Receipt of Goods</h2>
-                    <DonutChart transactions={transactions} />
-                </div>
-                <hr className="separator-line" />
-                <div className="chart">
-                    <h2>Order Status</h2>
-                    <StackedBarChart transactions={transactions}/>
-                </div>
-            </div>
+            
         </div>
     );
 };
