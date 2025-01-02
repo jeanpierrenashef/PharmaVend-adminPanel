@@ -58,58 +58,64 @@ const Machines = () => {
     return (
         <div className="machines-page">
             <Navbar />
-            <div className="main-content">
-                <h1>Machines</h1>
-                <div className="button-container">
-                    <button className="open-modal-button" onClick={() => setIsModalOpen(true)}>
-                        Add Machine
-                    </button>
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Location</th>
-                            <th>Latitude</th>
-                            <th>Longitude</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {machines.map((machine) => (
-                            <MachineRow key={machine.id} machine={machine} onDelete={handleDelete} onEdit={handleEdit}/>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-            <div className="maps">
-                <div>
-                    <h2>Machine Map</h2>
-                    <MapComponent machines={machines} />
-                </div>
-                <div>
-                    <h2>Machines Stats</h2>
-                    <MachineStatusDonutChart machineStatusData={machineStatusData} />
-                </div>
-            </div>
+            <div className="content">
+                <div className="main-content">
+                        <h1>Machines</h1>
+                        <div className="button-container">
+                            <button className="open-modal-button" onClick={() => setIsModalOpen(true)}>
+                                Add Machine
+                            </button>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Location</th>
+                                    <th>Latitude</th>
+                                    <th>Longitude</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {machines.map((machine) => (
+                                    <MachineRow key={machine.id} machine={machine} onDelete={handleDelete} onEdit={handleEdit}/>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <div className="charts">
+                            <div className="chart">
+                                <h2>Machine Map</h2>
+                                <MapComponent machines={machines} />
+                            </div>
+                            <div className="chart">
+                                <h2>Machines Stats</h2>
+                                <MachineStatusDonutChart machineStatusData={machineStatusData} />
+                            </div>
+                        </div>
+                    </div>
+                        
 
-            <Modal
-                isOpen={isModalOpen}
-                onRequestClose={handleCloseModal}
-                className="modal-content"
-                overlayClassName="modal-overlay"
-                ariaHideApp={false}
-            >
-                <button className="close-modal-button" onClick={handleCloseModal}>
-                    ×
-                </button>
-                <AddMachineForm
-                    setShouldFetchMachines={setShouldFetchMachines}
-                    initialData={editData}
-                />
-            </Modal>
-        </div>
+                    <Modal
+                        isOpen={isModalOpen}
+                        onRequestClose={handleCloseModal}
+                        className="modal-content"
+                        overlayClassName="modal-overlay"
+                        ariaHideApp={false}
+                    >
+                        <button className="close-modal-button" onClick={handleCloseModal}>
+                            ×
+                        </button>
+                        <AddMachineForm
+                            setShouldFetchMachines={setShouldFetchMachines}
+                            initialData={editData}
+                        />
+                    </Modal>
+                </div>
+            </div>
+                
     );
 };
 

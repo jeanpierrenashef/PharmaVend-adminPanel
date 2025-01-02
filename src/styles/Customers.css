@@ -6,9 +6,6 @@
     background-color: #f8f9fa;
     width: 100%;
 }
-.content{
-    width: 100%;
-}
 .navbar {
     flex-shrink: 0;
 }
