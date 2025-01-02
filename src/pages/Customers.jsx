@@ -52,39 +52,40 @@ const Customers = () => {
     return (
         <div className="customers-page">
             <Navbar />
-            <div className="main-content">
-                <h1>Customers</h1>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Total Orders</th>
-                            <th>Created At</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {customersWithOrderCount.map((customer) => (
-                            <CustomerRow key={customer.id} customer={customer} onDelete={handleDelete}/>
-                        ))}
-                    </tbody>
-                </table>
+            <div className="content">
+                <div className="main-content">
+                    <h1>Customers</h1>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Total Orders</th>
+                                <th>Created At</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {customersWithOrderCount.map((customer) => (
+                                <CustomerRow key={customer.id} customer={customer} onDelete={handleDelete}/>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+                <div className="charts">
+                    <div className="chart">
+                        <h2>Engagement of customers</h2>
+                        <CustomerPieChart customers={customers} transactions={transactions}/>
+                    </div>    
+                    <hr className="separator-line" />
+                    <div className="chart">
+                        <h2>Customer Growth</h2>
+                        <CustomerBarChartWithLine customers={customers} />
+                    </div>          
+                </div>
             </div>
-            <div className="charts">
-                <div className="chart">
-                    <h2>Engagement of customers</h2>
-                    <CustomerPieChart customers={customers} transactions={transactions}/>
-                </div>    
-                <hr className="separator-line" />
-                <div className="chart">
-                    <h2>Customer Growth</h2>
-                    <CustomerBarChartWithLine customers={customers} />
-                </div>          
                 
-
-            </div>
         </div>
     );
 }

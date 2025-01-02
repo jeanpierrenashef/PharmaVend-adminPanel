@@ -4,62 +4,15 @@
     min-height: 100vh;
     overflow-y: auto;
     background-color: #f8f9fa;
+    width: 100%;
 }
-
+.content{
+    width: 100%;
+}
 .navbar {
     flex-shrink: 0;
 }
 
-.main-content {
-    flex-grow: 1;
-    padding: 20px;
-    overflow-y: auto;
-}
-
-.main-content h1 {
-    text-align: start;
-    font-size: 36px;
-    margin: 10px;
-    font-weight: bold;
-}
-
-.main-content table {
-    width: 100%;
-    border-collapse: collapse;
-    background: #fff;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.main-content table thead {
-    background-color: #ffffff;
-    color: #333;
-    text-align: center;
-}
-
-.main-content table thead th {
-    padding: 12px 16px;
-    font-weight: bold;
-    text-align: center;
-    color: #333;
-}
-
-.main-content table tbody tr {
-    border-bottom: 1px solid #e0e0e0;
-    transition: background-color 0.2s ease-in-out;
-    text-align: center;
-}
-
-.main-content table tbody tr:hover {
-    background-color: #f1f1f1;
-}
-
-.main-content table tbody td {
-    padding: 12px 16px;
-    font-size: 14px;
-    text-align: center;
-}
 .charts {
     flex-direction: column;
     flex-grow: 1;
