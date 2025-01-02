@@ -55,6 +55,10 @@ const Inventory = () => {
         };
     });
 
+    const filteredInventory = currentMachineInventory.filter((item) =>
+        item.name?.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
     const totalPages = Math.ceil(currentMachineInventory.length / itemsPerPage);
     const startIndex = (currentPage - 1) * itemsPerPage;
     const paginatedInventory = currentMachineInventory.slice(startIndex, startIndex + itemsPerPage);
