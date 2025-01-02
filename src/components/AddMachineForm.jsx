@@ -107,7 +107,7 @@ const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
                     Get Current Location
                 </button>
             </div>
-            <button type="submit">{initialData ? "Update Machine" : "Add Machine"}</button>
+            <button type="submit" className="add-machine-button">{initialData ? "Update Machine" : "Add Machine"}</button>
         </form> 
     );
 };
