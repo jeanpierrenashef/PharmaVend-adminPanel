@@ -1,7 +1,7 @@
 import React from "react";
 import CustomerRow from "../components/CustomerRow";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../components/NavBar";
 import "../styles/Customers.css"
 import CustomerPieChart from "../components/CustomerPieChart";
@@ -15,6 +15,9 @@ const Customers = () => {
     const customers = useSelector((state) => state.users.list);
     const transactions = useSelector((state) => state.transactions.list);
     const dispatch = useDispatch();
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
     
     useEffect(() => {
         if (customers.length === 0) {
@@ -46,8 +49,18 @@ const Customers = () => {
     } catch (e) {
         console.error("Error deleting user:", e);
     }
-};
+    };
+    const totalPages = Math.ceil(customersWithOrderCount.length / itemsPerPage); 
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const paginatedInventory = customersWithOrderCount.slice(startIndex, startIndex + itemsPerPage);
 
+    const handleNextPage = () => {
+        setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+    };
+
+    const handlePrevPage = () => {
+        setCurrentPage((prev) => Math.max(prev - 1, 1));
+    };
 
     return (
         <div className="customers-page">
@@ -67,11 +80,22 @@ const Customers = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {customersWithOrderCount.map((customer) => (
+                            {paginatedInventory.map((customer) => (
                                 <CustomerRow key={customer.id} customer={customer} onDelete={handleDelete}/>
                             ))}
                         </tbody>
                     </table>
+                    <div className="pagination-controls">
+                        <button onClick={handlePrevPage} disabled={currentPage === 1}> 
+                            Previous
+                        </button>
+                        <span>
+                            Page {currentPage} of {totalPages}
+                        </span>
+                        <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+                            Next
+                        </button>
+                    </div>
                 </div>
                 <div className="charts">
                     <div className="chart">
