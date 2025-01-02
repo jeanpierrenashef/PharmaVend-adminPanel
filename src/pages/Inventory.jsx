@@ -9,6 +9,7 @@ import { updateQuantity } from "../redux/inventory/slice";
 import {loadProducts} from "../redux/products/slice.js";
 import {loadMachines} from "../redux/machines/slice.js";
 import TopProducts from "../components/TopProducts.jsx";
+import InventoryBarChart from "../components/InventoryBarChart.jsx";
 
 const Inventory = () => {
     const dispatch = useDispatch();
@@ -112,13 +113,20 @@ const Inventory = () => {
                     </tbody>
                 </table>
             </div>
-            <div className="top-products-section">
-                <h2>Top 3 Most Sold Products</h2>
-                <TopProducts
-                    machineId={currentMachine?.id}
-                    products={products}
-                    transactions={transactions}
-                />
+            <div className="data">
+                <div className="top-products-section">
+                    <h2>Top 3 Most Sold Products</h2>
+                    <TopProducts
+                        machineId={currentMachine?.id}
+                        products={products}
+                        transactions={transactions}
+                    />
+                </div>
+            
+                <div className="chart">
+                    <h2>Total Sales Per Machine</h2>
+                    <InventoryBarChart machines={machines} transactions={transactions} />
+                </div>
             </div>
         </div>
     );
