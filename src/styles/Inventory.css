@@ -172,3 +172,17 @@
     font-size: 14px;
     color: #333;
 }
+.quantity-controls {
+    display: flex;
+    align-items: center; 
+    gap: 8px; 
+    width: 100%; 
+}
+
+.quantity-value {
+    display: inline-block;
+    min-width: 20px; 
+    text-align: center; 
+    font-weight: 600;
+    font-size: 14px;
+}
