@@ -48,7 +48,7 @@ const CustomerBarChartWithLine = ({ customers }) => {
         });
 
         const margin = { top: 20, right: 50, bottom: 50, left: 50 };
-        const width = 550 - margin.left - margin.right;
+        const width = 750 - margin.left - margin.right;
         const height = 400 - margin.top - margin.bottom;
 
         d3.select(chartRef.current).selectAll("*").remove();

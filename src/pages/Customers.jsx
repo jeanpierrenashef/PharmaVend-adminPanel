@@ -97,17 +97,19 @@ const Customers = () => {
                         </button>
                     </div>
                 </div>
-                <div className="charts">
-                    <div className="chart">
-                        <h2>Engagement of customers</h2>
-                        <CustomerPieChart customers={customers} transactions={transactions}/>
-                    </div>    
-                    <hr className="separator-line" />
-                    <div className="chart">
-                        <h2>Customer Growth</h2>
-                        <CustomerBarChartWithLine customers={customers} />
-                    </div>          
+                <div>
+                    <div className="charts">
+                        <div className="chart">
+                            <h2>Engagement of customers</h2>
+                            <CustomerPieChart customers={customers} transactions={transactions}/>
+                        </div>    
+                        <div className="chart">
+                            <h2>Customer Growth</h2>
+                            <CustomerBarChartWithLine customers={customers} />
+                        </div>          
+                    </div>
                 </div>
+                    
             </div>
                 
         </div>
