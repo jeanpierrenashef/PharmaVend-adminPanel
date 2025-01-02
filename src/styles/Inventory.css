@@ -186,3 +186,23 @@
     font-weight: 600;
     font-size: 14px;
 }
+.search-bar {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.search-bar input {
+    width: 300px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-bar input:focus {
+    border-color: #408751;
+    
+}

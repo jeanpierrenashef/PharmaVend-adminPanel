@@ -58,10 +58,11 @@ const Inventory = () => {
     const filteredInventory = currentMachineInventory.filter((item) =>
         item.name?.toLowerCase().includes(searchQuery.toLowerCase())
     );
-
-    const totalPages = Math.ceil(currentMachineInventory.length / itemsPerPage);
+    
+    const totalPages = Math.ceil(filteredInventory.length / itemsPerPage); 
     const startIndex = (currentPage - 1) * itemsPerPage;
-    const paginatedInventory = currentMachineInventory.slice(startIndex, startIndex + itemsPerPage);
+    const paginatedInventory = filteredInventory.slice(startIndex, startIndex + itemsPerPage);
+    
 
     const handleNextPage = () => {
         setCurrentPage((prev) => Math.min(prev + 1, totalPages));
@@ -116,7 +117,14 @@ const Inventory = () => {
                         <h2>{currentMachine ? `Machine ID: ${currentMachine.id}` : "Loading..."}</h2>
                         <button onClick={handleNextMachine}>&gt;</button>
                     </div>
-
+                    <div className="search-bar">
+                        <input
+                            type="text"
+                            placeholder="Search for medicine..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                        />
+                    </div>
                     <table>
                         <thead>
                             <tr>
