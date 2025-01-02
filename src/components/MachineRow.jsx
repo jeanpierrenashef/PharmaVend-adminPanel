@@ -1,13 +1,23 @@
 import React from "react";
 
 const MachineRow = ({ machine, onDelete , onEdit }) => {
+    const handleToggleStatus = async () => {
+        try {
+            const response = await axios.post(
+                `http://127.0.0.1:8000/api/admin/machines/${machine.id}/toggle_status`
+            );
+            dispatch(updateMachine(response.data));
+        } catch (error) {
+            console.error("Error toggling status:", error);
+        }
+    };
     return (
         <tr>
             <td>{machine.id}</td>
             <td>{machine.location}</td>
             <td>{machine.latitude}</td>
             <td>{machine.longitude}</td>
-            <td>
+            <td onClick={handleToggleStatus} style={{ cursor: "pointer" }}>
                 {machine.status === "active" ? (
                     <span className="status active">
                         <i className="mdi mdi-check-circle"></i> Active
