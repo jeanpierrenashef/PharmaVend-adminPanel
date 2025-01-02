@@ -46,7 +46,7 @@ const Inventory = () => {
             ...product,
             quantity: inventoryItem ? inventoryItem.quantity : 0,
         };
-    }) .sort((a, b) => (a.name?.toLowerCase() || "").localeCompare(b.name?.toLowerCase() || ""));
+    })
 
     const handleUpdateQuantity = async (productId, increment) => {
         const payload = {
@@ -84,50 +84,53 @@ const Inventory = () => {
     return (
         <div className="inventory-page">
             <Navbar />
-            <div className="main-content">
-                <h1>Inventory Management</h1>
+            <div className="content">
+                <div className="main-content">
+                    <h1>Inventory Management</h1>
 
-                <div className="machine-navigation">
-                    <button onClick={handlePrevMachine}>&lt;</button>
-                    <h2>{currentMachine ? `Machine ID: ${currentMachine.id}` : "Loading..."}</h2>
-                    <button onClick={handleNextMachine}>&gt;</button>
-                </div>
+                    <div className="machine-navigation">
+                        <button onClick={handlePrevMachine}>&lt;</button>
+                        <h2>{currentMachine ? `Machine ID: ${currentMachine.id}` : "Loading..."}</h2>
+                        <button onClick={handleNextMachine}>&gt;</button>
+                    </div>
 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Product Name</th>
-                            <th>Quantity</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {currentMachineInventory.map((item) => (
-                            <InventoryRow
-                                key={item.product_id}
-                                product={item}
-                                quantity={item.quantity}    
-                                onUpdateQuantity={handleUpdateQuantity}
-                            />
-                    ))}
-                    </tbody>
-                </table>
-            </div>
-            <div className="data">
-                <div className="top-products-section">
-                    <h2>Top 3 Most Sold Products</h2>
-                    <TopProducts
-                        machineId={currentMachine?.id}
-                        products={products}
-                        transactions={transactions}
-                    />
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product ID</th>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {currentMachineInventory.map((item) => (
+                                <InventoryRow
+                                    key={item.product_id}
+                                    product={item}
+                                    quantity={item.quantity}    
+                                    onUpdateQuantity={handleUpdateQuantity}
+                                />
+                        ))}
+                        </tbody>
+                    </table>
                 </div>
-                <hr className="separator-line" />
-                <div className="chart">
-                    <h2>Total Sales Per Machine</h2>
-                    <InventoryBarChart machines={machines} transactions={transactions} />
+                <div className="data">
+                    <div className="top-products-section">
+                        <h2>Top 3 Most Sold Products</h2>
+                        <TopProducts
+                            machineId={currentMachine?.id}
+                            products={products}
+                            transactions={transactions}
+                        />
+                    </div>
+                    <hr className="separator-line" />
+                    <div className="chart">
+                        <h2>Total Sales Per Machine</h2>
+                        <InventoryBarChart machines={machines} transactions={transactions} />
+                    </div>
                 </div>
             </div>
+            
         </div>
     );
 
