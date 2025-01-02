@@ -22,12 +22,11 @@ const machineSlice = createSlice({
             state.list = state.list.filter(machine=>machine.id !== machineId);
         },
         updateMachine: (state, action) => {
-            const machineId = action.payload;
-            const index = state.list.findIndex((machine) => machine.id === machineId);
-            if (index !== -1) {
-                state.list[index] = action.payload; 
-            }
-        }
+            state.list = state.list.map((machine) =>
+                machine.id === action.payload.id ? action.payload : machine
+            );
+        },
+        
     }
 })
 

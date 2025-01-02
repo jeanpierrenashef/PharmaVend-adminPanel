@@ -1,6 +1,10 @@
 import React from "react";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { updateMachine } from "../redux/machines/slice";
 
 const MachineRow = ({ machine, onDelete , onEdit }) => {
+    const dispatch = useDispatch();
     const handleToggleStatus = async () => {
         try {
             const response = await axios.post(
@@ -8,7 +12,7 @@ const MachineRow = ({ machine, onDelete , onEdit }) => {
             );
             dispatch(updateMachine(response.data));
         } catch (error) {
-            console.error("Error toggling status:", error);
+            console.error(error);
         }
     };
     return (

@@ -9,7 +9,7 @@ const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
         location: "",
         latitude: "",
         longitude: "",
-        
+        status: "inactive"
     
     });
 
@@ -108,7 +108,7 @@ const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
                 </button>
             </div>
             <button type="submit">{initialData ? "Update Machine" : "Add Machine"}</button>
-        </form>
+        </form> 
     );
 };
 
