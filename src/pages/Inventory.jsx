@@ -19,7 +19,8 @@ const Inventory = () => {
     const transactions = useSelector((state) => state.transactions.list)
 
     const [currentMachineIndex, setCurrentMachineIndex] = useState(0);
-    const [currentPage, setCurrentPage] = useState(1); 
+    const [currentPage, setCurrentPage] = useState(1);
+    const [searchQuery, setSearchQuery] = useState("");
     const itemsPerPage = 10;
 
     
@@ -33,11 +34,13 @@ const Inventory = () => {
     const handlePrevMachine = () => {
         setCurrentMachineIndex((prev) => (prev > 0 ? prev - 1 : machines.length - 1));
         setCurrentPage(1);
+        setSearchQuery("");
     };
 
     const handleNextMachine = () => {
         setCurrentMachineIndex((prev) => (prev < machines.length - 1 ? prev + 1 : 0));
         setCurrentPage(1);
+        setSearchQuery("");
     };
 
     const currentMachine = machines[currentMachineIndex];
