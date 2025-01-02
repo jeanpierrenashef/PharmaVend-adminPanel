@@ -48,7 +48,7 @@ const CustomerBarChartWithLine = ({ customers }) => {
         });
 
         const margin = { top: 20, right: 50, bottom: 50, left: 50 };
-        const width = 500 - margin.left - margin.right;
+        const width = 550 - margin.left - margin.right;
         const height = 400 - margin.top - margin.bottom;
 
         d3.select(chartRef.current).selectAll("*").remove();
@@ -89,9 +89,23 @@ const CustomerBarChartWithLine = ({ customers }) => {
 
         svg.append("g").call(d3.axisLeft(yScale));
 
+        svg.append("text")
+            .attr("text-anchor", "middle")
+            .attr("transform", `translate(-40,${height / 2}) rotate(-90)`)
+            .text("# of Customers")
+            .style("font-size", "12px")
+            .style("fill", "#494949");
+
         svg.append("g")
             .attr("transform", `translate(${width},0)`)
             .call(d3.axisRight(yScaleCumulative));
+
+        svg.append("text")
+            .attr("text-anchor", "middle")
+            .attr("transform", `translate(${width + 40},${height / 2}) rotate(-90)`)
+            .text("Total # of Customers")
+            .style("font-size", "12px")
+            .style("fill", "#494949");
 
         svg.selectAll(".bar")
             .data(data)

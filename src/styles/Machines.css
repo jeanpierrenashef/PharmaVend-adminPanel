@@ -152,3 +152,11 @@
   color: #aaa;
   pointer-events: none;
 }
+
+.action-button:hover {
+  color: #000;
+}
+
+.delete-button {
+  color: red;
+}

@@ -83,3 +83,11 @@
     gap: 0px;
     width: 100%; 
 }
+
+.action-button:hover {
+    color: #000;
+}
+
+.delete-button {
+    color: red;
+}
