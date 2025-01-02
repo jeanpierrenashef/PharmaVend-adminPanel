@@ -14,7 +14,7 @@ const MapComponent = ({ machines }) => {
     }
 
     return (
-        <div style={{ width: "400px", height: "300px" }}>
+        <div style={{ width: "750px", height: "300px" }}>
         <GoogleMap
             mapContainerStyle={{ width: "100%", height: "100%" }}
             center={center}
