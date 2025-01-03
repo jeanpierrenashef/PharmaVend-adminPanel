@@ -11,10 +11,13 @@ const ProductContainer = ({ product }) => {
                 className="product-image"
             />
             <div className="product-details">
-                <h3>{product.name}</h3>
+                <div className="product-title">
+                    <h3>{product.name}</h3>
+                    <p>${product.price}</p>
+                </div>
                 <p>ID: {product.id}</p>
                 <p>{product.description}</p>
-                <p>Price: ${product.price}</p>
+                
             </div>
             <div className="product-actions">
                 <button className="edit-button">
