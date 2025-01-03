@@ -9,12 +9,16 @@
 
 .dashboard-content {
     display: flex;
+    flex-direction: column;
+    background-color: #f8f9fa;
+    margin: 20px;
+}
+.top-section-content{
+    display: flex;
     justify-content: space-between;
     align-items: flex-start;
     padding: 20px;
     gap: 50px;
-    background-color: #f8f9fa;
-    margin: 20px;
 }
 .welcome-section{
     padding-top: 30px;
@@ -37,3 +41,8 @@
     line-height: 1.6;
 }
 
+.charts-section{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
