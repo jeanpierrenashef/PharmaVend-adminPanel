@@ -8,7 +8,7 @@ const InventoryRow = ({ product, quantity, onUpdateQuantity }) => {
             <td>
                 <div className="quantity-controls">
                     <button
-                        className="action-button subtract-button"
+                        className="action-button subtract-inv-button"
                         onClick={() => onUpdateQuantity(product.id, -1)}
                         title="Decrease Quantity"
                     >
@@ -16,7 +16,7 @@ const InventoryRow = ({ product, quantity, onUpdateQuantity }) => {
                     </button>
                     <span className="quantity-value">{quantity}</span>
                     <button
-                        className="action-button add-button"
+                        className="action-button add-inv-button"
                         onClick={() => onUpdateQuantity(product.id, 1)}
                         title="Increase Quantity"
                     >

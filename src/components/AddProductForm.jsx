@@ -26,13 +26,13 @@ const AddProductForm = ({ setShouldFetchProducts , initialData, onSubmit}) => {
         try {
             if (initialData) {
                 const response = await axios.put(
-                    `http://127.0.0.1:8000/api/admin/machines/${formData.id}`,
+                    `http://127.0.0.1:8000/api/admin/products/${formData.id}`,
                     formData
                 );
                 dispatch(updateProduct(response.data));
             } else {
                 const response = await axios.post(
-                    "http://127.0.0.1:8000/api/admin/add_machine",
+                    "http://127.0.0.1:8000/api/admin/add_product",
                     formData
                 );
                 dispatch(addProduct(response.data));
@@ -54,8 +54,8 @@ const AddProductForm = ({ setShouldFetchProducts , initialData, onSubmit}) => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit} className="add-machine-form">
-                <h3>{initialData ? "Edit Machine" : "Add New Machine"}</h3>
+            <form onSubmit={handleSubmit} className="add-form">
+                <h3>{initialData ? "Edit Product" : "Add New Product"}</h3>
                 <div>
                     <label>Name:</label>
                     <input
@@ -101,7 +101,7 @@ const AddProductForm = ({ setShouldFetchProducts , initialData, onSubmit}) => {
                     <button>Add image locally</button>
                 </div>
 
-                <button type="submit" className="add-machine-button">{initialData ? "Update Product" : "Add Product"}</button>
+                <button type="submit" className="add-button">{initialData ? "Update Product" : "Add Product"}</button>
             </form>
         </div>
             

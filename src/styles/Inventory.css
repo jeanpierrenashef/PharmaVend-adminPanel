@@ -126,19 +126,19 @@
     color: #0056b3;
 }
 
-.add-button {
+.add-inv-button {
     color: #28a745;
 }
 
-.add-button:hover {
+.add-inv-button:hover {
     color: #218838;
 }
 
-.subtract-button {
+.subtract-inv-button {
     color: #dc3545;
 }
 
-.subtract-button:hover {
+.subtract-inv-button:hover {
     color: #c82333;
 }
 .pagination-controls {

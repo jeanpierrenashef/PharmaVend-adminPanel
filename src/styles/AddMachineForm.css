@@ -1,4 +1,4 @@
-.add-machine-form {
+.add-form {
     padding: 20px;
     border-radius: 8px;
     background: #fff;
@@ -8,26 +8,26 @@
     align-items: center;
 }
 
-.add-machine-form h3 {
+.add-form h3 {
     width: 100%;
     margin-bottom: 15px;
     text-align: center;
 }
 
-.add-machine-form div {
+.add-form div {
     width: 100%;
     margin-bottom: 10px;
 }
 
-.add-machine-form label {
+.add-form label {
     width: 100%;
     display: block;
     font-weight: bold;
     margin-bottom: 5px;
 }
 
-.add-machine-form input,
-.add-machine-form select {
+.add-form input,
+.add-form select {
     width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
@@ -55,7 +55,7 @@
     border-color: #ccc;
 }
 
-.add-machine-button {
+.add-button {
     width: 40%;
     border: 1px solid #ddd;
     border-radius: 20px;

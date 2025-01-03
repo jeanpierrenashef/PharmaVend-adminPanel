@@ -81,7 +81,7 @@ const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit} className="add-machine-form">
+            <form onSubmit={handleSubmit} className="add-form">
                 <h3>{initialData ? "Edit Machine" : "Add New Machine"}</h3>
                 <div>
                     <label>Location:</label>
@@ -127,7 +127,7 @@ const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
                         Pick Location on Map
                     </button>
                 </div>
-                <button type="submit" className="add-machine-button">{initialData ? "Update Machine" : "Add Machine"}</button>
+                <button type="submit" className="add-button">{initialData ? "Update Machine" : "Add Machine"}</button>
             </form>
             {showMapPicker && (
                 <div className="map-picker-modal">
