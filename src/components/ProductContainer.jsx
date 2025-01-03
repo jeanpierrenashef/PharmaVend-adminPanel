@@ -16,7 +16,7 @@ const ProductContainer = ({ product, onEdit }) => {
                     <p>${product.price}</p>
                 </div>
                 <p>ID: {product.id}</p>
-                <p>{product.category}</p>
+                <p>Category: {product.category}</p>
                 <p>{product.description}</p>
                 
             </div>

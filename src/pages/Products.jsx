@@ -12,6 +12,7 @@ import AddProductForm from "../components/AddProductForm";
 const Products = () => {
     const dispatch = useDispatch();
     const products = useSelector((global) => global.products.list);
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [shouldFetchProducts, setShouldFetchProducts] = useState(false);
     const [editData, setEditData] = useState(null);
@@ -19,12 +20,12 @@ const Products = () => {
     useEffect(()=>{
         if(shouldFetchProducts || products.length === 0){
             axios.get("http://127.0.0.1:8000/api/admin/products").then(({ data }) => {
-                const action = { type: "machines/loadProducts", payload: data };
+                const action = { type: "products/loadProducts", payload: data };
                 dispatch(action);
                 setShouldFetchProducts(false); 
             });
         }
-    }, [products, dispatch]);
+    }, [shouldFetchProducts, products.length, dispatch]);
 
     const handleEdit = (product) => {
         setEditData(product); 
