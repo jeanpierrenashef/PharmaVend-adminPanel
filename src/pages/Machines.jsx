@@ -18,6 +18,9 @@ const Machines = () => {
     const [shouldFetchMachines, setShouldFetchMachines] = useState(false);
     const [editData, setEditData] = useState(null);
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
+
     useEffect(() => {
         if (shouldFetchMachines || machines.length === 0) {
             axios.get("http://127.0.0.1:8000/api/admin/machines").then(({ data }) => {
@@ -36,6 +39,18 @@ const Machines = () => {
         },
         { Active: 0, Inactive: 0 }
     );
+
+    const totalPages = Math.ceil(machines.length / itemsPerPage); 
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const paginatedInventory = machines.slice(startIndex, startIndex + itemsPerPage);
+    
+    const handleNextPage = () => {
+        setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+    };
+
+    const handlePrevPage = () => {
+        setCurrentPage((prev) => Math.max(prev - 1, 1));
+    };
 
     const handleDelete = async (id) => {
         try{
@@ -78,11 +93,22 @@ const Machines = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {machines.map((machine) => (
+                                {paginatedInventory.map((machine) => (
                                     <MachineRow key={machine.id} machine={machine} onDelete={handleDelete} onEdit={handleEdit}/>
                                 ))}
                             </tbody>
                         </table>
+                        <div className="pagination-controls">
+                            <button onClick={handlePrevPage} disabled={currentPage === 1}> 
+                                Previous
+                            </button>
+                            <span>
+                                Page {currentPage} of {totalPages}
+                            </span>
+                            <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+                                Next
+                        </button>
+                    </div>
                     </div>
                     <div>
                         <div className="charts">
