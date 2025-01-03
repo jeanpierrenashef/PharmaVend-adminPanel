@@ -10,6 +10,7 @@ import TopProducts from "../components/TopProducts";
 import StackedBarChart from "../components/OrderStatusPieChart";
 import MachineStatusDonutChart from "../components/MachineStatusDonutChart";
 import MapComponent from "../components/MapComponent";
+import InventoryBarChart from "../components/InventoryBarChart";
 
 const Dashboard = () => {
     const dispatch = useDispatch();
@@ -86,13 +87,11 @@ const Dashboard = () => {
                             <h2>Order Status</h2>
                             <StackedBarChart orderStatusData={orderStatusData} />
                         </div>
-                        <div className="top-products-section-dash">
-                            <h2>Top 5 Most Sold Products of All Time</h2>
-                            <TopProducts
-                                products={products}
-                                transactions={transactions}
-                            />
+                        <div className="chart">
+                            <h2>Total Sales Per Machine</h2>
+                            <InventoryBarChart machines={machines} transactions={transactions} />
                         </div>
+                        
                     </div>
                     <div className="sectioning">
                         <div className="chart">
@@ -104,6 +103,13 @@ const Dashboard = () => {
                             <MachineStatusDonutChart machineStatusData={machineStatusData} />
                         </div>
                     </div>
+                    <div className="top-products-section-dash">
+                            <h2>Top 5 Most Sold Products of All Time</h2>
+                            <TopProducts
+                                products={products}
+                                transactions={transactions}
+                            />
+                        </div>
                     
                         
                 </div>

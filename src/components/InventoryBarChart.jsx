@@ -18,7 +18,7 @@ const InventoryBarChart = ({ machines, transactions }) => {
 
         const margin = { top: 20, right: 30, bottom: 50, left: 50 };
         const width = 550 - margin.left - margin.right;
-        const height = 400 - margin.top - margin.bottom;
+        const height = 350 - margin.top - margin.bottom;
 
         d3.select(chartRef.current).selectAll("*").remove();
 
