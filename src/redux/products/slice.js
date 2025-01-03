@@ -13,6 +13,13 @@ const productsSlice = createSlice({
                 ...state,
                 list: products
             };
+        },
+        addProduct: (state, action) => {
+            state.list.push(action.payload);
+        },
+        updateProduct: (state, action) => {
+            state.list = state.list.map((product) => 
+            product.id === action.payload.id ? action.payload : product)
         }
     }
 });
