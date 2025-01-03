@@ -3,7 +3,17 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import { addMachine, updateMachine } from "../redux/machines/slice";
 import "../styles/AddMachineForm.css";
+import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 
+const LocationPicker = ({ setLocation }) => {
+    useMapEvents({
+        click: (e) => {
+            setLocation({ lat: e.latlng.lat, lng: e.latlng.lng });
+        },
+    });
+
+    return null;
+};
 const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
     const [formData, setFormData] = useState(initialData || {
         location: "",
@@ -14,6 +24,8 @@ const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
     });
 
     const dispatch = useDispatch();
+    const [isMapOpen, setIsMapOpen] = useState(false); 
+    const [markerPosition, setMarkerPosition] = useState(null); 
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -64,6 +76,24 @@ const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
         } else {
             console.log("Geolocation is not supported by this browser.");
             
+        }
+    };
+    const openMap = () => {
+        setIsMapOpen(true);
+    };
+
+    const closeMap = () => {
+        setIsMapOpen(false);
+    };
+
+    const handleMapSelect = () => {
+        if (markerPosition) {
+            setFormData({
+                ...formData,
+                latitude: markerPosition.lat.toFixed(4),
+                longitude: markerPosition.lng.toFixed(4),
+            });
+            closeMap();
         }
     };
 
