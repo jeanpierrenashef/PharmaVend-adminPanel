@@ -17,6 +17,10 @@ const Orders = () => {
     const [quantityFilter, setQuantityFilter] = useState("");
     const [priceFilter, setPriceFilter] = useState("");
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
+    
+
     useEffect(() => {
         axios.get("http://127.0.0.1:8000/api/admin/transactions").then(({ data }) => {
             const action = { type: "transactions/loadTransactions", payload: data };
@@ -51,6 +55,19 @@ const Orders = () => {
         }
         return true;
     });
+
+    const totalPages = Math.ceil(transactions.length / itemsPerPage); 
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const paginatedInventory = transactions.slice(startIndex, startIndex + itemsPerPage);
+    
+
+    const handleNextPage = () => {
+        setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+    };
+
+    const handlePrevPage = () => {
+        setCurrentPage((prev) => Math.max(prev - 1, 1));
+    };
 
     return (
         <div className="orders-page">
@@ -101,7 +118,7 @@ const Orders = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {filteredTransactions.map((transaction) => {
+                            {paginatedInventory.map((transaction) => {
                                 const user = users.find((u) => u.id === transaction.user_id);
                                 const product = products.find((p) => p.id === transaction.product_id);
                                 return (
@@ -115,6 +132,17 @@ const Orders = () => {
                             })}
                         </tbody>
                     </table>
+                    <div className="pagination-controls">
+                        <button onClick={handlePrevPage} disabled={currentPage === 1}> 
+                            Previous
+                        </button>
+                        <span>
+                            Page {currentPage} of {totalPages}
+                        </span>
+                        <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+                            Next
+                        </button>
+                    </div>
                     
                 </div>
                 <div className="charts">
