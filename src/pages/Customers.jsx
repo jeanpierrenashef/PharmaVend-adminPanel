@@ -18,6 +18,9 @@ const Customers = () => {
 
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
+
+    const [showConfirmation, setShowConfirmation] = useState(false); 
+    const [customerToDelete, setCustomerToDelete] = useState(null);
     
     useEffect(() => {
         if (customers.length === 0) {
@@ -46,6 +49,7 @@ const Customers = () => {
         const response = await axios.delete(`http://127.0.0.1:8000/api/admin/users/${id}`);
         console.log("API Response:", response.data);
         dispatch(deleteUser(id));
+        setShowConfirmation(false);
     } catch (e) {
         console.error("Error deleting user:", e);
     }
@@ -61,6 +65,12 @@ const Customers = () => {
     const handlePrevPage = () => {
         setCurrentPage((prev) => Math.max(prev - 1, 1));
     };
+
+    const openConfirmation = (customer) => {
+        setCustomerToDelete(customer);
+        setShowConfirmation(true);
+    };
+
 
     return (
         <div className="customers-page">
@@ -81,7 +91,7 @@ const Customers = () => {
                         </thead>
                         <tbody>
                             {paginatedInventory.map((customer) => (
-                                <CustomerRow key={customer.id} customer={customer} onDelete={handleDelete}/>
+                                <CustomerRow key={customer.id} customer={customer} onDelete={() => openConfirmation(customer)}/>
                             ))}
                         </tbody>
                     </table>
@@ -111,6 +121,20 @@ const Customers = () => {
                 </div>
                     
             </div>
+            {showConfirmation && (
+                <div className="confirmation-modal">
+                    <div className="modal-content">
+                        <p>
+                            Are you sure you want to delete customer{" "}
+                            <strong>{customerToDelete?.username}</strong>?
+                        </p>
+                        <div className="modal-actions">
+                            <button onClick={() => setShowConfirmation(false)}>Cancel</button>
+                            <button onClick={() => handleDelete(customerToDelete.id)}>Proceed</button>
+                        </div>
+                    </div>
+                </div>
+            )}
                 
         </div>
     );

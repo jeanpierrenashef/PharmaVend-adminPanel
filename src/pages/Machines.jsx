@@ -21,6 +21,9 @@ const Machines = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
 
+    const [showConfirmation, setShowConfirmation] = useState(false); 
+    const [machineToDelete, setMachineToDelete] = useState(null);
+
     useEffect(() => {
         if (shouldFetchMachines || machines.length === 0) {
             axios.get("http://127.0.0.1:8000/api/admin/machines").then(({ data }) => {
@@ -56,6 +59,7 @@ const Machines = () => {
         try{
             await axios.delete(`http://127.0.0.1:8000/api/admin/machines/${id}`);
             dispatch(delteMachine(id));
+            setShowConfirmation(false);
         }catch (e) {
             console.log("Error ", e);
         }
@@ -68,6 +72,10 @@ const Machines = () => {
     const handleCloseModal = () => {
         setIsModalOpen(false);
         setEditData(null); 
+    };
+    const openConfirmation = (machine) => {
+        setMachineToDelete(machine);
+        setShowConfirmation(true);
     };
 
     return (
@@ -94,7 +102,7 @@ const Machines = () => {
                             </thead>
                             <tbody>
                                 {paginatedInventory.map((machine) => (
-                                    <MachineRow key={machine.id} machine={machine} onDelete={handleDelete} onEdit={handleEdit}/>
+                                    <MachineRow key={machine.id} machine={machine} onDelete={() => openConfirmation(machine)} onEdit={handleEdit}/>
                                 ))}
                             </tbody>
                         </table>
@@ -140,6 +148,20 @@ const Machines = () => {
                         />
                     </Modal>
                 </div>
+                {showConfirmation && (
+                <div className="confirmation-modal">
+                    <div className="modal-content">
+                        <p>
+                            Are you sure you want to delete machine{" "}
+                            <strong>V{machineToDelete?.id}</strong>?
+                        </p>
+                        <div className="modal-actions">
+                            <button onClick={() => setShowConfirmation(false)}>Cancel</button>
+                            <button onClick={() => handleDelete(machineToDelete.id)}>Proceed</button>
+                        </div>
+                    </div>
+                </div>
+            )}
             </div>
                 
     );

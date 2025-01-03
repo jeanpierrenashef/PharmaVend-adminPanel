@@ -4,13 +4,13 @@ const OrderRow = ({ transaction, user, product }) => {
     const formattedDate = transaction.created_at.split("T")[0];
     return (
         <tr>
-        <td>#000{transaction.id}</td>
-        <td>{user?.username || "Unknown"}</td>
-        <td>{transaction.quantity}</td>
-        <td>${transaction.total_price}</td>
-        <td>V{transaction.machine_id}</td>
-        <td>{product?.name}</td>
-        <td>
+            <td>#000{transaction.id}</td>
+            <td>{user?.username || "Unknown"}</td>
+            <td>{transaction.quantity}</td>
+            <td>${transaction.total_price}</td>
+            <td>V{transaction.machine_id}</td>
+            <td>{product?.name}</td>
+            <td>
                 {transaction.dispensed === 1 ? (
                     <span className="status dispensed">
                         <i className="mdi mdi-check-circle"></i> Dispensed
@@ -21,7 +21,7 @@ const OrderRow = ({ transaction, user, product }) => {
                     </span>
                 )}
             </td>
-        <td>{formattedDate}</td>
+            <td>{formattedDate}</td>
         </tr>
     );
 };
