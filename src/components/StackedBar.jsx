@@ -2,25 +2,16 @@ import React, { useRef, useEffect } from "react";
 import * as d3 from "d3";
 import "../styles/StackedBar.css";
 
-const StackedBarChart = ({ transactions }) => {
+const StackedBarChart = ({ orderStatusData }) => {
     const chartRef = useRef();
 
     useEffect(() => {
-        const data = transactions.reduce(
-            (acc, transaction) => {
-                const key = transaction.dispensed ? "Dispensed" : "Not Dispensed";
-                acc[key] += transaction.quantity; 
-                return acc;
-            },
-            { Dispensed: 0, "Not Dispensed": 0 } 
-        );
+        const totalQuantity = Object.values(orderStatusData).reduce((a, b) => a + b, 0);
 
-        const totalQuantity = data.Dispensed + data["Not Dispensed"];
-
-        const chartData = [
-            { status: "Dispensed", value: data.Dispensed },
-            { status: "Not Dispensed", value: data["Not Dispensed"] },
-        ];
+        const chartData = Object.entries(orderStatusData).map(([key, value]) => ({
+            status: key,
+            value,
+        }));
 
         d3.select(chartRef.current).selectAll("*").remove();
 
@@ -64,7 +55,7 @@ const StackedBarChart = ({ transactions }) => {
             .data(chartData)
             .join("text")
             .attr("x", (d) => {
-                const xPos = xScale(cumulative + d.value / 2); 
+                const xPos = xScale(cumulative + d.value / 2);
                 cumulative += d.value;
                 return xPos;
             })
@@ -74,16 +65,7 @@ const StackedBarChart = ({ transactions }) => {
             .attr("dy", ".35em")
             .style("font-size", "12px")
             .text((d) => `${((d.value / totalQuantity) * 100).toFixed(1)}%`);
-    }, [transactions]);
-
-    const data = transactions.reduce(
-        (acc, transaction) => {
-            const key = transaction.dispensed ? "Dispensed" : "Not Dispensed";
-            acc[key] += transaction.quantity;
-            return acc;
-        },
-        { Dispensed: 0, "Not Dispensed": 0 }
-    );
+    }, [orderStatusData]);
 
     return (
         <div className="stacked-bar-chart-container">
@@ -95,7 +77,7 @@ const StackedBarChart = ({ transactions }) => {
                         style={{ backgroundColor: "#408751" }}
                     ></span>
                     <div className="legend-text-group">
-                        <span className="legend-text">{data.Dispensed}</span>
+                        <span className="legend-text">{orderStatusData.Dispensed}</span>
                         <p className="legend-label">Dispensed</p>
                     </div>
                 </div>
@@ -105,8 +87,8 @@ const StackedBarChart = ({ transactions }) => {
                         style={{ backgroundColor: "#595959" }}
                     ></span>
                     <div className="legend-text-group">
-                        <span className="legend-text">{data["Not Dispensed"]}</span>
-                        <p className="legend-label">Pending</p>
+                        <span className="legend-text">{orderStatusData["Not Dispensed"]}</span>
+                        <p className="legend-label">Not Dispensed</p>
                     </div>
                 </div>
             </div>

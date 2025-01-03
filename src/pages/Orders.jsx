@@ -70,6 +70,14 @@ const Orders = () => {
     const handlePrevPage = () => {
         setCurrentPage((prev) => Math.max(prev - 1, 1));
     };
+    const orderStatusData = transactions.reduce(
+        (acc, transaction) => {
+            const key = transaction.dispensed === 1 ? "Dispensed" : "Not Dispensed"; 
+            acc[key] += 1; 
+            return acc;
+        },
+        { Dispensed: 0, "Not Dispensed": 0 } 
+    );
 
     return (
         <div className="orders-page">
@@ -154,7 +162,7 @@ const Orders = () => {
                     </div>
                     <div className="chart">
                         <h2>Order Status</h2>
-                        <StackedBarChart transactions={transactions}/>
+                        <StackedBarChart transactions={orderStatusData}/>
                     </div>
                 </div>
             </div>

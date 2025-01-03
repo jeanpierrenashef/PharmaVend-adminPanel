@@ -7,6 +7,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import DonutChart from "../components/DonutChart";
 import TopProducts from "../components/TopProducts";
+import StackedBarChart from "../components/StackedBar";
 
 const Dashboard = () => {
     const dispatch = useDispatch();
@@ -38,6 +39,17 @@ const Dashboard = () => {
         });
     }, []);
 
+    const orderStatusData = transactions.reduce(
+        (acc, transaction) => {
+            const key = transaction.dispensed === 1 ? "Dispensed" : "Not Dispensed"; 
+            acc[key] += 1; 
+            return acc;
+        },
+        { Dispensed: 0, "Not Dispensed": 0 } 
+    );
+    
+    
+
     return (
         <div className="dashboard-page">
             <Navbar />
@@ -59,13 +71,20 @@ const Dashboard = () => {
                         <h2>Receipt of Goods</h2>
                         <DonutChart transactions={transactions} />
                     </div>
-                    <div className="top-products-section-dash">
-                        <h2>Top 3 Most Sold Products of All Time</h2>
-                        <TopProducts
-                            products={products}
-                            transactions={transactions}
-                        />
+                    <div className="stacked-charts">
+                        <div className="top-products-section-dash">
+                            <h2>Top 3 Most Sold Products of All Time</h2>
+                            <TopProducts
+                                products={products}
+                                transactions={transactions}
+                            />
+                        </div>
+                        <div className="chart">
+                            <h2>Order Status</h2>
+                            <StackedBarChart orderStatusData={orderStatusData} />
+                        </div>
                     </div>
+
                         
                 </div>
                     
