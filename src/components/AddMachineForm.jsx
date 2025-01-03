@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import { addMachine, updateMachine } from "../redux/machines/slice";
 import "../styles/AddMachineForm.css";
+import MapPicker from "./MapPicker";
 
 const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
     const [formData, setFormData] = useState(initialData || {
@@ -14,11 +15,13 @@ const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
     });
 
     const dispatch = useDispatch();
+    const [showMapPicker, setShowMapPicker] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -107,12 +110,22 @@ const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
                     <button type="button" onClick={handleGetCurrentLocation} className="get-location-button">
                         Get Current Location
                     </button>
-                    <button type="button" className="open-map-button">
-                        Open Map
+                    <button
+                        type="button"
+                        onClick={() => setShowMapPicker(true)}
+                        className="get-location-button"
+                        >
+                        Pick Location on Map
                     </button>
                 </div>
                 <button type="submit" className="add-machine-button">{initialData ? "Update Machine" : "Add Machine"}</button>
             </form>
+            {showMapPicker && (
+                <div className="map-picker-modal">
+                    <MapPicker onLocationSelect={handleMapLocationSelect} />
+                    <button onClick={() => setShowMapPicker(false)}>Close Map</button>
+                </div>
+                )}
         </div>
             
     );
