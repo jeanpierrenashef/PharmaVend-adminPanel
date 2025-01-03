@@ -11,6 +11,7 @@ import StackedBarChart from "../components/OrderStatusPieChart";
 import MachineStatusDonutChart from "../components/MachineStatusDonutChart";
 import MapComponent from "../components/MapComponent";
 import InventoryBarChart from "../components/InventoryBarChart";
+import TransactionBarChartWithLine from "../components/TransactionBarChartWithLine";
 
 const Dashboard = () => {
     const dispatch = useDispatch();
@@ -103,13 +104,20 @@ const Dashboard = () => {
                             <MachineStatusDonutChart machineStatusData={machineStatusData} />
                         </div>
                     </div>
-                    <div className="top-products-section-dash">
+                    <div>
+                        <div className="top-products-section-dash">
                             <h2>Top 5 Most Sold Products of All Time</h2>
                             <TopProducts
                                 products={products}
                                 transactions={transactions}
                             />
                         </div>
+                        <div className="chart">
+                            <h2>Total Transactions in Time</h2>
+                            <TransactionBarChartWithLine transactions={transactions}/>
+                        </div>
+                    </div>
+                        
                     
                         
                 </div>
