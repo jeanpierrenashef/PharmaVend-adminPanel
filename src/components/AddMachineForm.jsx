@@ -3,17 +3,7 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import { addMachine, updateMachine } from "../redux/machines/slice";
 import "../styles/AddMachineForm.css";
-import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 
-const LocationPicker = ({ setLocation }) => {
-    useMapEvents({
-        click: (e) => {
-            setLocation({ lat: e.latlng.lat, lng: e.latlng.lng });
-        },
-    });
-
-    return null;
-};
 const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
     const [formData, setFormData] = useState(initialData || {
         location: "",
@@ -24,8 +14,6 @@ const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
     });
 
     const dispatch = useDispatch();
-    const [isMapOpen, setIsMapOpen] = useState(false); 
-    const [markerPosition, setMarkerPosition] = useState(null); 
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -79,25 +67,6 @@ const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
         }
     };
 
-    const openMap = () => {
-        setIsMapOpen(true);
-    };
-
-    const closeMap = () => {
-        setIsMapOpen(false);
-    };
-
-    const handleMapSelect = () => {
-        if (markerPosition) {
-            setFormData({
-                ...formData,
-                latitude: markerPosition.lat.toFixed(4),
-                longitude: markerPosition.lng.toFixed(4),
-            });
-            closeMap();
-        }
-    };
-
     return (
         <div>
             <form onSubmit={handleSubmit} className="add-machine-form">
@@ -138,34 +107,12 @@ const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
                     <button type="button" onClick={handleGetCurrentLocation} className="get-location-button">
                         Get Current Location
                     </button>
-                    <button type="button" onClick={openMap} className="open-map-button">
+                    <button type="button" className="open-map-button">
                         Open Map
                     </button>
                 </div>
                 <button type="submit" className="add-machine-button">{initialData ? "Update Machine" : "Add Machine"}</button>
             </form>
-            {isMapOpen && (
-                <div className="map-modal">
-                    <div className="map-container">
-                        <MapContainer
-                            center={[51.505, -0.09]}
-                            zoom={13}
-                            style={{ height: "400px", width: "100%" }}
-                        >
-                            <TileLayer
-                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                            />
-                            <LocationPicker setLocation={setMarkerPosition} />
-                            {markerPosition && <Marker position={markerPosition}></Marker>}
-                        </MapContainer>
-                        <div className="map-actions">
-                            <button onClick={handleMapSelect}>Set Location</button>
-                            <button onClick={closeMap}>Cancel</button>
-                        </div>
-                    </div>
-                </div>
-            )} 
         </div>
             
     );
