@@ -78,6 +78,7 @@ const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
             
         }
     };
+
     const openMap = () => {
         setIsMapOpen(true);
     };
@@ -135,6 +136,9 @@ const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
             <div>
                 <button type="button" onClick={handleGetCurrentLocation} className="get-location-button">
                     Get Current Location
+                </button>
+                <button type="button" onClick={openMap} className="open-map-button">
+                    Open Map
                 </button>
             </div>
             <button type="submit" className="add-machine-button">{initialData ? "Update Machine" : "Add Machine"}</button>
