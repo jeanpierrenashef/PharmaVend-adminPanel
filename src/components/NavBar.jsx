@@ -39,6 +39,12 @@ const Navbar = () => {
           <img src={require("../styles/assets/customers.png")} className="nav-icon" height={20}/>
           Customers
         </NavLink>
+        <NavLink 
+          to="/products" 
+          className={({ isActive }) => (isActive ? "active-link" : "")}>
+          <img src={require("../styles/assets/products.png")} className="nav-icon" height={20}/>
+          Products
+        </NavLink>
       </nav>
       <div className="navbar-footer">
         <NavLink 

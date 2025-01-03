@@ -14,14 +14,28 @@ import InventoryBarChart from "../components/InventoryBarChart.jsx";
 const Inventory = () => {
     const dispatch = useDispatch();
     const inventory = useSelector((global) => global.inventory.list);
-    const machines = useSelector((state) => state.machines.list);
-    const products = useSelector((state) => state.products.list);
-    const transactions = useSelector((state) => state.transactions.list)
+    const machines = useSelector((global) => global.machines.list);
+    const products = useSelector((global) => global.products.list);
+    const transactions = useSelector((global) => global.transactions.list)
 
     const [currentMachineIndex, setCurrentMachineIndex] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [searchQuery, setSearchQuery] = useState("");
     const itemsPerPage = 10;
+
+    useEffect(() => {
+        if (products.length === 0) {
+            axios.get("http://127.0.0.1:8000/api/admin/products").then(({ data }) => {
+                dispatch(loadProducts(data));
+            });
+        }
+
+        if (machines.length === 0) {
+            axios.get("http://127.0.0.1:8000/api/admin/machines").then(({ data }) => {
+                dispatch(loadMachines(data));
+            });
+        }
+    }, [products, machines, dispatch]);
 
     
     useEffect(()=>{
@@ -90,20 +104,6 @@ const Inventory = () => {
             console.error(error);
         }
     };
-    useEffect(() => {
-        if (products.length === 0) {
-            axios.get("http://127.0.0.1:8000/api/admin/products").then(({ data }) => {
-                dispatch(loadProducts(data));
-            });
-        }
-
-        if (machines.length === 0) {
-            axios.get("http://127.0.0.1:8000/api/admin/machines").then(({ data }) => {
-                dispatch(loadMachines(data));
-            });
-        }
-    }, [products, machines, dispatch]);
-
     
     return (
         <div className="inventory-page">

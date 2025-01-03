@@ -6,6 +6,7 @@ import Orders from './pages/Orders';
 import Machines from './pages/Machines';
 import Customers from './pages/Customers';
 import Inventory from './pages/Inventory';
+import Products from './pages/Products';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
               <Route path="/machines" element={<Machines />} />
               <Route path="/customers" element={<Customers />} />
               <Route path="/inventory" element={<Inventory />} />
+              <Route path="/products" element={<Products />} />
             </Routes>
           
         </BrowserRouter>
