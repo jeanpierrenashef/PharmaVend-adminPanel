@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { loadProducts } from "../redux/products/slice";
+import { loadProducts, deleteProduct } from "../redux/products/slice";
 import Navbar from "../components/NavBar";
 import axios from "axios";
 import ProductContainer from "../components/ProductContainer";
@@ -16,6 +16,9 @@ const Products = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [shouldFetchProducts, setShouldFetchProducts] = useState(false);
     const [editData, setEditData] = useState(null);
+
+    const [showConfirmation, setShowConfirmation] = useState(false); 
+    const [productToDelete, setProductToDelete] = useState(null);
 
     useEffect(()=>{
         if(shouldFetchProducts || products.length === 0){
@@ -45,7 +48,12 @@ const Products = () => {
     const handleCloseModal = () => {
         setIsModalOpen(false);
         setEditData(null); 
-    }
+    };
+
+    const openConfirmation = (product) => {
+        setProductToDelete(product);
+        setShowConfirmation(true);
+    };
 
     return (
         <div className="products-page">
@@ -59,7 +67,7 @@ const Products = () => {
                 </div>
                 <div className="product-container">
                     {products.map((product) => (
-                        <ProductContainer key={product.id} product={product} onEdit={handleEdit}/>
+                        <ProductContainer key={product.id} product={product} onEdit={handleEdit} onDelete={() => openConfirmation(product)}/>
                     ))}
                 </div>
                 <Modal
@@ -78,6 +86,20 @@ const Products = () => {
                     />
                 </Modal>
             </div>
+            {showConfirmation && (
+            <div className="confirmation-modal">
+                <div className="modal-content">
+                    <p>
+                        Are you sure you want to delete product{" "}
+                        <strong>{productToDelete.name}</strong>?
+                    </p>
+                    <div className="modal-actions">
+                        <button onClick={() => setShowConfirmation(false)}>Cancel</button>
+                        <button onClick={() => handleDelete(productToDelete.id)}>Proceed</button>
+                    </div>
+                </div>
+            </div>
+            )}
         </div>
     );
 }

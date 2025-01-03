@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/ProductContainer.css";
 
-const ProductContainer = ({ product, onEdit }) => {
+const ProductContainer = ({ product, onEdit, onDelete }) => {
 
     return (
         <div className="product-card">
@@ -27,7 +27,10 @@ const ProductContainer = ({ product, onEdit }) => {
                 >
                     <i className="mdi mdi-pencil"></i>
                 </button>
-                <button className="delete-button">
+                <button className="delete-button"
+                    onClick={() => onDelete(product.id)}
+                    title="Delete Product"
+                >
                     <i className="mdi mdi-delete"></i>
                 </button>
             </div>
