@@ -20,6 +20,9 @@ const Products = () => {
     const [showConfirmation, setShowConfirmation] = useState(false); 
     const [productToDelete, setProductToDelete] = useState(null);
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 8;
+
     useEffect(()=>{
         if(shouldFetchProducts || products.length === 0){
             axios.get("http://127.0.0.1:8000/api/admin/products").then(({ data }) => {
@@ -55,6 +58,18 @@ const Products = () => {
         setShowConfirmation(true);
     };
 
+    const totalPages = Math.ceil(products.length / itemsPerPage); 
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const paginatedInventory = products.slice(startIndex, startIndex + itemsPerPage);
+    
+    const handleNextPage = () => {
+        setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+    };
+
+    const handlePrevPage = () => {
+        setCurrentPage((prev) => Math.max(prev - 1, 1));
+    };
+
     return (
         <div className="products-page">
             <Navbar />
@@ -66,9 +81,20 @@ const Products = () => {
                     </button>
                 </div>
                 <div className="product-container">
-                    {products.map((product) => (
+                    {paginatedInventory.map((product) => (
                         <ProductContainer key={product.id} product={product} onEdit={handleEdit} onDelete={() => openConfirmation(product)}/>
                     ))}
+                </div>
+                <div className="pagination-controls">
+                    <button onClick={handlePrevPage} disabled={currentPage === 1}> 
+                        Previous
+                    </button>
+                    <span>
+                        Page {currentPage} of {totalPages}
+                    </span>
+                    <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+                        Next
+                    </button>
                 </div>
                 <Modal
                     isOpen={isModalOpen}
