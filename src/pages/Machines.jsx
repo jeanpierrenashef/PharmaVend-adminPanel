@@ -118,18 +118,6 @@ const Machines = () => {
                         </button>
                     </div>
                 </div>
-                <div>
-                    <div className="charts">
-                        <div className="chart">
-                            <h2>Machine Map</h2>
-                            <MapComponent machines={machines} />
-                        </div>
-                        <div className="chart">
-                            <h2>Machines Stats</h2>
-                            <MachineStatusDonutChart machineStatusData={machineStatusData} />
-                        </div>
-                    </div>
-                </div>
                 <Modal
                     isOpen={isModalOpen}
                     onRequestClose={handleCloseModal}

@@ -77,31 +77,34 @@ const Dashboard = () => {
                     </div>
                 </div>
                 <div className="charts-section">
-                    <div className="receipt-goods-chart">
-                        <h2>Receipt of Goods</h2>
-                        <DonutChart transactions={transactions} />
+                    <div className="sectioning">
+                        <div className="receipt-goods-chart">
+                            <h2>Receipt of Goods</h2>
+                            <DonutChart transactions={transactions} />
+                        </div>
+                        <div className="chart">
+                            <h2>Order Status</h2>
+                            <StackedBarChart orderStatusData={orderStatusData} />
+                        </div>
+                        <div className="top-products-section-dash">
+                            <h2>Top 5 Most Sold Products of All Time</h2>
+                            <TopProducts
+                                products={products}
+                                transactions={transactions}
+                            />
+                        </div>
                     </div>
-                    <div className="chart">
-                        <h2>Order Status</h2>
-                        <StackedBarChart orderStatusData={orderStatusData} />
+                    <div className="sectioning">
+                        <div className="chart">
+                            <h2>Machine Map</h2>
+                            <MapComponent machines={machines} />
+                        </div>
+                        <div className="chart">
+                            <h2>Machines Stats</h2>
+                            <MachineStatusDonutChart machineStatusData={machineStatusData} />
+                        </div>
                     </div>
-                    <div className="top-products-section-dash">
-                        <h2>Top 5 Most Sold Products of All Time</h2>
-                        <TopProducts
-                            products={products}
-                            transactions={transactions}
-                        />
-                    </div>
-
-                    <div className="chart">
-                        <h2>Machines Stats</h2>
-                        <MachineStatusDonutChart machineStatusData={machineStatusData} />
-                    </div>
-                    <div className="chart">
-                        <h2>Machine Map</h2>
-                        <MapComponent machines={machines} />
-                    </div>
-
+                    
                         
                 </div>
                     

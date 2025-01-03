@@ -43,9 +43,13 @@
 
 .charts-section{
     display: flex;
+    flex-direction: column
+}
+.sectioning{
+    display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
     gap: 60px;
+    justify-content: space-around;
 }
 .receipt-goods-chart{
     display: flex;
@@ -64,3 +68,4 @@
     border-radius: 8px;
     padding: 20px;
 }
+
