@@ -115,7 +115,7 @@ const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
                         required
                     />
                 </div>
-                <div>
+                <div className="button-options">
                     <button type="button" onClick={handleGetCurrentLocation} className="get-location-button">
                         Get Current Location
                     </button>

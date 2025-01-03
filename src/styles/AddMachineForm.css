@@ -1,5 +1,4 @@
 .add-machine-form {
-    margin-bottom: 20px;
     padding: 20px;
     border-radius: 8px;
     background: #fff;
@@ -34,7 +33,10 @@
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-
+.button-options{
+    display: flex;
+    justify-content: space-around;
+}
 
 .get-location-button {
     margin-top: 10px;
