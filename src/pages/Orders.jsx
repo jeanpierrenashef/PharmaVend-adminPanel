@@ -78,6 +78,7 @@ const Orders = () => {
         },
         { Dispensed: 0, "Not Dispensed": 0 } 
     );
+    
 
     return (
         <div className="orders-page">
@@ -160,10 +161,10 @@ const Orders = () => {
                         <h2>Receipt of Goods</h2>
                         <DonutChart transactions={transactions} />
                     </div>
-                    <div className="chart">
+                    {/* <div className="chart">
                         <h2>Order Status</h2>
                         <StackedBarChart transactions={orderStatusData}/>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             

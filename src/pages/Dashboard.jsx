@@ -8,12 +8,13 @@ import { useDispatch, useSelector } from "react-redux";
 import DonutChart from "../components/DonutChart";
 import TopProducts from "../components/TopProducts";
 import StackedBarChart from "../components/StackedBar";
+import MachineStatusDonutChart from "../components/MachineStatusDonutChart";
 
 const Dashboard = () => {
     const dispatch = useDispatch();
     const transactions = useSelector((global) => global.transactions.list);
     const products = useSelector((global) => global.products.list)
-    //const inventories = useSelector((global) => global.inventories.list)
+    const machines = useSelector((global) => global.machines.list)
 
     const handleMachineSelection = (machine) => {
         console.log("Selected Machine:", machine);
@@ -39,6 +40,13 @@ const Dashboard = () => {
         });
     }, []);
 
+    useEffect(() => {
+        axios.get("http://127.0.0.1:8000/api/admin/machines").then(({ data }) => {
+            const action = { type: "machines/loadMachines", payload: data };
+            dispatch(action);
+        });
+    }, []);
+
     const orderStatusData = transactions.reduce(
         (acc, transaction) => {
             const key = transaction.dispensed === 1 ? "Dispensed" : "Not Dispensed"; 
@@ -46,6 +54,15 @@ const Dashboard = () => {
             return acc;
         },
         { Dispensed: 0, "Not Dispensed": 0 } 
+    );
+
+    const machineStatusData = machines.reduce(
+        (acc, machine) => {
+            const key = machine.status === "active" ? "Active" : "Inactive";
+            acc[key] += 1;
+            return acc;
+        },
+        { Active: 0, Inactive: 0 }
     );
     
     
@@ -83,6 +100,10 @@ const Dashboard = () => {
                             <h2>Order Status</h2>
                             <StackedBarChart orderStatusData={orderStatusData} />
                         </div>
+                    </div>
+                    <div className="chart">
+                        <h2>Machines Stats</h2>
+                        <MachineStatusDonutChart machineStatusData={machineStatusData} />
                     </div>
 
                         
