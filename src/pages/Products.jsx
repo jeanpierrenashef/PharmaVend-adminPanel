@@ -11,13 +11,15 @@ const Products = () => {
     const dispatch = useDispatch();
     const products = useSelector((global) => global.products.list);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [setShouldFetchProducts, setShouldFetchProdsetShouldFetchProducts] = useState(false);
+    const [shouldFetchProducts, setShouldFetchProducts] = useState(false);
     const [editData, setEditData] = useState(null);
 
     useEffect(()=>{
-        if(products.length === 0){
+        if(shouldFetchProducts || products.length === 0){
             axios.get("http://127.0.0.1:8000/api/admin/products").then(({ data }) => {
-                dispatch(loadProducts(data));
+                const action = { type: "machines/loadProducts", payload: data };
+                dispatch(action);
+                setShouldFetchProducts(false); 
             });
         }
     }, [products, dispatch]);
@@ -30,6 +32,7 @@ const Products = () => {
     const handleCloseModal = () => {
         setIsModalOpen(false);
         setEditData(null); 
+    }
 
     return (
         <div className="products-page">
@@ -38,7 +41,7 @@ const Products = () => {
                 <h1>Products</h1>
                 <div className="button-container">
                     <button className="open-modal-button" onClick={() => setIsModalOpen(true)}>
-                        Add Machine
+                        Add Product
                     </button>
                 </div>
                 <div className="product-container">
