@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import "../styles/AddProductForm.css";
+import "../styles/AddMachineForm.css";
 
 const AddProductForm = ({ setShouldFetchProducts , initialData, onSubmit}) => {
     const [formData, setFormData] = useState(initialData || {

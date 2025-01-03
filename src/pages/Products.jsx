@@ -6,6 +6,8 @@ import Navbar from "../components/NavBar";
 import axios from "axios";
 import ProductContainer from "../components/ProductContainer";
 import "../styles/Products.css"
+import Modal from "react-modal";
+import AddProductForm from "../components/AddProductForm";
 
 const Products = () => {
     const dispatch = useDispatch();
