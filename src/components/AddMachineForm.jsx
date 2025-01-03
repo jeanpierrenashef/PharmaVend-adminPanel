@@ -70,6 +70,15 @@ const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
         }
     };
 
+    const handleMapLocationSelect = (location) => {
+        setFormData({
+        ...formData,
+        latitude: location.lat.toFixed(4),
+        longitude: location.lng.toFixed(4),
+        });
+        setShowMapPicker(false);
+    };
+
     return (
         <div>
             <form onSubmit={handleSubmit} className="add-machine-form">
