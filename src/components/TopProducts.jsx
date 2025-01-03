@@ -1,16 +1,17 @@
 import React from "react";
-import "../styles/TopProducts.css"
+import "../styles/TopProducts.css";
 
 const TopProducts = ({ machineId, products, transactions }) => {
-    if (!machineId || !products.length || !transactions.length) {
+    if (!products.length || !transactions.length) {
         return <p>Loading...</p>;
     }
 
+    
     const productSales = products.map((product) => {
         const totalSold = transactions
             .filter(
                 (transaction) =>
-                    transaction.machine_id === machineId &&
+                    (!machineId || transaction.machine_id === machineId) && 
                     transaction.product_id === product.id
             )
             .reduce((acc, transaction) => acc + transaction.quantity, 0);
@@ -32,14 +33,14 @@ const TopProducts = ({ machineId, products, transactions }) => {
                             <span className="product-name">
                                 {index + 1}. {product.name}
                             </span>
-                            <span className="product-name">
+                            <span className="product-sales">
                                 {product.totalSold} sold
                             </span>
                         </div>
                     </li>
                 ))
             ) : (
-                <p>No sales data available for this machine.</p>
+                <p>No sales data available{machineId ? " for this machine" : ""}.</p>
             )}
         </ul>
     );

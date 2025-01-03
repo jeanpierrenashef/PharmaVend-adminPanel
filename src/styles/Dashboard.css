@@ -45,4 +45,18 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    gap: 60px;
+}
+.receipt-goods-chart{
+    display: flex;
+    flex-direction: column;
+}
+.top-products-section-dash{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    width: 450px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
 }
