@@ -14,7 +14,7 @@ const ProductContainer = ({ product }) => {
                 <h3>{product.name}</h3>
                 <p>ID: {product.id}</p>
                 <p>{product.description}</p>
-                <p>Price: ${product.price.toFixed(2)}</p>
+                <p>Price: ${product.price}</p>
             </div>
             <div className="product-actions">
                 <button className="edit-button">

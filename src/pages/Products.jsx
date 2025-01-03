@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { loadProducts } from "../redux/products/slice";
 import Navbar from "../components/NavBar";
+import axios from "axios";
+import ProductContainer from "../components/ProductContainer";
+import "../styles/Products.css"
 
 const Products = () => {
     const dispatch = useDispatch();
@@ -20,9 +23,13 @@ const Products = () => {
         <div className="products-page">
             <Navbar />
             <div className="products-container">
-                {products.map((product) => (
-                    <ProductContainer key={product.id} product={product} />
-                ))}
+                <h1>Products</h1>
+                <div className="product-container">
+                    {products.map((product) => (
+                        <ProductContainer key={product.id} product={product} />
+                    ))}
+                </div>
+                    
             </div>
         </div>
     );
