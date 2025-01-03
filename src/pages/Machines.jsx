@@ -8,7 +8,7 @@ import MapComponent from "../components/MapComponent.jsx";
 import MachineStatusDonutChart from "../components/MachineStatusDonutChart.jsx";
 import AddMachineForm from "../components/AddMachineForm.jsx";
 import Modal from "react-modal";
-import { delteMachine, updateMachine } from "../redux/machines/slice.js";
+import { deleteMachine, updateMachine } from "../redux/machines/slice.js";
 
 const Machines = () => {
     const dispatch = useDispatch();
@@ -58,7 +58,7 @@ const Machines = () => {
     const handleDelete = async (id) => {
         try{
             await axios.delete(`http://127.0.0.1:8000/api/admin/machines/${id}`);
-            dispatch(delteMachine(id));
+            dispatch(deleteMachine(id));
             setShowConfirmation(false);
         }catch (e) {
             console.log("Error ", e);

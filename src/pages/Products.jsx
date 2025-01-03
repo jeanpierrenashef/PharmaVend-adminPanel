@@ -27,6 +27,16 @@ const Products = () => {
         }
     }, [shouldFetchProducts, products.length, dispatch]);
 
+    const handleDelete = async (id) => {
+        try{
+            await axios.delete(`http://127.0.0.1:8000/api/admin/products/${id}`);
+            dispatch(deleteProduct(id));
+            setShowConfirmation(false);
+        }catch (e) {
+            console.log("Error ", e);
+        }
+    }
+
     const handleEdit = (product) => {
         setEditData(product); 
         setIsModalOpen(true); 
