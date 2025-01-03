@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import "../styles/AddMachineForm.css";
+import { updateProduct, addProduct } from "../redux/products/slice";
 
 const AddProductForm = ({ setShouldFetchProducts , initialData, onSubmit}) => {
     const [formData, setFormData] = useState(initialData || {
         image_url: "",
         name: "",
         price: "",
+        category: "",
         description: ""
     
     });
@@ -37,6 +39,7 @@ const AddProductForm = ({ setShouldFetchProducts , initialData, onSubmit}) => {
                 setFormData({ image_url: "",
                     name: "",
                     price: "",
+                    category: "",
                     description: ""});
             }
 
@@ -64,6 +67,16 @@ const AddProductForm = ({ setShouldFetchProducts , initialData, onSubmit}) => {
                     />
                 </div>
                 <div>
+                    <label>Category:</label>
+                    <input
+                        type="text"
+                        name="category"
+                        value={formData.category}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div>
                     <label>Price: </label>
                     <input
                         type="number"
@@ -84,6 +97,10 @@ const AddProductForm = ({ setShouldFetchProducts , initialData, onSubmit}) => {
                         required
                     />
                 </div>
+                <div>
+                    <button>Add image locally</button>
+                </div>
+
                 <button type="submit" className="add-machine-button">{initialData ? "Update Product" : "Add Product"}</button>
             </form>
         </div>

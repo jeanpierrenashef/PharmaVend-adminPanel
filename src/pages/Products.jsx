@@ -48,7 +48,7 @@ const Products = () => {
                 </div>
                 <div className="product-container">
                     {products.map((product) => (
-                        <ProductContainer key={product.id} product={product} />
+                        <ProductContainer key={product.id} product={product} onEdit={handleEdit}/>
                     ))}
                 </div>
                 <Modal

@@ -83,87 +83,84 @@ const Machines = () => {
             <Navbar />
             <div className="content">
                 <div className="main-content">
-                        <h1>Machines</h1>
-                        <div className="button-container">
-                            <button className="open-modal-button" onClick={() => setIsModalOpen(true)}>
-                                Add Machine
-                            </button>
-                        </div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Location</th>
-                                    <th>Latitude</th>
-                                    <th>Longitude</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {paginatedInventory.map((machine) => (
-                                    <MachineRow key={machine.id} machine={machine} onDelete={() => openConfirmation(machine)} onEdit={handleEdit}/>
-                                ))}
-                            </tbody>
-                        </table>
-                        <div className="pagination-controls">
-                            <button onClick={handlePrevPage} disabled={currentPage === 1}> 
-                                Previous
-                            </button>
-                            <span>
-                                Page {currentPage} of {totalPages}
-                            </span>
-                            <button onClick={handleNextPage} disabled={currentPage === totalPages}>
-                                Next
+                    <h1>Machines</h1>
+                    <div className="button-container">
+                        <button className="open-modal-button" onClick={() => setIsModalOpen(true)}>
+                            Add Machine
                         </button>
                     </div>
-                    </div>
-                    <div>
-                        <div className="charts">
-                            <div className="chart">
-                                <h2>Machine Map</h2>
-                                <MapComponent machines={machines} />
-                            </div>
-                            <div className="chart">
-                                <h2>Machines Stats</h2>
-                                <MachineStatusDonutChart machineStatusData={machineStatusData} />
-                            </div>
-                        </div>
-                    </div>
-                        
-
-                    <Modal
-                        isOpen={isModalOpen}
-                        onRequestClose={handleCloseModal}
-                        className="modal-content"
-                        overlayClassName="modal-overlay"
-                        ariaHideApp={false}
-                    >
-                        <button className="close-modal-button" onClick={handleCloseModal}>
-                            ×
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Location</th>
+                                <th>Latitude</th>
+                                <th>Longitude</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {paginatedInventory.map((machine) => (
+                                <MachineRow key={machine.id} machine={machine} onDelete={() => openConfirmation(machine)} onEdit={handleEdit}/>
+                            ))}
+                        </tbody>
+                    </table>
+                    <div className="pagination-controls">
+                        <button onClick={handlePrevPage} disabled={currentPage === 1}> 
+                            Previous
                         </button>
-                        <AddMachineForm
-                            setShouldFetchMachines={setShouldFetchMachines}
-                            initialData={editData}
-                        />
-                    </Modal>
+                        <span>
+                            Page {currentPage} of {totalPages}
+                        </span>
+                        <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+                            Next
+                        </button>
+                    </div>
                 </div>
-                {showConfirmation && (
-                <div className="confirmation-modal">
-                    <div className="modal-content">
-                        <p>
-                            Are you sure you want to delete machine{" "}
-                            <strong>V{machineToDelete?.id}</strong>?
-                        </p>
-                        <div className="modal-actions">
-                            <button onClick={() => setShowConfirmation(false)}>Cancel</button>
-                            <button onClick={() => handleDelete(machineToDelete.id)}>Proceed</button>
+                <div>
+                    <div className="charts">
+                        <div className="chart">
+                            <h2>Machine Map</h2>
+                            <MapComponent machines={machines} />
+                        </div>
+                        <div className="chart">
+                            <h2>Machines Stats</h2>
+                            <MachineStatusDonutChart machineStatusData={machineStatusData} />
                         </div>
                     </div>
                 </div>
-            )}
+                <Modal
+                    isOpen={isModalOpen}
+                    onRequestClose={handleCloseModal}
+                    className="modal-content"
+                    overlayClassName="modal-overlay"
+                    ariaHideApp={false}
+                >
+                    <button className="close-modal-button" onClick={handleCloseModal}>
+                        ×
+                    </button>
+                    <AddMachineForm
+                        setShouldFetchMachines={setShouldFetchMachines}
+                        initialData={editData}
+                    />
+                </Modal>
             </div>
-                
+            {showConfirmation && (
+            <div className="confirmation-modal">
+                <div className="modal-content">
+                    <p>
+                        Are you sure you want to delete machine{" "}
+                        <strong>V{machineToDelete?.id}</strong>?
+                    </p>
+                    <div className="modal-actions">
+                        <button onClick={() => setShowConfirmation(false)}>Cancel</button>
+                        <button onClick={() => handleDelete(machineToDelete.id)}>Proceed</button>
+                    </div>
+                </div>
+            </div>
+            )}
+        </div>
     );
 };
 
