@@ -23,6 +23,8 @@ const Products = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 8;
 
+    const [searchQuery, setSearchQuery] = useState("");
+
     useEffect(()=>{
         if(shouldFetchProducts || products.length === 0){
             axios.get("http://127.0.0.1:8000/api/admin/products").then(({ data }) => {
@@ -58,10 +60,15 @@ const Products = () => {
         setShowConfirmation(true);
     };
 
-    const totalPages = Math.ceil(products.length / itemsPerPage); 
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const paginatedInventory = products.slice(startIndex, startIndex + itemsPerPage);
     
+    const filteredProducts = products.filter((product) =>
+        product.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    const totalPages = Math.ceil(filteredProducts.length / itemsPerPage); 
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const paginatedInventory = filteredProducts.slice(startIndex, startIndex + itemsPerPage);
+
     const handleNextPage = () => {
         setCurrentPage((prev) => Math.min(prev + 1, totalPages));
     };
@@ -69,6 +76,8 @@ const Products = () => {
     const handlePrevPage = () => {
         setCurrentPage((prev) => Math.max(prev - 1, 1));
     };
+    
+
 
     return (
         <div className="products-page">
@@ -79,6 +88,14 @@ const Products = () => {
                     <button className="open-modal-button" onClick={() => setIsModalOpen(true)}>
                         Add Product
                     </button>
+                </div>
+                <div className="search-bar">
+                    <input
+                        type="text"
+                        placeholder="Search for medicine..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
                 </div>
                 <div className="product-container">
                     {paginatedInventory.map((product) => (
