@@ -1,8 +1,8 @@
 import React, { useRef, useEffect } from "react";
 import * as d3 from "d3";
-import "../styles/StackedBar.css";
+import "../styles/OrderStatusPieChart.css";
 
-const StackedBarChart = ({ orderStatusData }) => {
+const OrderStatusPieChart = ({ orderStatusData }) => {
     const chartRef = useRef();
 
     useEffect(() => {
@@ -15,62 +15,57 @@ const StackedBarChart = ({ orderStatusData }) => {
 
         d3.select(chartRef.current).selectAll("*").remove();
 
-        const width = 400;
-        const height = 30;
+        const width = 260;
+        const height = 260;
+        const radius = Math.min(width, height) / 2;
 
         const svg = d3
             .select(chartRef.current)
             .attr("width", width)
-            .attr("height", height);
-
-        const xScale = d3
-            .scaleLinear()
-            .domain([0, totalQuantity])
-            .range([0, width]);
+            .attr("height", height)
+            .append("g")
+            .attr("transform", `translate(${width / 2}, ${height / 2})`);
 
         const color = d3
             .scaleOrdinal()
-            .domain(["Dispensed", "Not Dispensed"])
+            .domain(chartData.map((d) => d.status))
             .range(["#408751", "#595959"]);
 
-        let cumulative = 0;
+        const pie = d3
+            .pie()
+            .value((d) => d.value)(chartData);
+
+        const arc = d3
+            .arc()
+            .innerRadius(0) // Full pie chart, no inner radius
+            .outerRadius(radius);
+
+        // Draw pie chart
         svg
-            .selectAll("rect")
-            .data(chartData)
-            .join("rect")
-            .attr("x", (d) => {
-                const xPos = xScale(cumulative);
-                cumulative += d.value;
-                return xPos;
-            })
-            .attr("y", 0)
-            .attr("width", (d) => xScale(d.value))
-            .attr("height", height)
-            .attr("fill", (d) => color(d.status));
+            .selectAll("path")
+            .data(pie)
+            .join("path")
+            .attr("d", arc)
+            .attr("fill", (d) => color(d.data.status))
+            .attr("stroke", "white")
+            .style("stroke-width", "2px");
 
-        cumulative = 0;
-
+        // Add percentage labels
         svg
             .selectAll("text")
-            .data(chartData)
+            .data(pie)
             .join("text")
-            .attr("x", (d) => {
-                const xPos = xScale(cumulative + d.value / 2);
-                cumulative += d.value;
-                return xPos;
-            })
-            .attr("y", height / 2)
-            .attr("fill", "white")
+            .text((d) => `${((d.data.value / totalQuantity) * 100).toFixed(1)}%`)
+            .attr("transform", (d) => `translate(${arc.centroid(d)})`)
             .attr("text-anchor", "middle")
-            .attr("dy", ".35em")
             .style("font-size", "12px")
-            .text((d) => `${((d.value / totalQuantity) * 100).toFixed(1)}%`);
+            .style("fill", "white");
     }, [orderStatusData]);
 
     return (
-        <div className="stacked-bar-chart-container">
+        <div className="pie-chart-container">
             <svg ref={chartRef}></svg>
-            <div className="stacked-bar-chart-legend">
+            <div className="pie-chart-legend">
                 <div className="legend-item">
                     <span
                         className="legend-box"
@@ -96,4 +91,4 @@ const StackedBarChart = ({ orderStatusData }) => {
     );
 };
 
-export default StackedBarChart;
+export default OrderStatusPieChart;

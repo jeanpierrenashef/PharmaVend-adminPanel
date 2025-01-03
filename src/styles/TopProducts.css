@@ -51,16 +51,24 @@
 }
 
 .rank-1 .product-name {
-    font-size: 26px;
+    font-size: 32px;
     color: #408751;
 }
 
 .rank-2 .product-name {
-    font-size: 20px;
+    font-size: 24px;
     color: #2b788a;
 }
 
 .rank-3 .product-name {
-    font-size: 16px;
+    font-size: 18px;
     color: #b8860b;
+}
+.rank-4 .product-name {
+    font-size: 16px;
+    color: #2a7f71;
+}
+.rank-5 .product-name {
+    font-size: 12px;
+    color: #62217e;
 }

@@ -5,7 +5,7 @@ import OrderRow from "../components/OrderRow.jsx";
 import "../styles/Orders.css";
 import Navbar from "../components/NavBar.jsx";
 import DonutChart from "../components/DonutChart";
-import StackedBarChart from "../components/StackedBar.jsx";
+import StackedBarChart from "../components/OrderStatusPieChart.jsx";
 
 const Orders = () => {
     const dispatch = useDispatch();

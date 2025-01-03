@@ -1,44 +1,40 @@
-.stacked-bar-chart-container {
+.pie-chart-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
 }
-svg {
-    display: block;
-}
-.stacked-bar-chart-legend {
+
+.pie-chart-legend {
     display: flex;
-    justify-content: space-around;
-    gap: 20px;
-    width: 100%;
+    justify-content: center;
+    margin-top: 15px;
 }
 
 .legend-item {
     display: flex;
     align-items: center;
-    gap: 8px;
+    margin-right: 15px;
 }
 
 .legend-box {
-    width: 12px;
-    height: 12px;
-    border-radius: 2px;
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
 }
 
 .legend-text-group {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    gap: 5px;
 }
 
 .legend-text {
     font-size: 14px;
-    font-weight: 500;
+    font-weight: bold;
 }
 
 .legend-label {
     font-size: 12px;
     color: #666;
-    margin: 0;
 }

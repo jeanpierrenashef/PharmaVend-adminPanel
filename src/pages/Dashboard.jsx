@@ -7,8 +7,9 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import DonutChart from "../components/DonutChart";
 import TopProducts from "../components/TopProducts";
-import StackedBarChart from "../components/StackedBar";
+import StackedBarChart from "../components/OrderStatusPieChart";
 import MachineStatusDonutChart from "../components/MachineStatusDonutChart";
+import MapComponent from "../components/MapComponent";
 
 const Dashboard = () => {
     const dispatch = useDispatch();
@@ -25,22 +26,14 @@ const Dashboard = () => {
             const action = { type: "transactions/loadTransactions", payload: data };
             dispatch(action);
         });
-    }, []);
-    useEffect(() => {
         axios.get("http://127.0.0.1:8000/api/admin/products").then(({ data }) => {
             const action = { type: "products/loadProducts", payload: data };
             dispatch(action);
         });
-    }, []);
-
-    useEffect(() => {
         axios.get("http://127.0.0.1:8000/api/admin/inventory").then(({ data }) => {
             const action = { type: "inventory/loadInventory", payload: data };
             dispatch(action);
         });
-    }, []);
-
-    useEffect(() => {
         axios.get("http://127.0.0.1:8000/api/admin/machines").then(({ data }) => {
             const action = { type: "machines/loadMachines", payload: data };
             dispatch(action);
@@ -88,22 +81,25 @@ const Dashboard = () => {
                         <h2>Receipt of Goods</h2>
                         <DonutChart transactions={transactions} />
                     </div>
-                    <div className="stacked-charts">
-                        <div className="top-products-section-dash">
-                            <h2>Top 3 Most Sold Products of All Time</h2>
-                            <TopProducts
-                                products={products}
-                                transactions={transactions}
-                            />
-                        </div>
-                        <div className="chart">
-                            <h2>Order Status</h2>
-                            <StackedBarChart orderStatusData={orderStatusData} />
-                        </div>
+                    <div className="chart">
+                        <h2>Order Status</h2>
+                        <StackedBarChart orderStatusData={orderStatusData} />
                     </div>
+                    <div className="top-products-section-dash">
+                        <h2>Top 5 Most Sold Products of All Time</h2>
+                        <TopProducts
+                            products={products}
+                            transactions={transactions}
+                        />
+                    </div>
+
                     <div className="chart">
                         <h2>Machines Stats</h2>
                         <MachineStatusDonutChart machineStatusData={machineStatusData} />
+                    </div>
+                    <div className="chart">
+                        <h2>Machine Map</h2>
+                        <MapComponent machines={machines} />
                     </div>
 
                         

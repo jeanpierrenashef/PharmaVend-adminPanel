@@ -22,7 +22,7 @@ const TopProducts = ({ machineId, products, transactions }) => {
     const topProducts = productSales
         .filter((product) => product.totalSold > 0)
         .sort((a, b) => b.totalSold - a.totalSold)
-        .slice(0, 3);
+        .slice(0, 5);
 
     return (
         <ul className="top-products-list">
