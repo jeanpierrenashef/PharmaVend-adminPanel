@@ -20,9 +20,13 @@ const productsSlice = createSlice({
         updateProduct: (state, action) => {
             state.list = state.list.map((product) => 
             product.id === action.payload.id ? action.payload : product)
+        },
+        deleteProduct: (state, action) => {
+            const productId = action.payload;
+            state.list = state.list.filter(product => product.id != productId);
         }
     }
 });
 
 export default productsSlice;
-export const {loadProducts, addProduct, updateProduct} = productsSlice.actions;
+export const {loadProducts, addProduct, updateProduct, deleteProduct} = productsSlice.actions;
