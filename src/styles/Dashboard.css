@@ -73,7 +73,7 @@
     flex-direction: column;
     justify-content: start;
     width: 450px;
-    background: #f8f9fa;
+    background: transparent;
     border-radius: 8px;
     padding: 20px;
 }
