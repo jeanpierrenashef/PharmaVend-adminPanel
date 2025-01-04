@@ -6,7 +6,6 @@ import Navbar from "../components/NavBar";
 import "../styles/Inventory.css";
 import { updateQuantity } from "../redux/inventory/slice";
 import { loadProducts } from "../redux/products/slice.js";
-import { loadMachines } from "../redux/machines/slice.js";
 import TopProducts from "../components/TopProducts.jsx";
 
 const Inventory = () => {
@@ -38,7 +37,6 @@ const Inventory = () => {
         }
     }, [products, inventory, dispatch]);
 
-    // Filter inventory for the selected machine
     const currentMachineInventory = products.map((product) => {
         const inventoryItem = inventory.find(
             (item) => item.machine_id === selectedMachineId && item.product_id === product.id
@@ -49,7 +47,6 @@ const Inventory = () => {
         };
     });
 
-    // Filter inventory based on search query
     const filteredInventory = currentMachineInventory.filter((item) =>
         item.name?.toLowerCase().includes(searchQuery.toLowerCase())
     );

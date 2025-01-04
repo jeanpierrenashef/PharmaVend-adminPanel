@@ -34,15 +34,6 @@ const Machines = () => {
         }
     }, [shouldFetchMachines, machines.length, dispatch]);
 
-    const machineStatusData = machines.reduce(
-        (acc, machine) => {
-            const key = machine.status === "active" ? "Active" : "Inactive";
-            acc[key] += 1;
-            return acc;
-        },
-        { Active: 0, Inactive: 0 }
-    );
-
     const totalPages = Math.ceil(machines.length / itemsPerPage); 
     const startIndex = (currentPage - 1) * itemsPerPage;
     const paginatedInventory = machines.slice(startIndex, startIndex + itemsPerPage);
