@@ -1,27 +1,27 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import InventoryRow from "../components/InventoryRow";
 import axios from "axios";
 import Navbar from "../components/NavBar";
-import "../styles/Inventory.css"
+import "../styles/Inventory.css";
 import { updateQuantity } from "../redux/inventory/slice";
-import {loadProducts} from "../redux/products/slice.js";
-import {loadMachines} from "../redux/machines/slice.js";
+import { loadProducts } from "../redux/products/slice.js";
+import { loadMachines } from "../redux/machines/slice.js";
 import TopProducts from "../components/TopProducts.jsx";
-import InventoryBarChart from "../components/InventoryBarChart.jsx";
 
 const Inventory = () => {
     const dispatch = useDispatch();
     const inventory = useSelector((global) => global.inventory.list);
-    const machines = useSelector((global) => global.machines.list);
     const products = useSelector((global) => global.products.list);
-    const transactions = useSelector((global) => global.transactions.list)
+    const transactions = useSelector((global) => global.transactions.list);
 
-    const [currentMachineIndex, setCurrentMachineIndex] = useState(0);
-    const [currentPage, setCurrentPage] = useState(1);
     const [searchQuery, setSearchQuery] = useState("");
+    const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
+
+    const selectedMachine = JSON.parse(localStorage.getItem("selectedMachine"));
+    const selectedMachineId = selectedMachine?.id;
+    const selectedMachineLocation = selectedMachine?.location;
 
     useEffect(() => {
         if (products.length === 0) {
@@ -30,38 +30,18 @@ const Inventory = () => {
             });
         }
 
-        if (machines.length === 0) {
-            axios.get("http://127.0.0.1:8000/api/admin/machines").then(({ data }) => {
-                dispatch(loadMachines(data));
+        if (inventory.length === 0) {
+            axios.get("http://127.0.0.1:8000/api/admin/inventory").then(({ data }) => {
+                const action = { type: "inventory/loadInventory", payload: data };
+                dispatch(action);
             });
         }
-    }, [products, machines, dispatch]);
+    }, [products, inventory, dispatch]);
 
-    
-    useEffect(()=>{
-        axios.get("http://127.0.0.1:8000/api/admin/inventory").then(({data}) => {
-            const action = { type: "inventory/loadInventory", payload: data};
-            dispatch(action);
-        })
-    }, []);
-
-    const handlePrevMachine = () => {
-        setCurrentMachineIndex((prev) => (prev > 0 ? prev - 1 : machines.length - 1));
-        setCurrentPage(1);
-        setSearchQuery("");
-    };
-
-    const handleNextMachine = () => {
-        setCurrentMachineIndex((prev) => (prev < machines.length - 1 ? prev + 1 : 0));
-        setCurrentPage(1);
-        setSearchQuery("");
-    };
-
-    const currentMachine = machines[currentMachineIndex];
-
+    // Filter inventory for the selected machine
     const currentMachineInventory = products.map((product) => {
         const inventoryItem = inventory.find(
-            (item) => item.machine_id === currentMachine?.id && item.product_id === product.id
+            (item) => item.machine_id === selectedMachineId && item.product_id === product.id
         );
         return {
             ...product,
@@ -69,14 +49,14 @@ const Inventory = () => {
         };
     });
 
+    // Filter inventory based on search query
     const filteredInventory = currentMachineInventory.filter((item) =>
         item.name?.toLowerCase().includes(searchQuery.toLowerCase())
     );
-    
-    const totalPages = Math.ceil(filteredInventory.length / itemsPerPage); 
+
+    const totalPages = Math.ceil(filteredInventory.length / itemsPerPage);
     const startIndex = (currentPage - 1) * itemsPerPage;
     const paginatedInventory = filteredInventory.slice(startIndex, startIndex + itemsPerPage);
-    
 
     const handleNextPage = () => {
         setCurrentPage((prev) => Math.min(prev + 1, totalPages));
@@ -88,7 +68,7 @@ const Inventory = () => {
 
     const handleUpdateQuantity = async (productId, increment) => {
         const payload = {
-            machine_id: currentMachine.id,
+            machine_id: selectedMachine.id,
             product_id: productId,
             increment,
         };
@@ -96,7 +76,7 @@ const Inventory = () => {
 
         try {
             await axios.post("http://127.0.0.1:8000/api/admin/update_inventory", {
-                machine_id: currentMachine.id,
+                machine_id: selectedMachine.id,
                 product_id: productId,
                 add_quantity: increment,
             });
@@ -104,19 +84,14 @@ const Inventory = () => {
             console.error(error);
         }
     };
-    
+
     return (
         <div className="inventory-page">
             <Navbar />
             <div className="content">
                 <div className="main-content">
                     <h1>Inventory Management</h1>
-
-                    <div className="machine-navigation">
-                        <button onClick={handlePrevMachine}>&lt;</button>
-                        <h2>{currentMachine ? `Machine ID: ${currentMachine.id}` : "Loading..."}</h2>
-                        <button onClick={handleNextMachine}>&gt;</button>
-                    </div>
+                    <h2>Machine:<span className="selected-machine">{selectedMachine ? ` ${selectedMachineLocation}` : "Loading..."}</span></h2>
                     <div className="search-bar">
                         <input
                             type="text"
@@ -145,7 +120,7 @@ const Inventory = () => {
                         </tbody>
                     </table>
                     <div className="pagination-controls">
-                        <button onClick={handlePrevPage} disabled={currentPage === 1}> 
+                        <button onClick={handlePrevPage} disabled={currentPage === 1}>
                             Previous
                         </button>
                         <span>
@@ -160,18 +135,15 @@ const Inventory = () => {
                     <div className="top-products-section">
                         <h2>Top 3 Most Sold Products</h2>
                         <TopProducts
-                            machineId={currentMachine?.id}
+                            machineId={selectedMachineId}
                             products={products}
                             transactions={transactions}
                         />
                     </div>
-                    
-
                 </div>
             </div>
-            
         </div>
     );
+};
 
-}
 export default Inventory;
