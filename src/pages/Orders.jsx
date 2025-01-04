@@ -5,7 +5,7 @@ import OrderRow from "../components/OrderRow.jsx";
 import "../styles/Orders.css";
 import Navbar from "../components/NavBar.jsx";
 import DonutChart from "../components/DonutChart";
-import StackedBarChart from "../components/OrderStatusPieChart.jsx";
+import OrderStatusPieChart from "../components/OrderStatusPieChart.jsx";
 
 const Orders = () => {
     const dispatch = useDispatch();
@@ -70,14 +70,8 @@ const Orders = () => {
     const handlePrevPage = () => {
         setCurrentPage((prev) => Math.max(prev - 1, 1));
     };
-    const orderStatusData = transactions.reduce(
-        (acc, transaction) => {
-            const key = transaction.dispensed === 1 ? "Dispensed" : "Not Dispensed"; 
-            acc[key] += 1; 
-            return acc;
-        },
-        { Dispensed: 0, "Not Dispensed": 0 } 
-    );
+
+    
     
 
     return (
@@ -161,10 +155,10 @@ const Orders = () => {
                         <h2>Receipt of Goods</h2>
                         <DonutChart transactions={transactions} />
                     </div>
-                    {/* <div className="chart">
+                    <div className="chart">
                         <h2>Order Status</h2>
-                        <StackedBarChart transactions={orderStatusData}/>
-                    </div> */}
+                        <OrderStatusPieChart transactions={transactions}/>
+                    </div>
                 </div>
             </div>
             

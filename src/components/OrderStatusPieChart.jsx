@@ -2,11 +2,26 @@ import React, { useRef, useEffect } from "react";
 import * as d3 from "d3";
 import "../styles/OrderStatusPieChart.css";
 
-const OrderStatusPieChart = ({ orderStatusData }) => {
+const OrderStatusPieChart = ({ transactions = [] }) => {
     const chartRef = useRef();
+
+    // Ensure transactions is an array
+    const validTransactions = Array.isArray(transactions) ? transactions : [];
+
+    // Calculate the order status data
+    const orderStatusData = validTransactions.reduce(
+        (acc, transaction) => {
+            const key = transaction.dispensed === 1 ? "Dispensed" : "Not Dispensed"; 
+            acc[key] += 1; 
+            return acc;
+        },
+        { Dispensed: 0, "Not Dispensed": 0 } // Default values
+    );
 
     useEffect(() => {
         const totalQuantity = Object.values(orderStatusData).reduce((a, b) => a + b, 0);
+
+        if (totalQuantity === 0) return;
 
         const chartData = Object.entries(orderStatusData).map(([key, value]) => ({
             status: key,
@@ -37,10 +52,9 @@ const OrderStatusPieChart = ({ orderStatusData }) => {
 
         const arc = d3
             .arc()
-            .innerRadius(0) // Full pie chart, no inner radius
+            .innerRadius(0) 
             .outerRadius(radius);
 
-        // Draw pie chart
         svg
             .selectAll("path")
             .data(pie)
@@ -50,7 +64,6 @@ const OrderStatusPieChart = ({ orderStatusData }) => {
             .attr("stroke", "white")
             .style("stroke-width", "2px");
 
-        // Add percentage labels
         svg
             .selectAll("text")
             .data(pie)
@@ -61,6 +74,12 @@ const OrderStatusPieChart = ({ orderStatusData }) => {
             .style("font-size", "12px")
             .style("fill", "white");
     }, [orderStatusData]);
+
+    const totalQuantity = Object.values(orderStatusData).reduce((a, b) => a + b, 0);
+
+    if (totalQuantity === 0) {
+        return <p className="no-data-message">No order data available to display.</p>;
+    }
 
     return (
         <div className="pie-chart-container">

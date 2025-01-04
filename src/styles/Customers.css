@@ -18,7 +18,7 @@
     overflow-y: auto;
     overflow: visible;
     display: flex;
-    justify-content: start;
+    justify-content: space-around;
     align-items: flex-start; 
 }
 .separator-line {

@@ -165,6 +165,7 @@ const Inventory = () => {
                             transactions={transactions}
                         />
                     </div>
+                    
 
                 </div>
             </div>
