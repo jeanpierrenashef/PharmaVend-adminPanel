@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
-import "../styles/CustomerBarChartWithLine.css";
+import "../styles/BarChartWithLine.css";
 
 const CustomerBarChartWithLine = ({ customers }) => {
     const chartRef = useRef();

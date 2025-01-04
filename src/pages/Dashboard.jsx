@@ -84,13 +84,10 @@ const Dashboard = () => {
                             <h2>Receipt of Goods</h2>
                             <DonutChart transactions={transactions} />
                         </div>
+
                         <div className="chart">
-                            <h2>Order Status</h2>
-                            <StackedBarChart orderStatusData={orderStatusData} />
-                        </div>
-                        <div className="chart">
-                            <h2>Total Sales Per Machine</h2>
-                            <InventoryBarChart machines={machines} transactions={transactions} products={products}/>
+                            <h2>Total Transactions in Time</h2>
+                            <TransactionBarChartWithLine transactions={transactions}/>
                         </div>
                         
                     </div>
@@ -104,7 +101,7 @@ const Dashboard = () => {
                             <MachineStatusDonutChart machineStatusData={machineStatusData} />
                         </div>
                     </div>
-                    <div>
+                    <div className="sectioning">
                         <div className="top-products-section-dash">
                             <h2>Top 5 Most Sold Products of All Time</h2>
                             <TopProducts
@@ -112,16 +109,13 @@ const Dashboard = () => {
                                 transactions={transactions}
                             />
                         </div>
+
                         <div className="chart">
-                            <h2>Total Transactions in Time</h2>
-                            <TransactionBarChartWithLine transactions={transactions}/>
+                            <h2>Total Sales Per Machine</h2>
+                            <InventoryBarChart machines={machines} transactions={transactions} products={products}/>
                         </div>
                     </div>
-                        
-                    
-                        
                 </div>
-                    
             </div>
         </div>
     );

@@ -165,11 +165,7 @@ const Inventory = () => {
                             transactions={transactions}
                         />
                     </div>
-                    <hr className="separator-line" />
-                    <div className="chart">
-                        <h2>Total Sales Per Machine</h2>
-                        <InventoryBarChart machines={machines} transactions={transactions} products={products}/>
-                    </div>
+
                 </div>
             </div>
             
