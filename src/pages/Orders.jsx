@@ -155,11 +155,11 @@ const Orders = () => {
                 <div className="charts">
                     <div className="chart">
                         <h2>Receipt of Goods</h2>
-                        <DonutChart transactions={transactions} />
+                        <DonutChart transactions={filteredTransactions} />
                     </div>
                     <div className="chart">
                         <h2>Order Status</h2>
-                        <OrderStatusPieChart transactions={transactions}/>
+                        <OrderStatusPieChart transactions={filteredTransactions}/>
                     </div>
                 </div>
             </div>

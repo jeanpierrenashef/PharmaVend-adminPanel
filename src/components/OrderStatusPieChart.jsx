@@ -4,18 +4,15 @@ import "../styles/OrderStatusPieChart.css";
 
 const OrderStatusPieChart = ({ transactions = [] }) => {
     const chartRef = useRef();
-
-    // Ensure transactions is an array
     const validTransactions = Array.isArray(transactions) ? transactions : [];
 
-    // Calculate the order status data
     const orderStatusData = validTransactions.reduce(
         (acc, transaction) => {
             const key = transaction.dispensed === 1 ? "Dispensed" : "Not Dispensed"; 
             acc[key] += 1; 
             return acc;
         },
-        { Dispensed: 0, "Not Dispensed": 0 } // Default values
+        { Dispensed: 0, "Not Dispensed": 0 }
     );
 
     useEffect(() => {
