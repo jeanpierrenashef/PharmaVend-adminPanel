@@ -19,6 +19,10 @@ const Orders = () => {
 
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
+
+    const selectedMachine = JSON.parse(localStorage.getItem("selectedMachine"));
+    const selectedMachineId = selectedMachine?.id;
+    const selectedMachineLocation = selectedMachine?.location
     
 
     useEffect(() => {
@@ -28,24 +32,25 @@ const Orders = () => {
                 dispatch(action);
             });
         }
-    }, [transactions, dispatch]);
+        if(products.length === 0){
+            axios.get("http://127.0.0.1:8000/api/admin/products").then(({ data }) => {
+                const action = { type: "products/loadProducts", payload: data };
+                dispatch(action);
+            });
+        }
+        if(users.length === 0){
+            axios.get("http://127.0.0.1:8000/api/admin/users").then(({ data }) => {
+                const action = { type: "users/loadUsers", payload: data };
+                dispatch(action);
+            });
+        }
+    }, [transactions, products, users, dispatch]);
 
-    useEffect(() => {
-        axios.get("http://127.0.0.1:8000/api/admin/users").then(({ data }) => {
-            const action = { type: "users/loadUsers", payload: data };
-            dispatch(action);
-        });
-    }, []);
+    const machineTransactions = transactions.filter(
+        (transaction) => transaction.machine_id === selectedMachineId
+    );
 
-    useEffect(() => {
-        axios.get("http://127.0.0.1:8000/api/admin/products").then(({ data }) => {
-            const action = { type: "products/loadProducts", payload: data };
-            dispatch(action);
-        });
-    }, []);
-
-
-    const filteredTransactions = transactions.filter((transaction) => {
+    const filteredTransactions = machineTransactions.filter((transaction) => {
         if (statusFilter !== "" && String(transaction.dispensed) !== statusFilter) {
             return false;
         }
@@ -58,10 +63,10 @@ const Orders = () => {
         return true;
     });
 
-    const totalPages = Math.ceil(transactions.length / itemsPerPage); 
+    const totalPages = Math.ceil(filteredTransactions.length / itemsPerPage);
     const startIndex = (currentPage - 1) * itemsPerPage;
-    const paginatedInventory = transactions.slice(startIndex, startIndex + itemsPerPage);
-    
+    const paginatedTransactions = filteredTransactions.slice(startIndex, startIndex + itemsPerPage);
+
 
     const handleNextPage = () => {
         setCurrentPage((prev) => Math.min(prev + 1, totalPages));
@@ -72,14 +77,12 @@ const Orders = () => {
     };
 
     
-    
-
     return (
         <div className="orders-page">
             <Navbar />
             <div className="content">
                 <div className="main-content">
-                    <h1>Orders</h1>
+                    <h1>Orders of <span className="selected-machine">{selectedMachineLocation}</span></h1>
                     <div className="filters">
                         <div className="filter-dropdown filter-dropdown-after">
                             <select
@@ -116,14 +119,13 @@ const Orders = () => {
                                 <th>User</th>
                                 <th>Quantity</th>
                                 <th>Total Price</th>
-                                <th>Machine ID</th>
                                 <th>Product</th>
                                 <th>Status</th>
                                 <th>Created At</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {paginatedInventory.map((transaction) => {
+                            {paginatedTransactions.map((transaction) => {
                                 const user = users.find((u) => u.id === transaction.user_id);
                                 const product = products.find((p) => p.id === transaction.product_id);
                                 return (

@@ -8,7 +8,6 @@ const OrderRow = ({ transaction, user, product }) => {
             <td>{user?.username || "Unknown"}</td>
             <td>{transaction.quantity}</td>
             <td>${transaction.total_price}</td>
-            <td>V{transaction.machine_id}</td>
             <td>{product?.name}</td>
             <td>
                 {transaction.dispensed === 1 ? (

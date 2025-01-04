@@ -16,7 +16,7 @@ function App() {
         <BrowserRouter>
           
             <Routes>
-              <Route path="/" element={<Orders />} />
+              <Route path="/" element={<Dashboard />} />
               <Route path="/orders" element={<Orders />} />
               <Route path="/machines" element={<Machines />} />
               <Route path="/customers" element={<Customers />} />

@@ -18,6 +18,9 @@ const Dashboard = () => {
     const transactions = useSelector((global) => global.transactions.list);
     const products = useSelector((global) => global.products.list)
     const machines = useSelector((global) => global.machines.list)
+    const users = useSelector((global) => global.users.list);
+    const inventory = useSelector((global) => global.inventory.list);
+
 
     const handleMachineSelection = (machine) => {
         console.log("Selected Machine:", machine);
@@ -38,6 +41,10 @@ const Dashboard = () => {
         });
         axios.get("http://127.0.0.1:8000/api/admin/machines").then(({ data }) => {
             const action = { type: "machines/loadMachines", payload: data };
+            dispatch(action);
+        });
+        axios.get("http://127.0.0.1:8000/api/admin/users").then(({ data }) => {
+            const action = { type: "users/loadUsers", payload: data };
             dispatch(action);
         });
     }, []);

@@ -86,3 +86,6 @@
   border: 1px solid rgb(181, 181, 181); 
   width: 400px;
 }
+.selected-machine{
+  color: #408751;
+}
