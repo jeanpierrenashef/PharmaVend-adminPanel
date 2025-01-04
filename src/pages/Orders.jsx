@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import OrderRow from "../components/OrderRow.jsx";
+import OrderRow from "../components/orders/OrderRow.jsx";
 import "../styles/Orders.css";
 import Navbar from "../components/NavBar.jsx";
-import DonutChart from "../components/DonutChart";
-import OrderStatusPieChart from "../components/OrderStatusPieChart.jsx";
+import DonutChart from "../components/charts/DonutChart.jsx";
+import OrderStatusPieChart from "../components/charts/OrderStatusPieChart.jsx";
 
 const Orders = () => {
     const dispatch = useDispatch();

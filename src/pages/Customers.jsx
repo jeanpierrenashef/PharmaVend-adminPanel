@@ -1,11 +1,11 @@
 import React from "react";
-import CustomerRow from "../components/CustomerRow";
+import CustomerRow from "../components/customers/CustomerRow";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import Navbar from "../components/NavBar";
 import "../styles/Customers.css"
-import CustomerPieChart from "../components/CustomerPieChart";
-import CustomerBarChartWithLine from "../components/CustomerBarChartWithLine";
+import CustomerPieChart from "../components/charts/CustomerPieChart";
+import CustomerBarChartWithLine from "../components/charts/CustomerBarChartWithLine";
 import { deleteUser, loadUsers } from "../redux/users/slice.js";
 import {loadTransactions} from "../redux/transactions/slice.js"
 import axios from "axios";

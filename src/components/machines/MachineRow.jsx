@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { updateMachine } from "../redux/machines/slice";
+import { updateMachine } from "../../redux/machines/slice";
 
 const MachineRow = ({ machine, onDelete , onEdit }) => {
     const dispatch = useDispatch();

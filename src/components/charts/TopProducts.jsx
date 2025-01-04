@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/TopProducts.css";
+import "../../styles/TopProducts.css";
 
 const TopProducts = ({ machineId, products, transactions }) => {
     if (!products.length || !transactions.length) {

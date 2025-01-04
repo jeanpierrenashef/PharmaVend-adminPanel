@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "../styles/MachineSelector.css";
+import "../../styles/MachineSelector.css"
 
 const MachineSelector = ({ onSelectMachine }) => {
     const [machines, setMachines] = useState([]);

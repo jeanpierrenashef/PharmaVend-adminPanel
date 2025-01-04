@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import * as d3 from "d3";
-import "../styles/DonutChart.css";
+import "../../styles/DonutChart.css";
 
 const DonutChart = ({ transactions }) => {
     const chartRef = useRef();

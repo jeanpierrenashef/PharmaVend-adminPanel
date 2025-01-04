@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import { addMachine, updateMachine } from "../redux/machines/slice";
-import "../styles/AddMachineForm.css";
+import { addMachine, updateMachine } from "../../redux/machines/slice";
+import "../../styles/AddMachineForm.css";
 import MapPicker from "./MapPicker";
 
 const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {

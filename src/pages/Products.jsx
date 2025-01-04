@@ -4,10 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { loadProducts, deleteProduct } from "../redux/products/slice";
 import Navbar from "../components/NavBar";
 import axios from "axios";
-import ProductContainer from "../components/ProductContainer";
+import ProductContainer from "../components/products/ProductContainer";
 import "../styles/Products.css"
 import Modal from "react-modal";
-import AddProductForm from "../components/AddProductForm";
+import AddProductForm from "../components/products/AddProductForm";
 
 const Products = () => {
     const dispatch = useDispatch();

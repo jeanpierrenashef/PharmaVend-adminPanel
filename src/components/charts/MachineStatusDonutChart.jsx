@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import * as d3 from "d3";
-import "../styles/DonutChart.css";
+import "../../styles/DonutChart.css";
 
 const MachineStatusDonutChart = ({ machineStatusData }) => {
     const chartRef = useRef();

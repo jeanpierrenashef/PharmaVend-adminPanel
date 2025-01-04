@@ -1,17 +1,16 @@
 import React from "react";
-import MachineSelector from "../components/MachineSelector";
+import MachineSelector from "../components/machines/MachineSelector";
 import Navbar from "../components/NavBar";
 import "../styles/Dashboard.css";
 import { useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import DonutChart from "../components/DonutChart";
-import TopProducts from "../components/TopProducts";
-import StackedBarChart from "../components/OrderStatusPieChart";
-import MachineStatusDonutChart from "../components/MachineStatusDonutChart";
-import MapComponent from "../components/MapComponent";
-import InventoryBarChart from "../components/InventoryBarChart";
-import TransactionBarChartWithLine from "../components/TransactionBarChartWithLine";
+import DonutChart from "../components/charts/DonutChart";
+import TopProducts from "../components/charts/TopProducts";
+import MachineStatusDonutChart from "../components/charts/MachineStatusDonutChart";
+import MapComponent from "../components/charts/MapComponent";
+import InventoryBarChart from "../components/charts/InventoryBarChart";
+import TransactionBarChartWithLine from "../components/charts/TransactionBarChartWithLine";
 
 const Dashboard = () => {
     const dispatch = useDispatch();

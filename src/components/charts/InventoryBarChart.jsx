@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
-import "../styles/InventoryBarChart.css";
+import "../../styles/InventoryBarChart.css";
 
 const InventoryBarChart = ({ machines, transactions, products }) => {
     const chartRef = useRef();

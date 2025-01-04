@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import * as d3 from "d3";
-import "../styles/OrderStatusPieChart.css";
+import "../../styles/OrderStatusPieChart.css";
 
 const OrderStatusPieChart = ({ transactions = [] }) => {
     const chartRef = useRef();

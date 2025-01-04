@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import MachineRow from "../components/MachineRow.jsx";
+import MachineRow from "../components/machines/MachineRow.jsx";
 import Navbar from "../components/NavBar.jsx";
 import "../styles/Machines.css";
-import MapComponent from "../components/MapComponent.jsx";
-import MachineStatusDonutChart from "../components/MachineStatusDonutChart.jsx";
-import AddMachineForm from "../components/AddMachineForm.jsx";
+import AddMachineForm from "../components/machines/AddMachineForm.jsx";
 import Modal from "react-modal";
-import { deleteMachine, updateMachine } from "../redux/machines/slice.js";
+import { deleteMachine} from "../redux/machines/slice.js";
 
 const Machines = () => {
     const dispatch = useDispatch();

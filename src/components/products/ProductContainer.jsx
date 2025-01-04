@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/ProductContainer.css";
+import "../../styles/ProductContainer.css";
 
 const ProductContainer = ({ product, onEdit, onDelete }) => {
 

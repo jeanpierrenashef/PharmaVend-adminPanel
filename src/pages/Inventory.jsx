@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import InventoryRow from "../components/InventoryRow";
+import InventoryRow from "../components/inventory/InventoryRow.jsx";
 import axios from "axios";
 import Navbar from "../components/NavBar";
 import "../styles/Inventory.css";
 import { updateQuantity } from "../redux/inventory/slice";
 import { loadProducts } from "../redux/products/slice.js";
-import TopProducts from "../components/TopProducts.jsx";
+import TopProducts from "../components/charts/TopProducts.jsx";
 
 const Inventory = () => {
     const dispatch = useDispatch();
