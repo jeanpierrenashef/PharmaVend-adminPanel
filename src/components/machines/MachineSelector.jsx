@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axiosInstance from "../../utils/axiosInstance";
 import "../../styles/MachineSelector.css"
 
 const MachineSelector = ({ onSelectMachine }) => {
@@ -11,7 +11,7 @@ const MachineSelector = ({ onSelectMachine }) => {
     const [showDropdown, setShowDropdown] = useState(false);
 
     useEffect(() => {
-        axios.get("http://127.0.0.1:8000/api/admin/machines").then(({ data }) => {
+        axiosInstance.get("/admin/machines").then(({ data }) => {
             setMachines(data);
         });
     }, []);

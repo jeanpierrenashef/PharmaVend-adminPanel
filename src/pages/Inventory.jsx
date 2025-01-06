@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import InventoryRow from "../components/inventory/InventoryRow.jsx";
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance.js";
 import Navbar from "../components/NavBar";
 import "../styles/Inventory.css";
 import { updateQuantity } from "../redux/inventory/slice";
@@ -24,13 +24,13 @@ const Inventory = () => {
 
     useEffect(() => {
         if (products.length === 0) {
-            axios.get("http://127.0.0.1:8000/api/admin/products").then(({ data }) => {
+            axiosInstance.get("/admin/products").then(({ data }) => {
                 dispatch(loadProducts(data));
             });
         }
 
         if (inventory.length === 0) {
-            axios.get("http://127.0.0.1:8000/api/admin/inventory").then(({ data }) => {
+            axiosInstance.get("/admin/inventory").then(({ data }) => {
                 const action = { type: "inventory/loadInventory", payload: data };
                 dispatch(action);
             });
@@ -72,7 +72,7 @@ const Inventory = () => {
         dispatch(updateQuantity(payload));
 
         try {
-            await axios.post("http://127.0.0.1:8000/api/admin/update_inventory", {
+            await axiosInstance.post("/admin/update_inventory", {
                 machine_id: selectedMachine.id,
                 product_id: productId,
                 add_quantity: increment,

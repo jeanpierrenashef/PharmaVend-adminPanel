@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import axiosInstance from "../../utils/axiosInstance";
 import { useDispatch } from "react-redux";
 import { updateMachine } from "../../redux/machines/slice";
 
@@ -7,8 +7,8 @@ const MachineRow = ({ machine, onDelete , onEdit }) => {
     const dispatch = useDispatch();
     const handleToggleStatus = async () => {
         try {
-            const response = await axios.post(
-                `http://127.0.0.1:8000/api/admin/machines/toggle_status/${machine.id}`
+            const response = await axiosInstance.post(
+                `/machines/toggle_status/${machine.id}`
             );
             dispatch(updateMachine(response.data));
         } catch (error) {

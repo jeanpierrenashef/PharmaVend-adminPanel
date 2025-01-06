@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { loadProducts, deleteProduct } from "../redux/products/slice";
 import Navbar from "../components/NavBar";
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance";
 import ProductContainer from "../components/products/ProductContainer";
 import "../styles/Products.css"
 import Modal from "react-modal";
@@ -27,7 +27,7 @@ const Products = () => {
 
     useEffect(()=>{
         if(shouldFetchProducts || products.length === 0){
-            axios.get("http://127.0.0.1:8000/api/admin/products").then(({ data }) => {
+            axiosInstance.get("admin/products").then(({ data }) => {
                 const action = { type: "products/loadProducts", payload: data };
                 dispatch(action);
                 setShouldFetchProducts(false); 
@@ -37,7 +37,7 @@ const Products = () => {
 
     const handleDelete = async (id) => {
         try{
-            await axios.delete(`http://127.0.0.1:8000/api/admin/products/${id}`);
+            await axiosInstance.delete(`admin/products/${id}`);
             dispatch(deleteProduct(id));
             setShowConfirmation(false);
         }catch (e) {

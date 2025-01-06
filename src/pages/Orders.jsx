@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance.js";
 import OrderRow from "../components/orders/OrderRow.jsx";
 import "../styles/Orders.css";
 import Navbar from "../components/NavBar.jsx";
@@ -27,19 +27,19 @@ const Orders = () => {
 
     useEffect(() => {
         if(transactions.length === 0) {
-            axios.get("http://127.0.0.1:8000/api/admin/transactions").then(({ data }) => {
+            axiosInstance.get("/admin/transactions").then(({ data }) => {
                 const action = { type: "transactions/loadTransactions", payload: data };
                 dispatch(action);
             });
         }
         if(products.length === 0){
-            axios.get("http://127.0.0.1:8000/api/admin/products").then(({ data }) => {
+            axiosInstance.get("/admin/products").then(({ data }) => {
                 const action = { type: "products/loadProducts", payload: data };
                 dispatch(action);
             });
         }
         if(users.length === 0){
-            axios.get("http://127.0.0.1:8000/api/admin/users").then(({ data }) => {
+            axiosInstance.get("/admin/users").then(({ data }) => {
                 const action = { type: "users/loadUsers", payload: data };
                 dispatch(action);
             });

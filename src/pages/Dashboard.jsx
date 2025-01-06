@@ -3,7 +3,7 @@ import MachineSelector from "../components/machines/MachineSelector";
 import Navbar from "../components/NavBar";
 import "../styles/Dashboard.css";
 import { useEffect } from "react";
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance";
 import { useDispatch, useSelector } from "react-redux";
 import DonutChart from "../components/charts/DonutChart";
 import TopProducts from "../components/charts/TopProducts";
@@ -26,23 +26,23 @@ const Dashboard = () => {
     };
 
     useEffect(() => {
-        axios.get("http://127.0.0.1:8000/api/admin/transactions").then(({ data }) => {
+        axiosInstance.get("/admin/transactions").then(({ data }) => {
             const action = { type: "transactions/loadTransactions", payload: data };
             dispatch(action);
         });
-        axios.get("http://127.0.0.1:8000/api/admin/products").then(({ data }) => {
+        axiosInstance.get("/admin/products").then(({ data }) => {
             const action = { type: "products/loadProducts", payload: data };
             dispatch(action);
         });
-        axios.get("http://127.0.0.1:8000/api/admin/inventory").then(({ data }) => {
+        axiosInstance.get("/admin/inventory").then(({ data }) => {
             const action = { type: "inventory/loadInventory", payload: data };
             dispatch(action);
         });
-        axios.get("http://127.0.0.1:8000/api/admin/machines").then(({ data }) => {
+        axiosInstance.get("/admin/machines").then(({ data }) => {
             const action = { type: "machines/loadMachines", payload: data };
             dispatch(action);
         });
-        axios.get("http://127.0.0.1:8000/api/admin/users").then(({ data }) => {
+        axiosInstance.get("/admin/users").then(({ data }) => {
             const action = { type: "users/loadUsers", payload: data };
             dispatch(action);
         });

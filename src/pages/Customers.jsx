@@ -8,7 +8,7 @@ import CustomerPieChart from "../components/charts/CustomerPieChart";
 import CustomerBarChartWithLine from "../components/charts/CustomerBarChartWithLine";
 import { deleteUser, loadUsers } from "../redux/users/slice.js";
 import {loadTransactions} from "../redux/transactions/slice.js"
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance.js";
 
 const Customers = () => {
 
@@ -24,13 +24,13 @@ const Customers = () => {
     
     useEffect(() => {
         if (customers.length === 0) {
-            axios.get("http://127.0.0.1:8000/api/admin/users").then(({ data }) => {
+            axiosInstance.get("/admin/users").then(({ data }) => {
                 dispatch(loadUsers(data));
             });
         }
 
         if (transactions.length === 0) {
-            axios.get("http://127.0.0.1:8000/api/admin/transactions").then(({ data }) => {
+            axiosInstance.get("/admin/transactions").then(({ data }) => {
                 dispatch(loadTransactions(data));
             });
         }
@@ -46,7 +46,7 @@ const Customers = () => {
 
     const handleDelete = async (id) => {
     try {
-        const response = await axios.delete(`http://127.0.0.1:8000/api/admin/users/${id}`);
+        const response = await axiosInstance.delete(`/admin/users/${id}`);
         console.log("API Response:", response.data);
         dispatch(deleteUser(id));
         setShowConfirmation(false);

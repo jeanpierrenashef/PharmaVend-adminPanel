@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance.js";
 import MachineRow from "../components/machines/MachineRow.jsx";
 import Navbar from "../components/NavBar.jsx";
 import "../styles/Machines.css";
@@ -24,7 +24,7 @@ const Machines = () => {
 
     useEffect(() => {
         if (shouldFetchMachines || machines.length === 0) {
-            axios.get("http://127.0.0.1:8000/api/admin/machines").then(({ data }) => {
+            axiosInstance.get("/admin/machines").then(({ data }) => {
                 const action = { type: "machines/loadMachines", payload: data };
                 dispatch(action);
                 setShouldFetchMachines(false); 
@@ -46,7 +46,7 @@ const Machines = () => {
 
     const handleDelete = async (id) => {
         try{
-            await axios.delete(`http://127.0.0.1:8000/api/admin/machines/${id}`);
+            await axiosInstance.delete(`/admin/machines/${id}`);
             dispatch(deleteMachine(id));
             setShowConfirmation(false);
         }catch (e) {

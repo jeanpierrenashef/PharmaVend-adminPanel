@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import axios from "axios";
+import axiosInstance from "../../utils/axiosInstance";
 import { addMachine, updateMachine } from "../../redux/machines/slice";
 import "../../styles/AddMachineForm.css";
 import MapPicker from "./MapPicker";
@@ -26,14 +26,14 @@ const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
         e.preventDefault();
         try {
             if (initialData) {
-                const response = await axios.put(
-                    `http://127.0.0.1:8000/api/admin/machines/${formData.id}`,
+                const response = await axiosInstance.put(
+                    `/machines/${formData.id}`,
                     formData
                 );
                 dispatch(updateMachine(response.data));
             } else {
-                const response = await axios.post(
-                    "http://127.0.0.1:8000/api/admin/add_machine",
+                const response = await axiosInstance.post(
+                    "/add_machine",
                     formData
                 );
                 dispatch(addMachine(response.data));

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import axios from "axios";
+import axiosInstance from "../../utils/axiosInstance";
 import "../../styles/AddMachineForm.css";
 import { updateProduct, addProduct } from "../../redux/products/slice";
 import "../../styles/AddProductForm.css"
@@ -39,14 +39,14 @@ const AddProductForm = ({ setShouldFetchProducts , initialData, onSubmit}) => {
         e.preventDefault();
         try {
             if (initialData) {
-                const response = await axios.put(
-                    `http://127.0.0.1:8000/api/admin/products/${formData.id}`,
+                const response = await axiosInstance.put(
+                    `/admin/products/${formData.id}`,
                     formData
                 );
                 dispatch(updateProduct(response.data));
             } else {
-                const response = await axios.post(
-                    "http://127.0.0.1:8000/api/admin/add_product",
+                const response = await axiosInstance.post(
+                    "/admin/add_product",
                     formData
                 );
                 dispatch(addProduct(response.data));
