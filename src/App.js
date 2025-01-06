@@ -8,6 +8,7 @@ import Customers from './pages/Customers';
 import Inventory from './pages/Inventory';
 import Products from './pages/Products';
 import Dashboard from './pages/Dashboard'
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         <BrowserRouter>
           
             <Routes>
-              <Route path="/" element={<Dashboard />} />
+              <Route path="/" element={<Login />} />
               <Route path="/orders" element={<Orders />} />
               <Route path="/machines" element={<Machines />} />
               <Route path="/customers" element={<Customers />} />
