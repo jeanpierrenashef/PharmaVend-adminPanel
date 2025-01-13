@@ -27,13 +27,13 @@ const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
         try {
             if (initialData) {
                 const response = await axiosInstance.put(
-                    `/machines/${formData.id}`,
+                    `/admin/machines/${formData.id}`,
                     formData
                 );
                 dispatch(updateMachine(response.data));
             } else {
                 const response = await axiosInstance.post(
-                    "/add_machine",
+                    "/admin/add_machine",
                     formData
                 );
                 dispatch(addMachine(response.data));
