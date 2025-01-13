@@ -74,7 +74,7 @@ const Dashboard = () => {
             <div className="dashboard-content">
                 <div className="top-section-content">
                     <div className="welcome-section">
-                        <h1>Welcome, John Smith!</h1>
+                        <h1>Welcome Admin!</h1>
                         <p>
                             On the right, you can select the machine you want to see statistics for. Below, you'll find the 
                             total statistics for all machines and the entire system.
