@@ -47,13 +47,22 @@
 
 .navbar-footer {
   margin-top: auto;
+  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .navbar-footer a {
-  color: #c7c7c7;
+  width: 100%;
+  display: flex;
+  justify-content: start;
   text-decoration: none;
-  padding: 10px 15px;
+  color: #c7c7c7;
+  padding: 5px;
+  gap: 20px;
   border-radius: 8px;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 .navbar-footer a:hover {

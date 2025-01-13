@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import "../styles/Navbar.css";
 
 const Navbar = () => {
+
   return (
     <div className="navbar">
       <div className="navbar-header">
@@ -47,11 +48,11 @@ const Navbar = () => {
         </NavLink>
       </nav>
       <div className="navbar-footer">
-        <NavLink 
-          to="/help" 
+      <NavLink 
+          to="/" 
           className={({ isActive }) => (isActive ? "active-link" : "")}>
-          <img src="/icons/help.png" className="nav-icon" />
-          Help & Support
+          <img src={require("../styles/assets/logout.png")} className="nav-icon" height={20}/>
+          Logout
         </NavLink>
       </div>
     </div>
