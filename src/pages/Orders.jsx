@@ -82,8 +82,10 @@ const Orders = () => {
             <Navbar />
             <div className="content">
                 <div className="main-content">
-                    <h1>Orders</h1>
-                    <h2>Machine: <span className="selected-machine">{selectedMachineLocation}</span></h2>
+                    <div className ="title-content">
+                        <h1>Orders</h1>
+                        <h2>Machine: <span className="selected-machine">{selectedMachineLocation}</span></h2>
+                    </div>
                     <div className="filters">
                         <div className="filter-dropdown filter-dropdown-after">
                             <select

@@ -75,8 +75,8 @@
   transition: all 0.3s ease;
   cursor: pointer;
   position: relative; 
-  text-align: left; 
-  width: 130px;
+  text-align: right; 
+  width: 170px;
 }
 
 .open-modal-button:hover {
@@ -84,10 +84,10 @@
   border-color: #ccc;
 }
 
-.open-modal-button:after {
+.open-modal-button::before {
   content: "+";
   position: absolute;
-  right: 12px;
+  right: 140px;
   top: 50%;
   transform: translateY(-50%);
   font-size: 16px;

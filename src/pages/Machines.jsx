@@ -72,12 +72,16 @@ const Machines = () => {
             <Navbar />
             <div className="content">
                 <div className="main-content">
-                    <h1>Machines</h1>
-                    <div className="button-container">
+                    <div className="title-content">
+                        <h1>All Machines</h1>
+                        <div className="button-container">
                         <button className="open-modal-button" onClick={() => setIsModalOpen(true)}>
-                            Add Machine
+                            Add New Machine
                         </button>
                     </div>
+                    </div>
+                    
+
                     <table>
                         <thead>
                             <tr>

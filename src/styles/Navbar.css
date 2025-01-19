@@ -69,3 +69,7 @@
   background-color: #333;
   color: #fff;
 }
+.active-link {
+  color: #fff;
+  background-color: #333; /* Same as hover */
+}

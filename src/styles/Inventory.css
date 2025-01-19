@@ -22,8 +22,8 @@
 
 .main-content h1 {
     text-align: start;
-    font-size: 36px;
-    margin: 10px;
+    font-size: 42   px;
+    margin: 10px 0;
     font-weight: bold;
 }
 
@@ -157,7 +157,7 @@
     color: #333;
     border: 1px solid #ddd;
     border-radius: 20px;
-    background-color: #cccccc;
+    background-color: transparent;
     appearance: none;
     outline: none;
     transition: all 0.3s ease;
@@ -165,7 +165,7 @@
 }
 
 .pagination-controls button:disabled {
-    background-color: #909090;
+    background-color: #cccccc;
     cursor: not-allowed;
 }
 
@@ -191,11 +191,21 @@
     margin: 20px 0;
     display: flex;
     justify-content: center;
+    align-items: center; 
+    position: relative; 
+}
+
+.search-bar .search-icon {
+    position: absolute;
+    left: 10px;
+    font-size: 20px; 
+    color: #aaa; 
+    pointer-events: none; 
 }
 
 .search-bar input {
     width: 300px;
-    padding: 10px;
+    padding: 10px 10px 10px 40px; 
     font-size: 16px;
     border: 1px solid #ddd;
     border-radius: 20px;
@@ -205,5 +215,5 @@
 
 .search-bar input:focus {
     border-color: #408751;
-    
 }
+

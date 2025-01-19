@@ -77,7 +77,10 @@ const Customers = () => {
             <Navbar />
             <div className="content">
                 <div className="main-content">
-                    <h1>Customers</h1>
+                    <div className="title-content">
+                        <h1>Customers</h1>
+                    </div>
+                    
                     <table>
                         <thead>
                             <tr>

@@ -87,9 +87,12 @@ const Inventory = () => {
             <Navbar />
             <div className="content">
                 <div className="main-content">
-                    <h1>Inventory Management</h1>
-                    <h2>Machine:<span className="selected-machine">{selectedMachine ? ` ${selectedMachineLocation}` : "Loading..."}</span></h2>
+                    <div className="title-content">
+                        <h1>Inventory Management</h1>
+                        <h2>Machine:<span className="selected-machine">{selectedMachine ? ` ${selectedMachineLocation}` : "Loading..."}</span></h2>
+                    </div>
                     <div className="search-bar">
+                        <i className="mdi mdi-magnify search-icon"></i>
                         <input
                             type="text"
                             placeholder="Search for medicine..."

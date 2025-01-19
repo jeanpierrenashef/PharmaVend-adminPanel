@@ -82,14 +82,19 @@ const Products = () => {
     return (
         <div className="products-page">
             <Navbar />
-            <div className="products-container">
-                <h1>Products</h1>
-                <div className="button-container">
+            <div className="main-content">
+                <div className="title-content">
+                    <h1>All Products</h1>
+                    <div className="button-container">
                     <button className="open-modal-button" onClick={() => setIsModalOpen(true)}>
-                        Add Product
+                        Add New Product
                     </button>
                 </div>
+                </div>
+                
+
                 <div className="search-bar">
+                    <i className="mdi mdi-magnify search-icon"></i>
                     <input
                         type="text"
                         placeholder="Search for medicine..."
