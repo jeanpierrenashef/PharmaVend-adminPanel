@@ -1,21 +1,22 @@
 .navbar {
   width: 200px;
-  height: 100vh; /* Full viewport height */
+  height: 94%; 
   background-color: #1c1e21;
   color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 20px;
-  position: fixed; /* Fixed on the left */
+  position: fixed; 
   top: 0;
   left: 0;
-  overflow-y: auto; /* Scrollable if needed */
+  overflow-y: auto; 
+  padding-bottom: 70px;
 }
 
-/* Push the main content to the right of the navbar */
+
 .main-content {
-  margin-left: 200px; /* Equal to the width of the navbar */
+  margin-left: 200px;
   padding: 20px;
 }
 
