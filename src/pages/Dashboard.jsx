@@ -71,58 +71,61 @@ const Dashboard = () => {
     return (
         <div className="dashboard-page">
             <Navbar />
-            <div className="dashboard-content">
-                <div className="top-section-content">
-                    <div className="welcome-section">
-                        <h1>Welcome Admin!</h1>
-                        <p>
-                            On the right, you can select the machine you want to see statistics for. Below, you'll find the 
-                            total statistics for all machines and the entire system.
-                        </p>
-                    </div>
-                    <div>
-                        <MachineSelector onSelectMachine={handleMachineSelection} />
-                    </div>
-                </div>
-                <div className="charts-section">
-                    <div className="sectioning">
-                        <div className="receipt-goods-chart">
-                            <h2>Receipt of Goods</h2>
-                            <DonutChart transactions={transactions} />
+            <div className="content">
+                <div className="dashboard-content">
+                    <div className="top-section-content">
+                        <div className="welcome-section">
+                            <h1>Welcome Admin!</h1>
+                            <p>
+                                On the right, you can select the machine you want to see statistics for. Below, you'll find the 
+                                total statistics for all machines and the entire system.
+                            </p>
                         </div>
+                        <div>
+                            <MachineSelector onSelectMachine={handleMachineSelection} />
+                        </div>
+                    </div>
+                    <div className="charts-section">
+                        <div className="sectioning">
+                            <div className="receipt-goods-chart">
+                                <h2>Receipt of Goods</h2>
+                                <DonutChart transactions={transactions} />
+                            </div>
 
-                        <div className="chart">
-                            <h2>Total Transactions in Time</h2>
-                            <TransactionBarChartWithLine transactions={transactions}/>
+                            <div className="chart">
+                                <h2>Total Transactions in Time</h2>
+                                <TransactionBarChartWithLine transactions={transactions}/>
+                            </div>
+                            
                         </div>
-                        
-                    </div>
-                    <div className="sectioning">
-                        <div className="chart">
-                            <h2>Machine Map</h2>
-                            <MapComponent machines={machines} />
+                        <div className="sectioning">
+                            <div className="chart">
+                                <h2>Machine Map</h2>
+                                <MapComponent machines={machines} />
+                            </div>
+                            <div className="chart">
+                                <h2>Machines Stats</h2>
+                                <MachineStatusDonutChart machineStatusData={machineStatusData} />
+                            </div>
                         </div>
-                        <div className="chart">
-                            <h2>Machines Stats</h2>
-                            <MachineStatusDonutChart machineStatusData={machineStatusData} />
-                        </div>
-                    </div>
-                    <div className="sectioning">
-                        <div className="top-products-section-dash">
-                            <h2>Top 5 Most Sold Products of All Time</h2>
-                            <TopProducts
-                                products={products}
-                                transactions={transactions}
-                            />
-                        </div>
+                        <div className="sectioning">
+                            <div className="top-products-section-dash">
+                                <h2>Top 5 Most Sold Products of All Time</h2>
+                                <TopProducts
+                                    products={products}
+                                    transactions={transactions}
+                                />
+                            </div>
 
-                        <div className="chart">
-                            <h2>Total Sales Per Machine</h2>
-                            <InventoryBarChart machines={machines} transactions={transactions} products={products}/>
+                            <div className="chart">
+                                <h2>Total Sales Per Machine</h2>
+                                <InventoryBarChart machines={machines} transactions={transactions} products={products}/>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            
         </div>
     );
 };

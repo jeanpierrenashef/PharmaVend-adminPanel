@@ -1,22 +1,19 @@
 .inventory-page {
     display: flex;
-    height: 100%;
     min-height: 100vh;
-    overflow-y: auto;
     background-color: #f8f9fa;
-    width: 100%;
-}
-.content{
-    width: 100%;
-}
+  }
+  .content {
+    margin-left: 240px; 
+    width: calc(100% - 200px);
+    padding: 0 10px;
+    overflow-y: auto; 
+  }
 
-.navbar {
-    flex-shrink: 0;
-}
 
 .main-content {
     flex-grow: 1;
-    padding: 20px;
+    padding: 0 20px;
     overflow-y: auto;
 }
 
@@ -205,7 +202,7 @@
 
 .search-bar input {
     width: 300px;
-    padding: 10px 10px 10px 40px; 
+    padding: 10px 10px 10px 40px; /* Add left padding to avoid overlapping with the icon */
     font-size: 16px;
     border: 1px solid #ddd;
     border-radius: 20px;

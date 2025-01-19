@@ -82,72 +82,74 @@ const Products = () => {
     return (
         <div className="products-page">
             <Navbar />
-            <div className="main-content">
-                <div className="title-content">
-                    <h1>All Products</h1>
-                    <div className="button-container">
-                    <button className="open-modal-button" onClick={() => setIsModalOpen(true)}>
-                        Add New Product
-                    </button>
-                </div>
-                </div>
-                
+            <div className="content">
+                <div className="main-content">
+                    <div className="title-content">
+                        <h1>All Products</h1>
+                        <div className="button-container">
+                        <button className="open-modal-button" onClick={() => setIsModalOpen(true)}>
+                            Add New Product
+                        </button>
+                    </div>
+                    </div>
+                    
 
-                <div className="search-bar">
-                    <i className="mdi mdi-magnify search-icon"></i>
-                    <input
-                        type="text"
-                        placeholder="Search for medicine..."
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                    />
+                    <div className="search-bar">
+                        <i className="mdi mdi-magnify search-icon"></i>
+                        <input
+                            type="text"
+                            placeholder="Search for medicine..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                        />
+                    </div>
+                    <div className="product-container">
+                        {paginatedInventory.map((product) => (
+                            <ProductContainer key={product.id} product={product} onEdit={handleEdit} onDelete={() => openConfirmation(product)}/>
+                        ))}
+                    </div>
+                    <div className="pagination-controls">
+                        <button onClick={handlePrevPage} disabled={currentPage === 1}> 
+                            Previous
+                        </button>
+                        <span>
+                            Page {currentPage} of {totalPages}
+                        </span>
+                        <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+                            Next
+                        </button>
+                    </div>
+                    <Modal
+                        isOpen={isModalOpen}
+                        onRequestClose={handleCloseModal}
+                        className="modal-content"
+                        overlayClassName="modal-overlay"
+                        ariaHideApp={false}
+                    >
+                        <button className="close-modal-button" onClick={handleCloseModal}>
+                            ×
+                        </button>
+                        <AddProductForm
+                            setShouldFetchProducts={setShouldFetchProducts}
+                            initialData={editData}
+                        />
+                    </Modal>
                 </div>
-                <div className="product-container">
-                    {paginatedInventory.map((product) => (
-                        <ProductContainer key={product.id} product={product} onEdit={handleEdit} onDelete={() => openConfirmation(product)}/>
-                    ))}
-                </div>
-                <div className="pagination-controls">
-                    <button onClick={handlePrevPage} disabled={currentPage === 1}> 
-                        Previous
-                    </button>
-                    <span>
-                        Page {currentPage} of {totalPages}
-                    </span>
-                    <button onClick={handleNextPage} disabled={currentPage === totalPages}>
-                        Next
-                    </button>
-                </div>
-                <Modal
-                    isOpen={isModalOpen}
-                    onRequestClose={handleCloseModal}
-                    className="modal-content"
-                    overlayClassName="modal-overlay"
-                    ariaHideApp={false}
-                >
-                    <button className="close-modal-button" onClick={handleCloseModal}>
-                        ×
-                    </button>
-                    <AddProductForm
-                        setShouldFetchProducts={setShouldFetchProducts}
-                        initialData={editData}
-                    />
-                </Modal>
-            </div>
-            {showConfirmation && (
-            <div className="confirmation-modal">
-                <div className="modal-content">
-                    <p>
-                        Are you sure you want to delete product{" "}
-                        <strong>{productToDelete.name}</strong>?
-                    </p>
-                    <div className="modal-actions">
-                        <button onClick={() => setShowConfirmation(false)}>Cancel</button>
-                        <button onClick={() => handleDelete(productToDelete.id)}>Proceed</button>
+                {showConfirmation && (
+                <div className="confirmation-modal">
+                    <div className="modal-content">
+                        <p>
+                            Are you sure you want to delete product{" "}
+                            <strong>{productToDelete.name}</strong>?
+                        </p>
+                        <div className="modal-actions">
+                            <button onClick={() => setShowConfirmation(false)}>Cancel</button>
+                            <button onClick={() => handleDelete(productToDelete.id)}>Proceed</button>
+                        </div>
                     </div>
                 </div>
+                )}
             </div>
-            )}
         </div>
     );
 }
