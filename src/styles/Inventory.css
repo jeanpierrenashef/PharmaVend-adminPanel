@@ -8,6 +8,7 @@
     width: calc(100% - 200px);
     padding: 0 10px;
     overflow-y: auto; 
+    height: 100vh;
   }
 
 
@@ -98,7 +99,7 @@
     font-size: 14px;
     text-align: left;
     width: 100px;
-    padding: 6px 16px;
+    padding: 7px 16px;
 }
 .actions{
     gap: 40px;
@@ -202,7 +203,7 @@
 
 .search-bar input {
     width: 300px;
-    padding: 10px 10px 10px 40px; /* Add left padding to avoid overlapping with the icon */
+    padding: 10px 10px 10px 40px;
     font-size: 16px;
     border: 1px solid #ddd;
     border-radius: 20px;

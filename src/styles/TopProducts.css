@@ -16,7 +16,9 @@
     width: 450px;
     background: transparent;
     border-radius: 8px;
-    padding: 20px;
+    padding: 20px 50px;
+    background-color: white;
+    border-radius: 50px;
     
 
 }

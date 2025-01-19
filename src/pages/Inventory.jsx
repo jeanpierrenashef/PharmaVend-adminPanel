@@ -22,6 +22,8 @@ const Inventory = () => {
     const selectedMachineId = selectedMachine?.id;
     const selectedMachineLocation = selectedMachine?.location;
 
+    const [view, setView] = useState("data"); 
+
     useEffect(() => {
         if (products.length === 0) {
             axiosInstance.get("/admin/products").then(({ data }) => {
@@ -90,56 +92,74 @@ const Inventory = () => {
                     <div className="title-content">
                         <h1>Inventory Management</h1>
                         <h2>Machine:<span className="selected-machine">{selectedMachine ? ` ${selectedMachineLocation}` : "Loading..."}</span></h2>
+                        <div className="view-selector">
+                            <label htmlFor="view">Select View:</label>
+                            <select
+                                id="view"
+                                value={view}
+                                onChange={(e) => setView(e.target.value)}
+                            >
+                                <option value="data">Data</option>
+                                <option value="insights">Insights</option>
+                            </select>
+                        </div>
                     </div>
-                    <div className="search-bar">
-                        <i className="mdi mdi-magnify search-icon"></i>
-                        <input
-                            type="text"
-                            placeholder="Search for medicine..."
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                        />
-                    </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Product ID</th>
-                                <th>Product Name</th>
-                                <th>Quantity</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {paginatedInventory.map((item) => (
-                                <InventoryRow
-                                    key={item.product_id}
-                                    product={item}
-                                    quantity={item.quantity}
-                                    onUpdateQuantity={handleUpdateQuantity}
+                    {view === "data" && (
+                        <>
+                        <div className="search-bar">
+                            <i className="mdi mdi-magnify search-icon"></i>
+                            <input
+                                type="text"
+                                placeholder="Search for medicine..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                            />
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product ID</th>
+                                    <th>Product Name</th>
+                                    <th>Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {paginatedInventory.map((item) => (
+                                    <InventoryRow
+                                        key={item.product_id}
+                                        product={item}
+                                        quantity={item.quantity}
+                                        onUpdateQuantity={handleUpdateQuantity}
+                                    />
+                                ))}
+                            </tbody>
+                        </table>
+                        <div className="pagination-controls">
+                            <button onClick={handlePrevPage} disabled={currentPage === 1}>
+                                Previous
+                            </button>
+                            <span>
+                                Page {currentPage} of {totalPages}
+                            </span>
+                            <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+                                Next
+                            </button>
+                        </div>
+                        </>
+                    )}
+                    
+                    {view === "insights" && (
+                        <div className="data">
+                            <div className="top-products-section">
+                                <h2>Top 3 Most Sold Products</h2>
+                                <TopProducts
+                                    machineId={selectedMachineId}
+                                    products={products}
+                                    transactions={transactions}
                                 />
-                            ))}
-                        </tbody>
-                    </table>
-                    <div className="pagination-controls">
-                        <button onClick={handlePrevPage} disabled={currentPage === 1}>
-                            Previous
-                        </button>
-                        <span>
-                            Page {currentPage} of {totalPages}
-                        </span>
-                        <button onClick={handleNextPage} disabled={currentPage === totalPages}>
-                            Next
-                        </button>
-                    </div>
-                </div>
-                <div className="data">
-                    <div className="top-products-section">
-                        <h2>Top 3 Most Sold Products</h2>
-                        <TopProducts
-                            machineId={selectedMachineId}
-                            products={products}
-                            transactions={transactions}
-                        />
-                    </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

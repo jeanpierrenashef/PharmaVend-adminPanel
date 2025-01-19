@@ -14,12 +14,16 @@
     flex-direction: row;
     flex-grow: 1;
     gap: 60px;
-    padding: 20px;
     overflow-y: auto;
     overflow: visible;
     display: flex;
     justify-content: space-around;
     align-items: flex-start; 
+    width: 80vw;
+    background-color: white;
+    height: auto;
+    border-radius: 50px;
+
 }
 .separator-line {
     border: 1px solid rgb(181, 181, 181); 

@@ -21,6 +21,8 @@ const Customers = () => {
 
     const [showConfirmation, setShowConfirmation] = useState(false); 
     const [customerToDelete, setCustomerToDelete] = useState(null);
+
+    const [view, setView] = useState("data"); 
     
     useEffect(() => {
         if (customers.length === 0) {
@@ -79,50 +81,65 @@ const Customers = () => {
                 <div className="main-content">
                     <div className="title-content">
                         <h1>Customers</h1>
+                        <div className="view-selector">
+                            <label htmlFor="view">Select View:</label>
+                            <select
+                                id="view"
+                                value={view}
+                                onChange={(e) => setView(e.target.value)}
+                            >
+                                <option value="data">Data</option>
+                                <option value="insights">Insights</option>
+                            </select>
+                        </div>
                     </div>
-                    
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Total Orders</th>
-                                <th>Created At</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {paginatedInventory.map((customer) => (
-                                <CustomerRow key={customer.id} customer={customer} onDelete={() => openConfirmation(customer)}/>
-                            ))}
-                        </tbody>
-                    </table>
-                    <div className="pagination-controls">
-                        <button onClick={handlePrevPage} disabled={currentPage === 1}> 
-                            Previous
-                        </button>
-                        <span>
-                            Page {currentPage} of {totalPages}
-                        </span>
-                        <button onClick={handleNextPage} disabled={currentPage === totalPages}>
-                            Next
-                        </button>
+                    {view === "data" && (
+                        <>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Total Orders</th>
+                                    <th>Created At</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {paginatedInventory.map((customer) => (
+                                    <CustomerRow key={customer.id} customer={customer} onDelete={() => openConfirmation(customer)}/>
+                                ))}
+                            </tbody>
+                        </table>
+                        <div className="pagination-controls">
+                            <button onClick={handlePrevPage} disabled={currentPage === 1}> 
+                                Previous
+                            </button>
+                            <span>
+                                Page {currentPage} of {totalPages}
+                            </span>
+                            <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+                                Next
+                            </button>
+                        </div>
+                        </>
+                    )}
+                    {view === "insights" && (
+                    <div>
+                        <div className="charts">
+                            <div className="chart">
+                                <h2>Engagement of customers</h2>
+                                <CustomerPieChart customers={customers} transactions={transactions}/>
+                            </div>    
+                            <div className="chart">
+                                <h2>Customer Growth</h2>
+                                <CustomerBarChartWithLine customers={customers} />
+                            </div>          
+                        </div>
                     </div>
+                    )}
                 </div>
-                <div>
-                    <div className="charts">
-                        <div className="chart">
-                            <h2>Engagement of customers</h2>
-                            <CustomerPieChart customers={customers} transactions={transactions}/>
-                        </div>    
-                        <div className="chart">
-                            <h2>Customer Growth</h2>
-                            <CustomerBarChartWithLine customers={customers} />
-                        </div>          
-                    </div>
-                </div>
-                    
             </div>
             {showConfirmation && (
                 <div className="confirmation-modal">
@@ -138,7 +155,6 @@ const Customers = () => {
                     </div>
                 </div>
             )}
-                
         </div>
     );
 }
