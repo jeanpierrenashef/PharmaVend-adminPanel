@@ -71,10 +71,10 @@ const AddProductForm = ({ setShouldFetchProducts , initialData, onSubmit}) => {
     };
 
     return (
-            <form onSubmit={handleSubmit} className="add-form">
+            <form onSubmit={handleSubmit} className="add-form-product">
             <h3>{initialData ? "Edit Product" : "Add New Product"}</h3>
             <div>
-                <label>Name:</label>
+                <label>Name</label>
                 <input
                     type="text"
                     name="name"
@@ -84,7 +84,7 @@ const AddProductForm = ({ setShouldFetchProducts , initialData, onSubmit}) => {
                 />
             </div>
             <div>
-                <label>Category:</label>
+                <label>Category</label>
                 <input
                     type="text"
                     name="category"
@@ -94,7 +94,7 @@ const AddProductForm = ({ setShouldFetchProducts , initialData, onSubmit}) => {
                 />
             </div>
             <div>
-                <label>Price:</label>
+                <label>Price</label>
                 <input
                     type="number"
                     step="0.1"
@@ -114,7 +114,7 @@ const AddProductForm = ({ setShouldFetchProducts , initialData, onSubmit}) => {
                 />
             </div>
             <div>
-                <label>Image:</label>
+                <label>Image</label>
                 <input type="file" accept="image/*" onChange={handleImageUpload} />
                 {imagePreview && (
                     <div className="image-preview">
@@ -122,7 +122,7 @@ const AddProductForm = ({ setShouldFetchProducts , initialData, onSubmit}) => {
                     </div>
                 )}
             </div>
-            <button type="submit" className="add-button">
+            <button type="submit" className="add-button-product">
                 {initialData ? "Update Product" : "Add Product"}
             </button>
         </form>

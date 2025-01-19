@@ -41,7 +41,7 @@ const OrderStatusPieChart = ({ transactions = [] }) => {
         const color = d3
             .scaleOrdinal()
             .domain(chartData.map((d) => d.status))
-            .range(["#408751", "#595959"]);
+            .range(["#20B573", "#595959"]);
 
         const pie = d3
             .pie()
@@ -85,7 +85,7 @@ const OrderStatusPieChart = ({ transactions = [] }) => {
                 <div className="legend-item">
                     <span
                         className="legend-box"
-                        style={{ backgroundColor: "#408751" }}
+                        style={{ backgroundColor: "#20B573" }}
                     ></span>
                     <div className="legend-text-group">
                         <span className="legend-text">{orderStatusData.Dispensed}</span>

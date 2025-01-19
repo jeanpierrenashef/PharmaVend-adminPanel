@@ -32,7 +32,7 @@ const DonutChart = ({ transactions }) => {
         const color = d3
         .scaleOrdinal()
         .domain(Object.keys(data))
-        .range(["#408751", "#595959"]);
+        .range(["#20B573", "#595959"]);
 
         const pie = d3
         .pie()

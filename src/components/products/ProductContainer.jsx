@@ -1,39 +1,63 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../styles/ProductContainer.css";
 
 const ProductContainer = ({ product, onEdit, onDelete }) => {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const toggleMenu = () => {
+        setIsMenuOpen((prev) => !prev);
+    };
 
     return (
         <div className="product-card">
-            <img
-                src={product.image_url || "https://via.placeholder.com/150"}
-                alt={product.name}
-                className="product-image"
-            />
-            <div className="product-details">
-                <div className="product-title">
-                    <h3>{product.name}</h3>
-                    <p>${product.price}</p>
-                </div>
-                <p>ID: {product.id}</p>
-                <p>Category: {product.category}</p>
-                <p>{product.description}</p>
-                
-            </div>
-            <div className="product-actions">
-                <button className="edit-button"
-                    onClick={() => onEdit(product)}
-                    title="Edit Product"
-                >
-                    <i className="mdi mdi-pencil"></i>
+        <div className="menu-container">
+            <button className="menu-button" onClick={toggleMenu}>
+                <i className="mdi mdi-dots-vertical"></i>
+            </button>
+            {isMenuOpen && (
+            <div className="dropdown-menu">
+                <button
+                    className="action-button edit-button"
+                    onClick={() => {
+                        onEdit(product);
+                        setIsMenuOpen(false);
+                    }}
+                    >
+                    <i className="mdi mdi-pencil-outline"></i>
                 </button>
-                <button className="delete-button"
-                    onClick={() => onDelete(product.id)}
-                    title="Delete Product"
-                >
-                    <i className="mdi mdi-delete"></i>
+                <button
+                    className="action-button delete-button"
+                    onClick={() => {
+                        onDelete(product.id);
+                        setIsMenuOpen(false);
+                    }}
+                    >
+                    <i className="mdi mdi-trash-can-outline"></i>
                 </button>
             </div>
+            )}
+        </div>
+
+        {/* Product image */}
+        <img
+            src={product.image_url || "https://via.placeholder.com/150"}
+            alt={product.name}
+            className="product-image"
+        />
+
+        {/* Product title */}
+        <div className="product-title">
+            <h3>{product.name}</h3>
+            <p>${product.price}</p>
+        </div>
+
+        {/* Product details */}
+        <div className="product-details">
+            <p>
+            <span className="category">Category:</span> {product.category}
+            </p>
+            <p>{product.description}</p>
+        </div>
         </div>
     );
 };

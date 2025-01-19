@@ -86,7 +86,7 @@ const InventoryBarChart = ({ machines, transactions, products }) => {
             .attr("y", (d) => yScaleLeft(d.totalSales))
             .attr("width", xScale.bandwidth() / 2)
             .attr("height", (d) => height - yScaleLeft(d.totalSales))
-            .attr("fill", "#408751");
+            .attr("fill", "#20B573");
 
         svg.selectAll(".bar-total-revenue")
             .data(machineSales)

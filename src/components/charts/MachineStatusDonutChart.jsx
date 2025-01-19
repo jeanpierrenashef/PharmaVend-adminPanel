@@ -24,7 +24,7 @@ const MachineStatusDonutChart = ({ machineStatusData }) => {
         const color = d3
             .scaleOrdinal()
             .domain(chartData.map(([key]) => key))
-            .range(["#408751", "#d9534f"]);
+            .range(["#20B573", "#d9534f"]);
 
         const pie = d3
             .pie()
@@ -77,7 +77,7 @@ const MachineStatusDonutChart = ({ machineStatusData }) => {
                 <div className="legend-item">
                     <span
                         className="legend-box"
-                        style={{ backgroundColor: "#408751" }}
+                        style={{ backgroundColor: "#20B573" }}
                     ></span>
                     <div className="legend-text-group">
                         <span className="legend-text">{machineStatusData.Active} Active</span>

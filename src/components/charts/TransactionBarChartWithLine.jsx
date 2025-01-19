@@ -103,7 +103,7 @@ const TransactionBarChartWithLine = ({ transactions }) => {
             .data(data)
             .join("rect")
             .attr("class", "bar")
-            .attr("fill", "#408751")
+            .attr("fill", "#20B573")
             .attr("x", (d) => xScale(d.date))
             .attr("y", (d) => yScale(d.totalRevenue))
             .attr("width", xScale.bandwidth())
