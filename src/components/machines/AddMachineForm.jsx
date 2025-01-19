@@ -84,7 +84,7 @@ const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
             <form onSubmit={handleSubmit} className="add-form">
                 <h3>{initialData ? "Edit Machine" : "Add New Machine"}</h3>
                 <div>
-                    <label>Location:</label>
+                    <label>Location</label>
                     <input
                         type="text"
                         name="location"
@@ -94,7 +94,7 @@ const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
                     />
                 </div>
                 <div>
-                    <label>Latitude:</label>
+                    <label>Latitude</label>
                     <input
                         type="number"
                         step="0.0001"
@@ -105,7 +105,7 @@ const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
                     />
                 </div>
                 <div>
-                    <label>Longitude:</label>
+                    <label>Longitude</label>
                     <input
                         type="number"
                         step="0.0001"
