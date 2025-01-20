@@ -1,0 +1,49 @@
+.donut-chart-legend {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .donut-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .donut-legend-box {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+  }
+  
+  .donut-legend-text-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  }
+  
+  .donut-legend-text {
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+  }
+  
+  .donut-legend-label {
+    font-size: 12px;
+    color: #666;
+    margin: 0;
+  }
+  
+
+svg {
+    display: block;
+    margin: auto;
+}
+
+.donut-chart-container svg {
+    max-width: 100%;
+    height: auto;
+}

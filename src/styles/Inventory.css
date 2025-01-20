@@ -1,0 +1,218 @@
+.inventory-page {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+  }
+  .content {
+    margin-left: 240px; 
+    width: calc(100% - 200px);
+    padding: 0 10px;
+    overflow-y: auto; 
+    height: 100vh;
+    overflow-x: hidden;
+  }
+
+
+.main-content {
+    flex-grow: 1;
+    padding: 0 20px;
+    overflow-y: auto;
+}
+
+.main-content h1 {
+    text-align: start;
+    font-size: 42   px;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+    justify-content: center;
+}
+.machine-navigation{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+}
+.main-content .machine-navigation button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: transparent;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.main-content .machine-navigation button:hover {
+    background-color: transparent;
+}
+
+.main-content .machine-navigation h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.main-content table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+.main-content table th,
+.main-content table td {
+    border: 1px solid #e0e0e0;
+    text-align: left;
+    padding: 12px 16px; 
+    font-size: 20px;
+}
+.main-content table tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.2s ease-in-out;
+}
+.main-content table thead {
+    background-color: #ffffff;
+    color: #000000;
+    text-align: center;
+}
+.main-content table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.main-content table thead th {
+    padding: 12px 16px;
+    font-weight: bold;
+    text-align: left;
+    color: #000000;
+
+}
+.main-content table tbody td {
+    color: #555;    
+    font-size: 14px;
+    text-align: left;
+    width: 100px;
+    padding: 7px 16px;
+}
+.actions{
+    gap: 40px;
+}
+.data{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.action-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 18px;
+    margin: 0 5px;
+    padding: 5px;
+    transition: color 0.2s ease-in-out;
+}
+
+.action-button:hover {
+    color: #0056b3;
+}
+
+.add-inv-button {
+    color: #28a745;
+}
+
+.add-inv-button:hover {
+    color: #218838;
+}
+
+.subtract-inv-button {
+    color: #dc3545;
+}
+
+.subtract-inv-button:hover {
+    color: #c82333;
+}
+.pagination-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+    width: 25%;
+}
+
+.pagination-controls button {
+    width: 90px;
+    padding: 8px 12px;
+    font-size: 14px;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    background-color: transparent;
+    appearance: none;
+    outline: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.pagination-controls button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.pagination-controls span {
+    font-size: 14px;
+    color: #333;
+}
+.quantity-controls {
+    display: flex;
+    align-items: center; 
+    gap: 8px; 
+    width: 100%; 
+}
+
+.quantity-value {
+    display: inline-block;
+    min-width: 20px; 
+    text-align: center; 
+    font-weight: 600;
+    font-size: 14px;
+}
+.search-bar {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    position: relative; 
+}
+
+.search-bar .search-icon {
+    position: absolute;
+    left: 10px;
+    font-size: 20px; 
+    color: #aaa; 
+    pointer-events: none; 
+}
+
+.search-bar input {
+    width: 300px;
+    padding: 10px 10px 10px 40px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-bar input:focus {
+    border-color: #408751;
+}
+

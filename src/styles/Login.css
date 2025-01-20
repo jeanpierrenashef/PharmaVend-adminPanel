@@ -1,0 +1,128 @@
+.back {
+    font-family: 'Arial', sans-serif;
+    background-color: #1d1f21; 
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.back::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background: #23B574;
+    border-radius: 50%;
+    animation: moveBackground 10s infinite ease-in-out;
+    z-index: -1; 
+}
+
+@keyframes moveBackground {
+    0% {
+        top: -100%;
+        left: -100%;
+    }
+    50% {
+        top: 50%;
+        left: 50%;
+    }
+    100% {
+        top: -100%;
+        left: -100%;
+    }
+}
+
+.auth-container {
+    background: #121416;
+    padding: 3rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    z-index: 1;
+    position: relative;
+}
+
+.auth-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #fff;
+    text-align: center;
+}
+.auth-form{
+    display: flex;
+    flex-direction: column;
+}
+.auth-form input {
+    padding: 0.8rem;
+    margin: 0.8rem 0;
+    border: 1px solid #444;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #212324;
+    color: #fff;
+}
+
+.auth-form input:focus {
+    border-color: #009345;
+    outline: none;
+    box-shadow: 0 0 5px rgba(58, 90, 64, 0.5);
+}
+
+.auth-form button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 0.8rem;
+    background-color:#00A99E;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.auth-form button:hover {
+    background-color: #29AAE3;
+}
+.auth-form h1{
+    color: white;
+}
+
+.auth-switch {
+    text-align: center;
+    margin-top: 1rem;
+    color: #aaa;
+}
+
+.auth-switch a {
+   color: #6a7c37;
+    text-decoration: none;
+}
+
+.auth-switch a:hover {
+    text-decoration: underline;
+}
+
+.auth-forgot-password {
+    text-align: center;
+    color: #aaa;
+    margin-top: 0.5rem;
+}
+
+.auth-forgot-password a {
+    color: #B6E43C;
+    text-decoration: none;
+}
+
+.auth-forgot-password a:hover {
+    text-decoration: underline;
+}
+
