@@ -4,6 +4,7 @@ import axiosInstance from "../../utils/axiosInstance";
 import { addMachine, updateMachine } from "../../redux/machines/slice";
 import "../../styles/AddMachineForm.css";
 import MapPicker from "./MapPicker";
+import googleInstance from "../../utils/googleInstance";
 
 const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
     const [formData, setFormData] = useState(initialData || {
@@ -45,7 +46,36 @@ const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
                 onSubmit(formData);
             }
         } catch (error) {
-            console.error("Error processing machine:", error);
+            console.error("Error", error);
+        }
+    };
+
+    const handleLocationResponse = async (latitude, longitude) => {
+        try {
+            const apiKey = process.env.REACT_APP_API_KEY;
+            const response = await googleInstance.get('', {
+                params: {
+                    latlng: `${latitude},${longitude}`,
+                    key: apiKey
+                }
+            });
+    
+            const results = response.data.results;
+            const addressComponents = results[0].address_components;
+            const plus_code = addressComponents.find(item => item.types.includes('plus_code'))?.long_name || '';
+            const admin_area_level_2 = addressComponents.find(item => item.types.includes('administrative_area_level_2'))?.long_name || '';
+            const admin_area_level_1 = addressComponents.find(item => item.types.includes('administrative_area_level_1'))?.long_name || '';
+            const formatted_address = `${admin_area_level_2}, ${admin_area_level_1}, ${plus_code}`;
+    
+            setFormData({
+                ...formData,
+                location: formatted_address,
+                latitude,
+                longitude,
+            });
+            console.log("Location updated:", formatted_address);
+        } catch (error) {
+            console.error("Failed", error);
         }
     };
 
@@ -53,29 +83,22 @@ const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
-                    setFormData({
-                        ...formData,
-                        latitude: position.coords.latitude.toFixed(4),
-                        longitude: position.coords.longitude.toFixed(4),
-                    });
-                    console.log("Location fetched successfully!");
+                    const { latitude, longitude } = position.coords;
+                    handleLocationResponse(latitude.toFixed(4), longitude.toFixed(4));
+                    
                 },
                 (error) => {
-                    console.log("Failed to fetch location. Please allow location access.");
+                    console.log("Failed.");
                 }
             );
         } else {
-            console.log("Geolocation is not supported by this browser.");
+            console.log("Geolocation is not supported.");
             
         }
     };
 
     const handleMapLocationSelect = (location) => {
-        setFormData({
-        ...formData,
-        latitude: location.lat.toFixed(4),
-        longitude: location.lng.toFixed(4),
-        });
+        handleLocationResponse(location.lat.toFixed(4), location.lng.toFixed(4));
         setShowMapPicker(false);
     };
 
@@ -132,7 +155,7 @@ const AddMachineForm = ({ setShouldFetchMachines , initialData, onSubmit}) => {
             {showMapPicker && (
                 <div className="map-picker-modal">
                     <MapPicker onLocationSelect={handleMapLocationSelect} />
-                    <button onClick={() => setShowMapPicker(false)}>Close Map</button>
+                    <button onClick={() => setShowMapPicker(true)}>Close Map</button>
                 </div>
                 )}
         </div>
